@@ -1,0 +1,21 @@
+BILL FORTRESS
+~~~~~~~~~~~~~
+
+#General:
+	-Top-down view of character as it moves through dungeon
+	-Power Points: Endorsements, make you stronger
+	-Currency: Campaign donations, can be used to buy Endorsements and power-ups
+	
+#Game Flow:
+	-Begins with character creation
+	-Three main sections:
+		-First Legislative House
+		-Second Legislative House
+		-Conference & Approval
+	-The two legislative sections are split between Committee and Floor section
+	-One can choose what house to originate in, unless one chose the "Revenue Bill" option, in which case one must start in the House
+	-Each individual house section culminates in a horde battle called "Final Vote"
+	-The final boss is the President
+
+#Character Creation:
+	-
