@@ -1,0 +1,3 @@
+[submodule "abstractengine"]
+	path = abstractengine
+	url = https://github.com/abstractstudio/abstractengine.git
