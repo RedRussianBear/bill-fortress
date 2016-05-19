@@ -7,22 +7,18 @@
 		<link rel="stylesheet" href="style.css">
 		
 		<!--JAVASCRIPT!-->
-		<script type="text/javascript">
-            var ENGINE = "abstractengine/";
-            function start() {
-                require(["fortress.js"], function() {
-                    console.log("Loaded Bill Fortress");
-                    var canvas = document.getElementById("canvas"); 
-                    engine = new Fortress(canvas);
-                    engine.start();
-                });
+		<script type="text/javascript" src="abstractengine/setup.js"></script>
+		<script type="text/javascript" src="fortress.js"></script>
+        <script type="text/javascript">
+            function main() {
+                var canvas = document.getElementById("canvas");
+                var engine = new Fortress(canvas);
+                engine.start();
             }
         </script>
-        <script type="text/javascript" src="abstractengine/setup.js"></script>
-		<script type="text/javascript" src="fortress.js"></script>
 		
     </head>
-    <body>
+    <body onload="javascript: setup()">
 		<div id="content">
 			<h1>Bill Fortress</h1>
 			<h2>A game of <span style="font-weight: bold;">legislation</span></h2>
