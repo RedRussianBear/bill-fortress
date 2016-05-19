@@ -1,9 +1,10 @@
 # Bill Fortress
 
-General
+## Minimal Viable Product:
+- Simple, functional overworld depicting the congressional process
+- Functional Debate mode
+- Meme-tastic soundtrack
 
-- Goal: Get your bill through the Congressional Dungeon with the most of the original text intact
-	
 ## Game Structure:
 - Begins with character creation
 - Three main sections:
