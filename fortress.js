@@ -1,4 +1,8 @@
-var STATE = [STATE.NULL = 0, STATE.START = 1, STATE.OVERWORLD = 2, STATE.DEBATE = 3];
+var STATE = [];
+STATE.NULL = 0;
+STATE.START = 1;
+STATE.OVERWORLD = 2, 
+STATE.DEBATE = 3;
 
 function Fortress(canvas) {
     
@@ -6,8 +10,8 @@ function Fortress(canvas) {
 	Engine.call(this, canvas);
     var superclass = new Engine();
 	
-	this.gui = new GUI(this.context);
-    this.state = STATE.NULL;
+	this.entities.gui = new GUI(this.context);
+    this.state = STATE.START;
 	
     /* Render. */
 	this.render = function(delta) {
