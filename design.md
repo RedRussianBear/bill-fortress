@@ -39,3 +39,10 @@
 ## Character Progression:
 - Endorsements grant better stats and new abilities in Debate
 - Endorsements can either be purchased with Campaign Contributions, or exchanged for Amendment, which lower Original Text Percentage
+
+## GUI:
+- Overall wrapper GUI class
+- Inside a GUI, one or more Components. This can be a menu, a bar, etc
+- A component contains buttons, fields, displays
+- Buttons are assigned a function to check if the button is active and a function to execute on press
+- Rendering of GUI is done recursively, first with the parent being drawn, then all of the children
