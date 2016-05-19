@@ -7,8 +7,20 @@
 		<link rel="stylesheet" href="style.css">
 		
 		<!--JAVASCRIPT!-->
+		<script type="text/javascript">
+            var ENGINE = "abstractengine/";
+            function start() {
+                require(["fortress.js"], function() {
+                    console.log("Loaded Bill Fortress");
+                    var canvas = document.getElementById("canvas"); 
+                    engine = new Fortress(canvas);
+                    engine.start();
+                });
+            }
+        </script>
+        <script type="text/javascript" src="abstractengine/setup.js"></script>
+		<script type="text/javascript" src="fortress.js"></script>
 		
-
     </head>
     <body>
 		<div id="content">
