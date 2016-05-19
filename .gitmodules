@@ -1,3 +1,7 @@
 [submodule "abstractengine"]
 	path = abstractengine
+<<<<<<< HEAD
 	url = https://github.com/abstractstudio/abstractengine
+=======
+	url = https://github.com/abstractstudio/abstractengine.git
+>>>>>>> origin/master
