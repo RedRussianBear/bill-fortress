@@ -9,7 +9,7 @@ function Component(x, y, w, h, engine, style) {
 	this.style = style;
 	this.engine = engine;
 	this.context = this.engine.context;
-	this.state = Component.HIDDEN;
+	this.state = Component.ACTIVE;
 	
 	this.children = [];
 	
@@ -32,45 +32,73 @@ function Component(x, y, w, h, engine, style) {
 		this.children.push(child);
 	}
 	
-	/*this.update = function() {
+	this.update = function() {
 		for(var i = 0; i < this.children.length; i++) {
-			if(this.children[i].)
+			var current = this.children[i];
+			
+			if(current.update)
+				current.update();
 		}
-	}*/
+	}
 }
 
+/* Component state constants */
 Component.HIDDEN = 0;
 Component.ACTIVE = 1;
 
 //Button class: holds a function to use to check if the button is ready, and a function to execute on click
-function Button(x, y, w, h, pater, tex, onPress, isReady, style, font) {
+function Button(x, y, w, h, pater, tex, onPress, isReady) {
 	this.parent = pater;
 	this.text = tex;
-	this.style = style;
-	this.font = font;
-	this.align = "center";
+	this.styles = [];
+	this.styles[Button.CLEAR] = {BOX: "white", BORDER: "gray", TEXT: "black"};
+	this.styles[Button.MOUSE_OVER] = {BOX: "gray", BORDER: "black", TEXT: "black"};
+	this.style = this.style_passive;
+	this.font = "20px Franklin Gothic Medium";
+	this.align = "left";
 	this.context = this.parent.context;
-	this.x = x + this.parent.x;
-	this.y = y + this.parent.y;
 	this.width = w;
 	this.height = h;
+	this.x = x + this.parent.x;
+	this.y = y + this.parent.y;
+	this.state = Button.CLEAR;
+	this.isReady = isReady;
+	this.onPress = onPress;
 
 	this.render = function() {
-		this.context.fillStyle = this.style.box;
-		this.context.fillRect(this.x - this.width/2, this.y - this.height/2, this.width, this.height);
-		//this.context.fillStyle = this.style.border;
+		this.context.fillStyle = this.styles[this.state].BOX;
+		this.context.fillRect(this.x, this.y, this.width, this.height);
+		//this.context.fillStyle = this.styles[this.state].BORDER;
 		//this.context.drawRect(this.x - this.width/2, this.y - this.height/2, this.width, this.height);
+	
 		this.context.font = this.font;
 		this.context.textAlign = this.align;
-		this.context.fillStyle = this.style.text;
-		this.context.fillText(this.text, this.x, this.y + this.height/2)
+		this.context.fillStyle = this.styles[this.state].TEXT;
+		this.context.fillText(this.text, this.x + 4, this.y + this.height/2)
 	}
 	
 	this.onClick = function() {
 		if(this.isReady())
 			this.onPress();
 	}
+	
+	this.update = function() {
+		this.state = Button.CLEAR;
+		this.style = this.style_passive;
+		
+		if(this.parent.engine.input.mouse.x > this.x && this.parent.engine.input.mouse.x < this.x + this.width &&
+		this.parent.engine.input.mouse.y > this.y && this.parent.engine.input.mouse.y < this.y + this.height) {
+			this.state = Button.MOUSE_OVER;
+			this.style = this.style_active;
+			if(this.parent.engine.input.mouse.left)
+				this.onClick();
+		}
+	}
 }
+
+/* Button state constants */
+Button.CLEAR = 0;
+Button.MOUSE_OVER = 1;
 
 function Text(x, y, pater, tex, style, font, align) {
 	this.align = align;
@@ -97,21 +125,16 @@ function GUI(engine) {
 	
 	this.addComponent = function(name, component) {
 		this.components[name] = component;
+		return component;
 	}
 	
 	this.update = function() {
-		if(this.engine.input.mouse.left == input.STATE.PRESSED)
-			for(comp in components) {
-				var current = this.components[comp];
-				if(this.engine.input.mouse.x >= current.x && 
-				this.engine.input.mouse.x <= current.x + current.width &&
-				this.engine.input.mouse.y >= current.y &&
-				this.engine.input.mouse.y <= current.y + current.height) {
-					if(current.state == component.ACTIVE) {
-						break;
-					}
-						
-				}
+		for(comp in this.components) {
+			var current = this.components[comp];
+
+			if(current.state == Component.ACTIVE) {
+				current.update();
 			}
+		}
 	}
 }
