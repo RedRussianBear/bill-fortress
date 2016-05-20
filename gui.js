@@ -47,7 +47,7 @@ Component.HIDDEN = 0;
 Component.ACTIVE = 1;
 
 //Button class: holds a function to use to check if the button is ready, and a function to execute on click
-function Button(x, y, w, h, pater, tex, onPress, isReady) {
+function Button(x, y, w, h, pater, tex, onPress) {
 	this.parent = pater;
 	this.text = tex;
 	this.styles = [];
@@ -59,30 +59,24 @@ function Button(x, y, w, h, pater, tex, onPress, isReady) {
 	this.context = this.parent.context;
 	this.width = w;
 	this.height = h;
-	this.x = x + this.parent.x;
-	this.y = y + this.parent.y;
+	this.x = x;
+	this.y = y;
 	this.state = Button.CLEAR;
-	this.isReady = isReady;
 	this.onPress = onPress;
 	this.textOffTop = this.height*(2/3);
 	this.textOffLeft = 3;
 
 	this.render = function() {
 		this.context.fillStyle = this.styles[this.state].BOX;
-		this.context.fillRect(this.x, this.y, this.width, this.height);
+		this.context.fillRect(this.x + this.parent.x, this.y + this.parent.y, this.width, this.height);
 		this.context.strokeStyle = this.styles[this.state].BORDER;
-		this.context.rect(this.x, this.y, this.width, this.height);
+		this.context.rect(this.x + this.parent.x, this.y + this.parent.y, this.width, this.height);
 		this.context.stroke();
 	
 		this.context.font = this.font;
 		this.context.textAlign = this.align;
 		this.context.fillStyle = this.styles[this.state].TEXT;
-		this.context.fillText(this.text, this.x + this.textOffLeft, this.y + this.textOffTop);
-	}
-	
-	this.onClick = function() {
-		if(this.isReady())
-			this.onPress();
+		this.context.fillText(this.text, this.x + this.parent.x + this.textOffLeft, this.y + this.parent.y + this.textOffTop);
 	}
 	
 	this.update = function() {
@@ -93,8 +87,8 @@ function Button(x, y, w, h, pater, tex, onPress, isReady) {
 		this.parent.engine.input.mouse.y > this.y && this.parent.engine.input.mouse.y < this.y + this.height) {
 			this.state = Button.MOUSE_OVER;
 			this.style = this.style_active;
-			if(this.parent.engine.input.mouse.left)
-				this.onClick();
+			if(this.parent.engine.input.mouse.left && this.state != Button.LOCKED)
+				this.onPress();
 		}
 	}
 }
@@ -102,6 +96,7 @@ function Button(x, y, w, h, pater, tex, onPress, isReady) {
 /* Button state constants */
 Button.CLEAR = 0;
 Button.MOUSE_OVER = 1;
+Button.LOCKED = 2;
 
 function Text(x, y, pater, tex, style, font, align) {
 	this.align = align;
@@ -117,7 +112,7 @@ function Text(x, y, pater, tex, style, font, align) {
 		this.context.fillStyle = this.style;
 		this.context.font = this.font;
 		this.context.textAlign = this.align;
-		this.context.fillText(this.text, this.x, this.y);
+		this.context.fillText(this.text, this.x + this.parent.x, this.y + this.parent.y);
 	}
 }
 
