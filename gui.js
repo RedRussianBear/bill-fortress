@@ -63,7 +63,7 @@ function Button(x, y, w, h, pater, tex, onPress) {
 	this.y = y;
 	this.state = Button.CLEAR;
 	this.onPress = onPress;
-	this.textOffTop = this.height*(2/3);
+	this.textOffTop = this.height/2 - 10;
 	this.textOffLeft = 3;
 
 	this.render = function() {
