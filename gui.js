@@ -64,17 +64,20 @@ function Button(x, y, w, h, pater, tex, onPress, isReady) {
 	this.state = Button.CLEAR;
 	this.isReady = isReady;
 	this.onPress = onPress;
+	this.textOffTop = this.height*2/3;
+	this.textOffLeft = 
 
 	this.render = function() {
 		this.context.fillStyle = this.styles[this.state].BOX;
 		this.context.fillRect(this.x, this.y, this.width, this.height);
-		//this.context.fillStyle = this.styles[this.state].BORDER;
-		//this.context.drawRect(this.x - this.width/2, this.y - this.height/2, this.width, this.height);
+		this.context.strokeStyle = this.styles[this.state].BORDER;
+		this.context.rect(this.x, this.y, this.width, this.height);
+		this.context.stroke();
 	
 		this.context.font = this.font;
 		this.context.textAlign = this.align;
 		this.context.fillStyle = this.styles[this.state].TEXT;
-		this.context.fillText(this.text, this.x + 4, this.y + this.height/2)
+		this.context.fillText(this.text, this.x + 4, this.y + this.height*(2/3))
 	}
 	
 	this.onClick = function() {
