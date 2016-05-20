@@ -46,26 +46,34 @@ function Component(x, y, w, h, engine, style) {
 Component.HIDDEN = 0;
 Component.ACTIVE = 1;
 
-//Button class: holds a function to use to check if the button is ready, and a function to execute on click
 function Button(x, y, w, h, pater, tex, onPress) {
+	/* Basic Variables */
 	this.parent = pater;
-	this.text = tex;
-	this.styles = [];
-	this.styles[Button.CLEAR] = {BOX: "white", BORDER: "gray", TEXT: "black"};
-	this.styles[Button.MOUSE_OVER] = {BOX: "gray", BORDER: "black", TEXT: "black"};
-	this.style = this.style_passive;
-	this.font = "20px Franklin Gothic Medium";
-	this.align = "left";
 	this.context = this.parent.context;
 	this.width = w;
 	this.height = h;
 	this.x = x;
 	this.y = y;
+	this.text = tex;
+
+	/* States and functions */
 	this.state = Button.CLEAR;
 	this.onPress = onPress;
-	this.textOffTop = this.height/2 - 10;
+
+	/* Draw Styling */
+	this.styles = [];
+	this.styles[Button.CLEAR] = {BOX: "white", BORDER: "gray", TEXT: "black"};
+	this.styles[Button.MOUSE_OVER] = {BOX: "gray", BORDER: "black", TEXT: "black"};
+
+	
+	/* Text format variables */
+	this.font = "20px Franklin Gothic Medium";
+	this.fontHeight = 20;
+	this.align = "left";
+	this.textOffTop = this.height/2 - this.fontHeight/2;
 	this.textOffLeft = 3;
 
+	/* Render button */
 	this.render = function() {
 		this.context.fillStyle = this.styles[this.state].BOX;
 		this.context.fillRect(this.x + this.parent.x, this.y + this.parent.y, this.width, this.height);
