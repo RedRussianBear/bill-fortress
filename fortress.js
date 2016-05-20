@@ -1,8 +1,10 @@
-var STATE = [];
+var STATE = {};
 STATE.NULL = 0;
 STATE.START = 1;
-STATE.OVERWORLD = 2, 
+STATE.OVERWORLD = 2;
 STATE.DEBATE = 3;
+
+var FONT = "Franklin Gothic Medium";
 
 function Fortress(canvas) {
     
@@ -10,27 +12,45 @@ function Fortress(canvas) {
 	Engine.call(this, canvas);
     var superclass = new Engine();
 	
-	this.entities.gui = new GUI(this.context);
+	this.entities.gui = new GUI(this);
     this.state = STATE.START;
+	
+	
+	/* Build Start menu */
+	var buttonStyle = {};
+	buttonStyle.box = "white";
+	buttonStyle.border = "gray";
+	buttonStyle.text = "black";
+	this.entities.gui.addComponent("start", new Component(0, 0, this.canvas.width, this.canvas.height, this, "none"));
+	this.entities.gui.components["start"].addChild(new Text(400, 200, this.entities.gui.components["start"], "Bill Fortress", "black", "36px " + FONT, "center"));
+	this.entities.gui.components["start"].addChild(new Text(400, 240, this.entities.gui.components["start"], "A game of legislation", "black", "24px " + FONT, "center"));
+	this.entities.gui.components["start"].addChild(new Button(400, 420, 100, 50, this.entities.gui.components["start"], "New Game", function(){}, function(){}, buttonStyle, "20px " + FONT ));
+	
+	/* Update loop. */
+    this.update = function(delta) {
+		/* Update GUI */
+		this.entities.gui.update();
+		
+		/* Update input. */
+		this.input.update(delta);
+	}
 	
     /* Render. */
 	this.render = function(delta) {
         /* Clear. */
         this.context.fillStyle = "white";
-        this.context.fillRect(0, 0, 800, 600);
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		
 		switch(this.state)
 		{
 			case(STATE.START):
-				/* Demo, draw the title. */
-				this.context.fillStyle = "black";
-				this.context.font = "36px Franklin Gothic Medium";
-				this.context.textAlign = "center";
-				this.context.fillText("Bill Fortress", 400, 200);
-				this.context.font = "24px Franklin Gothic Medium";
-				this.context.fillText("A game of legislation", 400, 240);
-				this.context.font = "20px Franklin Gothic Medium";
-				this.context.fillText("Click to begin", 400, 420); 
+				this.entities.gui.components["start"].render();
+				break;
+
+			case(STATE.OVERWORLD):
+				break;
+
+			case(STATE.DEBATE):
 				break;
 		}
 	}
