@@ -64,8 +64,8 @@ function Button(x, y, w, h, pater, tex, onPress, isReady) {
 	this.state = Button.CLEAR;
 	this.isReady = isReady;
 	this.onPress = onPress;
-	this.textOffTop = this.height*2/3;
-	this.textOffLeft = 
+	this.textOffTop = this.height*(2/3);
+	this.textOffLeft = 3;
 
 	this.render = function() {
 		this.context.fillStyle = this.styles[this.state].BOX;
@@ -77,7 +77,7 @@ function Button(x, y, w, h, pater, tex, onPress, isReady) {
 		this.context.font = this.font;
 		this.context.textAlign = this.align;
 		this.context.fillStyle = this.styles[this.state].TEXT;
-		this.context.fillText(this.text, this.x + 4, this.y + this.height*(2/3))
+		this.context.fillText(this.text, this.x + this.textOffLeft, this.y + this.textOffTop);
 	}
 	
 	this.onClick = function() {
