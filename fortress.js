@@ -17,10 +17,11 @@ function Fortress(canvas) {
 	this.context.textBaseline = "top";
 	
 	/* Build Start menu */
-	var startm = this.entities.gui.addComponent("start", new Component(0, 0, this.canvas.width, this.canvas.height, this, "none"));
+	var startm = this.entities.gui.addComponent("start", new Component(0, 0, this.canvas.width, this.canvas.height, this, this.entities.gui, "none"));
 	startm.addChild(new Text(this.canvas.width/2, 200, startm, "Bill Fortress", "black", "36px " + FONT, "center"));
 	startm.addChild(new Text(this.canvas.width/2, 240, startm, "A game of legislation", "black", "24px " + FONT, "center"));
-	startm.addChild(new Button(this.canvas.width/2 - 50, 300, 100, 50, startm, "New Game", function(){engine.state = STATE.OVERWORLD;}));
+	startm.addChild(new Button(this.canvas.width/2 - 50, 300, 100, 40, startm, "New Game", function(){engine.state = STATE.OVERWORLD;}, function(){return true;}));
+	startm.addChild(new InputField(200, 400, 200, 20, startm));
 	
 	/* Update loop. */
     this.update = function(delta) {
@@ -40,7 +41,7 @@ function Fortress(canvas) {
 		switch(this.state)
 		{
 			case(STATE.START):
-				this.entities.gui.components["start"].render();
+				this.entities.gui.components["start"].render(this.context);
 				break;
 
 			case(STATE.OVERWORLD):
