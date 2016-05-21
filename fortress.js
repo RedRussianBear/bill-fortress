@@ -3,6 +3,7 @@ STATE.NULL = 0;
 STATE.START = 1;
 STATE.OVERWORLD = 2;
 STATE.DEBATE = 3;
+STATE.MAKECHAR = 4;
 
 var FONT = "Franklin Gothic Medium";
 
@@ -21,7 +22,7 @@ function Fortress(canvas) {
 	startm.addChild(new Text(this.canvas.width/2, 200, startm, "Bill Fortress", "black", "36px " + FONT, "center"));
 	startm.addChild(new Text(this.canvas.width/2, 240, startm, "A game of legislation", "black", "24px " + FONT, "center"));
 	startm.addChild(new Button(this.canvas.width/2 - 50, 300, 100, 40, startm, "New Game", function(){engine.state = STATE.OVERWORLD;}, function(){return true;}));
-	startm.addChild(new InputField(200, 400, 200, 20, startm));
+	startm.addChild(new InputField(this.canvas.width/2 - 100, 400, 200, 20, startm));
 	
 	/* Update loop. */
     this.update = function(delta) {
@@ -38,10 +39,12 @@ function Fortress(canvas) {
         this.context.fillStyle = "white";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		
+		/* Render GUI */
+		this.entities.gui.render(this.context);
+		
 		switch(this.state)
 		{
 			case(STATE.START):
-				this.entities.gui.components["start"].render(this.context);
 				break;
 
 			case(STATE.OVERWORLD):

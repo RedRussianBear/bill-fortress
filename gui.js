@@ -203,9 +203,17 @@ function GUI(engine) {
 		
 		for(comp in this.components) {
 			var current = this.components[comp];
-
 			if(current.state == Component.ACTIVE) {
 				current.update();
+			}
+		}
+	}
+	
+	this.render = function(context) {
+			for(comp in this.components) {
+				var current = this.components[comp];
+				if(current.state != Component.HIDDEN) {
+					current.render(context);
 			}
 		}
 	}
