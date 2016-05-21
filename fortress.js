@@ -13,21 +13,27 @@ function Fortress(canvas) {
 	Engine.call(this, canvas);
     var superclass = new Engine();
 	
-	this.entities.gui = new GUI(this);
+	this.entities.gui = this.gui = new GUI(this);
     this.state = STATE.START;
 	this.context.textBaseline = "top";
 	
 	/* Build Start menu */
-	var startm = this.entities.gui.addComponent("start", new Component(0, 0, this.canvas.width, this.canvas.height, this, this.entities.gui, "none"));
+	var startm = this.gui.addComponent("start", new Component(0, 0, this.canvas.width, this.canvas.height, this, this.gui, "none"));
 	startm.addChild(new Text(this.canvas.width/2, 200, startm, "Bill Fortress", "black", "36px " + FONT, "center"));
 	startm.addChild(new Text(this.canvas.width/2, 240, startm, "A game of legislation", "black", "24px " + FONT, "center"));
-	startm.addChild(new Button(this.canvas.width/2 - 50, 300, 100, 40, startm, "New Game", function(){engine.state = STATE.OVERWORLD;}, function(){return true;}));
+	startm.addChild(new Button(this.canvas.width/2 - 50, 300, 100, 40, startm, "New Game", function(){this.parent.engine.state = STATE.MAKECHAR; this.parent.gui.components.make.state = Component.ACTIVE; this.parent.state = Component.HIDDEN;}, function(){return true;}));
 	startm.addChild(new InputField(this.canvas.width/2 - 100, 400, 200, 20, startm));
+	startm.state = Component.ACTIVE;
+	
+	/* Build Character Creation Menu */
+	var makem = this.gui.addComponent("make", new Component(0, 0, this.canvas.width, this.canvas.height, this, this.gui, "none"));
+	makem.addChild(new Text(this.canvas.width/2, 50, makem, "Character Creation", "black", "36px " + FONT, "center"));
+	
 	
 	/* Update loop. */
     this.update = function(delta) {
 		/* Update GUI */
-		this.entities.gui.update();
+		this.gui.update();
 		
 		/* Update input. */
 		this.input.update(delta);
@@ -40,7 +46,7 @@ function Fortress(canvas) {
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		
 		/* Render GUI */
-		this.entities.gui.render(this.context);
+		this.gui.render(this.context);
 		
 		switch(this.state)
 		{

@@ -9,7 +9,7 @@ function Component(x, y, w, h, engine, gui, style) {
 	this.style = style;
 	this.engine = engine;
 	this.gui = gui;
-	this.state = Component.ACTIVE;
+	this.state = Component.HIDDEN;
 	
 	this.children = [];
 	
@@ -213,6 +213,7 @@ function GUI(engine) {
 			for(comp in this.components) {
 				var current = this.components[comp];
 				if(current.state != Component.HIDDEN) {
+					//console.log("rendering " + comp);
 					current.render(context);
 			}
 		}
