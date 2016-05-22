@@ -10,6 +10,10 @@ function Component(engine, x, y, w, h, style) {
 	
 	this.children = [];
 	
+	/* Temporary */
+	this.width = w;
+	this.height = h;
+	
 	/* Render function, draws self and all child components */
 	this.render = function(context) {
 		this.engine.context.fillStyle = this.style;
@@ -45,6 +49,10 @@ function Button(x, y, w, h, text, onPress, isUnlocked) {
 	/* Basic Variables */
 	this.text = text;
 
+	/* Temporary */
+	this.width = w;
+	this.height = h;
+	
 	/* States and functions */
 	this.state = Button.CLEAR;
 	this.onPress = onPress;
@@ -118,6 +126,10 @@ function InputField(x, y, w, fontsize) {
 	/* Sprite super constructor */
 	sprite.Sprite.call(this, x, y, w, fontsize + 6);
 
+	/* Temporary */
+	this.width = w;
+	this.height = h;
+	
 	/* State variables */
 	this.state = InputField.CLEAR;
 	this.text = "";
