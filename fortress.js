@@ -18,16 +18,16 @@ function Fortress(canvas) {
 	this.context.textBaseline = "top";
 	
 	/* Build Start menu */
-	var startm = this.gui.addComponent("start", new Component(0, 0, this.canvas.width, this.canvas.height, this, this.gui, "none"));
-	startm.addChild(new Text(this.canvas.width/2, 200, startm, "Bill Fortress", "black", "36px " + FONT, "center"));
-	startm.addChild(new Text(this.canvas.width/2, 240, startm, "A game of legislation", "black", "24px " + FONT, "center"));
-	startm.addChild(new Button(this.canvas.width/2 - 50, 300, 100, 40, startm, "New Game", function(){this.parent.engine.state = STATE.MAKECHAR; this.parent.gui.components.make.state = Component.ACTIVE; this.parent.state = Component.HIDDEN;}, function(){return true;}));
-	startm.addChild(new InputField(this.canvas.width/2 - 100, 400, 200, 20, startm));
+	var startm = this.gui.addComponent("start", new Component(this, 0, 0, this.canvas.width, this.canvas.height, "none"));
+	startm.addChild(new Text(this.canvas.width/2, 200, "Bill Fortress", "black", "36px " + FONT, "center"));
+	startm.addChild(new Text(this.canvas.width/2, 240, "A game of legislation", "black", "24px " + FONT, "center"));
+	startm.addChild(new Button(this.canvas.width/2 - 50, 300, 100, 40, "New Game", function(){this.parent.engine.state = STATE.MAKECHAR; this.parent.gui.components.make.state = Component.ACTIVE; this.parent.state = Component.HIDDEN;}, function(){return true;}));
+	startm.addChild(new InputField(this.canvas.width/2 - 100, 400, 200, 20));
 	startm.state = Component.ACTIVE;
 	
 	/* Build Character Creation Menu */
-	var makem = this.gui.addComponent("make", new Component(0, 0, this.canvas.width, this.canvas.height, this, this.gui, "none"));
-	makem.addChild(new Text(this.canvas.width/2, 50, makem, "Character Creation", "black", "36px " + FONT, "center"));
+	var makem = this.gui.addComponent("make", new Component(this, 0, 0, this.canvas.width, this.canvas.height, "none"));
+	makem.addChild(new Text(this.canvas.width/2, 50, "Character Creation", "black", "36px " + FONT, "center"));
 	
 	
 	/* Update loop. */
