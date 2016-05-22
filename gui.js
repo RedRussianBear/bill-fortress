@@ -122,13 +122,14 @@ function Text(x, y, text, style, font, align) {
 	}
 }
 
-function InputField(x, y, w, fontsize) {
+function InputField(x, y, w, h) {
 	/* Sprite super constructor */
-	sprite.Sprite.call(this, x, y, w, fontsize + 6);
+	sprite.Sprite.call(this, x, y, w, h);
 
 	/* Temporary */
 	this.width = w;
 	this.height = h;
+	
 	
 	/* State variables */
 	this.state = InputField.CLEAR;
@@ -136,7 +137,8 @@ function InputField(x, y, w, fontsize) {
 	this.maxChars = 16;
 	
 	/* Text format variables */
-	this.font = fontsize + "px Franklin Gothic Medium";
+	this.fontsize = this.height - 6;
+	this.font = this.fontsize + "px Franklin Gothic Medium";
 	this.fontHeight = 20;
 	this.align = "left";
 	this.textOffTop = this.height/2 - this.fontHeight/2;
