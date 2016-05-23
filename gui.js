@@ -1,22 +1,23 @@
 
 /* GUI Component class, used to house all other elements */
-function Component(x, y, w, h, engine, gui, style) {
-	//initialize fields
-	this.x = x;
-	this.y = y;
-	this.width = w;
-	this.height = h;
+function Component(engine, x, y, w, h, style) {
+	/* Sprite super constructor */
+	sprite.Sprite.call(this, x, y, w, h);
+	
 	this.style = style;
 	this.engine = engine;
-	this.gui = gui;
 	this.state = Component.HIDDEN;
 	
 	this.children = [];
 	
+	/* Temporary */
+	this.width = w;
+	this.height = h;
+	
 	/* Render function, draws self and all child components */
 	this.render = function(context) {
 		this.engine.context.fillStyle = this.style;
-		this.engine.context.fillRect(this.x, this.y, this.width, this.height);
+		this.engine.context.fillRect(this.transform.position.x, this.transform.position.y, this.width, this.height);
 		
 		for(var i = 0; i < this.children.length; i++)
 			this.children[i].render(context);
@@ -24,6 +25,7 @@ function Component(x, y, w, h, engine, gui, style) {
 	
 	this.addChild = function(child) {
 		this.children.push(child);
+		child.parent = this;
 	}
 	
 	this.update = function() {
@@ -40,15 +42,17 @@ function Component(x, y, w, h, engine, gui, style) {
 Component.HIDDEN = 0;
 Component.ACTIVE = 1;
 
-function Button(x, y, w, h, parent, tex, onPress, isUnlocked) {
+function Button(x, y, w, h, text, onPress, isUnlocked) {
+	/* Sprite super constructor */
+	sprite.Sprite.call(this, x, y, w, h);
+
 	/* Basic Variables */
-	this.parent = parent;
+	this.text = text;
+
+	/* Temporary */
 	this.width = w;
 	this.height = h;
-	this.x = x;
-	this.y = y;
-	this.text = tex;
-
+	
 	/* States and functions */
 	this.state = Button.CLEAR;
 	this.onPress = onPress;
@@ -70,14 +74,14 @@ function Button(x, y, w, h, parent, tex, onPress, isUnlocked) {
 	/* Render button */
 	this.render = function(context) {
 		context.fillStyle = this.styles[this.state].BOX;
-		context.fillRect(this.x + this.parent.x, this.y + this.parent.y, this.width, this.height);
+		context.fillRect(this.transform.position.x + this.parent.transform.position.x, this.transform.position.y + this.parent.transform.position.y, this.width, this.height);
 		context.strokeStyle = this.styles[this.state].BORDER;
-		context.strokeRect(this.x + this.parent.x, this.y + this.parent.y, this.width, this.height);
+		context.strokeRect(this.transform.position.x + this.parent.transform.position.x, this.transform.position.y + this.parent.transform.position.y, this.width, this.height);
 	
 		context.font = this.font;
 		context.textAlign = this.align;
 		context.fillStyle = this.styles[this.state].TEXT;
-		context.fillText(this.text, this.x + this.parent.x + this.textOffLeft, this.y + this.parent.y + this.textOffTop);
+		context.fillText(this.text, this.transform.position.x + this.parent.transform.position.x + this.textOffLeft, this.transform.position.y + this.parent.transform.position.y + this.textOffTop);
 	}
 	
 	this.update = function() {
@@ -86,8 +90,8 @@ function Button(x, y, w, h, parent, tex, onPress, isUnlocked) {
 		else
 			this.state = Button.LOCKED;
 		
-		if(this.parent.engine.input.mouse.x > this.x && this.parent.engine.input.mouse.x < this.x + this.width &&
-		this.parent.engine.input.mouse.y > this.y && this.parent.engine.input.mouse.y < this.y + this.height 
+		if(this.parent.engine.input.mouse.x > this.transform.position.x && this.parent.engine.input.mouse.x < this.transform.position.x + this.width &&
+		this.parent.engine.input.mouse.y > this.transform.position.y && this.parent.engine.input.mouse.y < this.transform.position.y + this.height 
 		&& this.state != Button.LOCKED) {
 			this.state = Button.MOUSE_OVER;
 			if(this.parent.engine.input.mouse.left)
@@ -101,31 +105,31 @@ Button.CLEAR = 0;
 Button.MOUSE_OVER = 1;
 Button.LOCKED = 2;
 
-function Text(x, y, parent, tex, style, font, align) {
+function Text(x, y, text, style, font, align) {
+	/* Sprite super constructor */
+	sprite.Sprite.call(this, x, y);
+	
 	this.align = align;
-	this.parent = parent;
-	this.text = tex;
+	this.text = text;
 	this.font = font;
 	this.style = style;
-	this.x = x;
-	this.y = y;
-	
+
 	this.render = function(context) {
 		context.fillStyle = this.style;
 		context.font = this.font;
 		context.textAlign = this.align;
-		context.fillText(this.text, this.x + this.parent.x, this.y + this.parent.y);
+		context.fillText(this.text, this.transform.position.x + this.parent.transform.position.x, this.transform.position.y + this.parent.transform.position.y);
 	}
 }
 
-function InputField(x, y, w, fontsize, parent) {
-	/* Basic variables */
-	this.x = x;
-	this.y = y;
+function InputField(x, y, w, h) {
+	/* Sprite super constructor */
+	sprite.Sprite.call(this, x, y, w, h);
+
+	/* Temporary */
 	this.width = w;
-	this.height = fontsize + 6;
-	this.parent = parent;
-	context = parent.context;
+	this.height = h;
+	
 	
 	/* State variables */
 	this.state = InputField.CLEAR;
@@ -133,7 +137,8 @@ function InputField(x, y, w, fontsize, parent) {
 	this.maxChars = 16;
 	
 	/* Text format variables */
-	this.font = fontsize + "px Franklin Gothic Medium";
+	this.fontsize = this.height - 6;
+	this.font = this.fontsize + "px Franklin Gothic Medium";
 	this.fontHeight = 20;
 	this.align = "left";
 	this.textOffTop = this.height/2 - this.fontHeight/2;
@@ -146,14 +151,14 @@ function InputField(x, y, w, fontsize, parent) {
 	
 	this.render = function(context) {
 		context.fillStyle = this.styles[this.state].BOX;
-		context.fillRect(this.x + this.parent.x, this.y + this.parent.y, this.width, this.height);
+		context.fillRect(this.transform.position.x + this.parent.transform.position.x, this.transform.position.y + this.parent.transform.position.y, this.width, this.height);
 		context.strokeStyle = this.styles[this.state].BORDER;
-		context.strokeRect(this.x + this.parent.x, this.y + this.parent.y, this.width, this.height);
+		context.strokeRect(this.transform.position.x + this.parent.transform.position.x, this.transform.position.y + this.parent.transform.position.y, this.width, this.height);
 	
 		context.font = this.font;
 		context.textAlign = this.align;
 		context.fillStyle = this.styles[this.state].TEXT;
-		context.fillText(this.text, this.x + this.parent.x + this.textOffLeft, this.y + this.parent.y + this.textOffTop);
+		context.fillText(this.text, this.transform.position.x + this.parent.transform.position.x + this.textOffLeft, this.transform.position.y + this.parent.transform.position.y + this.textOffTop);
 	}
 	
 	this.update = function() {
@@ -176,8 +181,8 @@ function InputField(x, y, w, fontsize, parent) {
 		}
 		
 		if(this.parent.engine.input.mouse.left){
-			if(this.parent.engine.input.mouse.x > this.x && this.parent.engine.input.mouse.x < this.x + this.width &&
-			this.parent.engine.input.mouse.y > this.y && this.parent.engine.input.mouse.y < this.y + this.height) {
+			if(this.parent.engine.input.mouse.x > this.transform.position.x && this.parent.engine.input.mouse.x < this.transform.position.x + this.width &&
+			this.parent.engine.input.mouse.y > this.transform.position.y && this.parent.engine.input.mouse.y < this.transform.position.y + this.height) {
 				this.state = InputField.SELECTED;
 			}
 			else {
@@ -196,6 +201,7 @@ function GUI(engine) {
 	
 	this.addComponent = function(name, component) {
 		this.components[name] = component;
+		component.gui = this;
 		return component;
 	}
 	
