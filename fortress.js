@@ -18,13 +18,19 @@ function Fortress(canvas) {
 	this.setup = function() {
 	
 	    /* Create the start menu. */
-	    var menu = this.entities.gui.adopt("start", new gui.Component(this, this.entities.gui, 0, 0, this.canvas.width, this.canvas.height, {}));
-	    var startbutton = new gui.Button(this, menu, this.canvas.width/2 - 150, 300, 300, 40, "New Game", function() { console.log(5); });
-        menu.adopt("start", startbutton);
-        
-        //startm.addChild(new Text(this.canvas.width/2, 200, startm, "Bill Fortress", "black", "36px " + FONT, "center"));
-        //startm.addChild(new Text(this.canvas.width/2, 240, startm, "A game of legislation", "black", "24px " + FONT, "center"));
-        //startm.addChild(new InputField(200, 400, 200, 20, startm));
+	    var menu = this.entities.gui.adopt("start", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {})); 
+	    
+	    /* Some graphical interface components. */
+	    menu.adopt("title", new gui.Text(
+	        this, this.canvas.width/2, 200, "Bill Fortress", {base: {font: "60px Verdana"}}
+	    ));
+	    menu.adopt("tagline", new gui.Text(
+	        this, this.canvas.width/2, 250, "A game of legislation", {base: {font: "30px Verdana"}}
+	    ));
+	    menu.adopt("start", new gui.Button(
+	        this, this.canvas.width/2 - 150, 380, 300, 40, "New Game", function() { console.log("start!"); }
+	    ));
+
     }
     
 	/* Update loop. */

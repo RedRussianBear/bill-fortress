@@ -6,27 +6,41 @@ gui.STATE = {};
 gui.STATE.DISABLED = 0;
 gui.STATE.NORMAL = 1;
 
+/** Merge two dictionaries recursively. */
+function merge(from, into) {
+    for (var key in from) {
+        if (key in into && into[key].constructor == Object && from[key].constructor == Object) merge(from[key], into[key]);
+        else into[key] = from[key];
+    }
+}
+
 /** The basic interface component. */
-gui.Component = function Component(engine, parent, x, y, w, h, style) {
+gui.Component = function Component(engine, x, y, w, h, style) {
     
     /** Instantiate sprite. */
     sprite.Sprite.call(this, x, y, w, h);
         
     /** Retain other members. */
     this.engine = engine;
-    this.parent = parent;
     this.style = style;
     
     /** Instance. */
+    this.parent;
     this.visible = true;
     this.state = gui.STATE.NORMAL;
     this.children = {};
     
     /** Add a child to the component. */
-    this.adopt = function(name, component) { return this.children[name] = component; }
+    this.adopt = function(name, component) { 
+        component.parent = this;
+        return this.children[name] = component; 
+    }
     
     /** Remove a child from the component. */
-    this.remove = function(name) { name in this.children && delete this.children[name]; }
+    this.remove = function(name) { 
+        component.parent = null;
+        name in this.children && delete this.children[name]; 
+    }
     
     /** Render the component. */
     this.render = function(context) {
@@ -44,14 +58,14 @@ gui.Component = function Component(engine, parent, x, y, w, h, style) {
 
 /** Component relative transform. */
 gui.Component.prototype = {
-    get relative() { return this.parent.relative && this.transform.with(this.parent.relative) || this.transform; },
+    get relative() { return this.parent && this.parent.relative && this.transform.with(this.parent.relative) || this.transform; },
 }
 
 /** Button component class. */
-gui.Button = function Button(engine, parent, x, y, w, h, text, callback, styles) {
+gui.Button = function Button(engine, x, y, w, h, text, callback, styles) {
     
 	/* Component superclass. */
-	gui.Component.call(this, engine, parent, x, y, w, h);
+	gui.Component.call(this, engine, x, y, w, h);
 
     /** Specific to the button. */
     this.text = text;
@@ -68,7 +82,8 @@ gui.Button = function Button(engine, parent, x, y, w, h, text, callback, styles)
         "$normal": {box: {fillStyle: "lightgray"}, text: {fillStyle: "black"}},
         "$disabled": {box: {fillStyle: "lightgray"}, text: {fillStyle: "gray"}},
         "$hover": {box: {fillStyle: "gray"}, text: {fillStyle: "black"}},
-    }
+    };
+    if (styles) merge(styles, this.styles);
 	
 	/** Render button the button. */
 	this.render = function(context) {
@@ -104,10 +119,11 @@ gui.Button = function Button(engine, parent, x, y, w, h, text, callback, styles)
     /** Update the button. */
 	this.update = function(delta) {
 
+        /* Get the position of the button. */
         var transform = this.relative;
 
 	    /** Check hover and click. */
-	    if (geometry.Vector.inside(this.engine.input.mouse, transform.x, transform.y, this.width, this.height) && this.state != gui.Button.DISABLED) {
+	    if (geometry.Vector.inside(this.engine.input.mouse, transform, this.width, this.height) && this.state != gui.Button.DISABLED) {
             this.hover = true;
 			if (this.engine.input.mouse.left == input.STATE.PRESSED) this.callback();
 		} else {
@@ -122,22 +138,42 @@ gui.Button = function Button(engine, parent, x, y, w, h, text, callback, styles)
 /* Inherit the prototype. */
 gui.Button.prototype = gui.Component.prototype;
 
-function Text(x, y, parent, tex, style, font, align) {
-	this.align = align;
-	this.parent = parent;
-	this.text = tex;
-	this.font = font;
-	this.style = style;
-	this.x = x;
-	this.y = y;
-	
+/** A static text element. */
+gui.Text = function Text(engine, x, y, text, styles) {
+
+    /* Component superclass. */
+    gui.Component.call(this, engine, x, y);
+    
+    /* Instance. */
+    this.text = text;
+    this.styles = {base: {font: "20px Verdana", textAlign: "center", textBaseline: "middle", fillStyle: "black"}};
+    if (styles) merge(styles, this.styles);
+
+    /** Render the text. */	
 	this.render = function(context) {
-		context.fillStyle = this.style;
-		context.font = this.font;
-		context.textAlign = this.align;
-		context.fillText(this.text, this.x + this.parent.x, this.y + this.parent.y);
+	
+        /* Save the state of the context. */
+        context.save();
+        
+        /* General styles. */
+        for (var key in this.styles.base) context[key] = this.styles.base[key];
+        
+        /* Get the transform. */
+        var transform = this.relative;
+        
+        /* Create the text. */
+		context.fillText(this.text, transform.x, transform.y);
+		
+		/* Restore the context. */
+		context.restore();
+		
+		
 	}
+	
 }
+
+gui.Text.prototype = gui.Component.prototype;
+
 
 function InputField(x, y, w, fontsize, parent) {
 	/* Basic variables */
@@ -219,11 +255,16 @@ gui.Manager = function Manager(engine) {
 	this.children = {};
 	
     /** Add a child to the component. */
-    this.adopt = function(name, child) { return this.children[name] = child; }
+    this.adopt = function(name, child) { 
+        child.parent = this;
+        return this.children[name] = child; 
+    }
     
     /** Remove a child from the component. */
-    this.remove = function(name) { name in this.children && delete this.children[name]; }
-	
+    this.remove = function(name) { 
+        name in this.children && delete this.children[name]; 
+    }
+
     /** Render the component. */
     this.render = function(context) { for (var name in this.children) this.children[name].render(context); }
     
