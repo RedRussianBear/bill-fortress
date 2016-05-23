@@ -1,9 +1,20 @@
+/* Overworld and terrain management */
+var world = {};
 
-function World(engine) {
+world.STATE = {PASSIVE: 0, NORTH: 1, EAST: 2, SOUTH: 3, WEST: 4};
+
+world.OFFSETX = 0;
+world.OFFSETY = 0;
+world.SPEED = 20;
+world.BOXSIZE = 384;
+
+world.World = function World(engine) {
 	this.engine = engine;
 	this.transform = new sprite.Transform(World.OFFSETX, World.OFFSETY);
 	
 	this.state = World.PASSIVE;
+	this.grid = [][];
+	this.cells = [];
 	
 	this.update = function(delta) {
 		switch(this.state) {
@@ -26,18 +37,21 @@ function World(engine) {
 		
 	}
 	
-	this.render = function(context) {
-		context.drawImage(this.image, this.transform.x, this.transform.y);
+	this.render = function(context) { 
+		context.drawImage(this.image, this.transform.x, this.transform.y); 
+		for(var i = 0; i < cells.length; i++) {
+			cells[i].render(context);
+		}
 	}
+	
 }
 
-World.OFFSETX = 0;
-World.OFFSETY = 0;
-
-World.PASSIVE = 0;
-World.NORTH = 1;
-World.EAST = 2;
-World.SOUTH = 3;
-World.WEST = 4;
-
-World.SPEED = 20;
+world.Cell = function Cell(world, x, y, image) {
+	this.world = world;
+	this.image = image;
+	
+	/* Sprite Super Constructor */
+	sprite.Sprite.call(this, x, y, world.BOXSIZE, world.BOXSIZE);
+	
+	this.render = function(context) { context.drawImage(this.image, this.transform.x + this.world.transform.x, this.transform.y + this.world.transform.y, this.width, this.height); }
+} 

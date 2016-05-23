@@ -1,14 +1,12 @@
 function Bill(engine, name, type) {
 	
 	/* Sprite super constructor */
-	sprite.Sprite.call(this, engine.canvas.width/2 - Bill.WIDTH/2, engine.canvas.height/2 - Bill.HEIGHT/2);
+	sprite.Sprite.call(this, Bill.XPOS, Bill.YPOS, Bill.WIDTH, Bill.HEIGHT);
 
 	/* State */
 	this.state = Bill.PASSIVE;
 	
-	this.render = function(context) {
-
-	}
+	this.render = function(context) {	}
 	
 	this.update = function() {
 		
@@ -23,3 +21,6 @@ Bill.DOWN = 4;
 
 Bill.WIDTH = 64;
 Bill.HEIGHT = 96;
+
+Bill.XPOS = 0;
+Bill.YPOS = 0;

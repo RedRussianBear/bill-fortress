@@ -77,7 +77,7 @@ gui.Button = function Button(engine, x, y, w, h, text, callback, styles) {
 	this.callback = callback;	
 
 	/* Draw Styling */
-    this.styles = {
+    this.styles = styles || {
         base: {font: "20px Verdana", textAlign: "center", textBaseline: "middle", lineWidth: 1e-10},
         "$normal": {box: {fillStyle: "lightgray"}, text: {fillStyle: "black"}},
         "$disabled": {box: {fillStyle: "lightgray"}, text: {fillStyle: "gray"}},
