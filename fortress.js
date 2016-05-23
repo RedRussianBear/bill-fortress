@@ -1,3 +1,4 @@
+/** States. */
 var STATE = {};
 STATE.NULL = 0;
 STATE.START = 1;
@@ -6,6 +7,7 @@ STATE.OVERWORLD = 3;
 STATE.DEBATE = 4;
 STATE.CHARACTER = 5;
 
+/* Global font. */
 var FONT = "Franklin Gothic Medium";
 
 /** The Bill Fortress game engine. */
