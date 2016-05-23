@@ -1,12 +1,17 @@
 /** Graphical interface sprites. */
 var gui = {};
 
+/** Standard GUI states. */
+gui.STATE = {};
+gui.STATE.DISABLED = 0;
+gui.STATE.NORMAL = 1;
+
 /** The basic interface component. */
 gui.Component = function Component(engine, parent, x, y, w, h, style) {
     
     /** Instantiate sprite. */
     sprite.Sprite.call(this, x, y, w, h);
-    
+        
     /** Retain other members. */
     this.engine = engine;
     this.parent = parent;
@@ -14,11 +19,11 @@ gui.Component = function Component(engine, parent, x, y, w, h, style) {
     
     /** Instance. */
     this.visible = true;
-    this.state = Component.NORMAL;
+    this.state = gui.STATE.NORMAL;
     this.children = {};
     
     /** Add a child to the component. */
-    this.adopt = function(name, component) { this.children[name] = component; }
+    this.adopt = function(name, component) { return this.children[name] = component; }
     
     /** Remove a child from the component. */
     this.remove = function(name) { name in this.children && delete this.children[name]; }
@@ -31,20 +36,19 @@ gui.Component = function Component(engine, parent, x, y, w, h, style) {
     
     /** Update the component. */
     this.update = function(delta) {
-        if (this.state == Component.DISABLED) return;
+        if (this.state == gui.STATE.DISABLED) return;
         for (var name in this.children) this.children[name].update(delta);
     }
 
 }
 
-/** Component relative transform and states. */
+/** Component relative transform. */
 gui.Component.prototype = {
     get relative() { return this.parent.relative && this.transform.with(this.parent.relative) || this.transform; },
-    DISABLED: 0, NORMAL: 1
 }
 
 /** Button component class. */
-gui.Button = function Button(parent, x, y, w, h, text, mousedown) {
+gui.Button = function Button(engine, parent, x, y, w, h, text, callback, styles) {
     
 	/* Component superclass. */
 	gui.Component.call(this, engine, parent, x, y, w, h);
@@ -54,15 +58,17 @@ gui.Button = function Button(parent, x, y, w, h, text, mousedown) {
     this.mousedown = typeof mousedown == "function" && mousedown || function() {};
 
 	/* States and functions */
-	this.state = Button.NORMAL;
-	this.mousedown = mousedown;
+	this.state = gui.STATE.NORMAL;
+	this.hover = false;
+	this.callback = callback;	
 
 	/* Draw Styling */
-    this.style = {font: "20px Franklin Gothic Medium", textAlign: "center"};
-	this.styles = {};
-	this.styles[Button.DISABLED] = {box: {fillStyle: "gray", strokeStyle: "black"}, text: {fillStyle: "black"}};
-	this.styles[Button.NORMAL] = {box: {fillStyle: "white", strokeStyle: "gray"}, text: {fillStyle: "black"}};
-	this.styles[Button.HOVER] = {box: {fillStyle: "gray", strokeStyle: "black"}, text: {fillStyle: "black"}};
+    this.styles = {
+        base: {font: "20px Verdana", textAlign: "center", textBaseline: "middle", lineWidth: 1e-10},
+        "$normal": {box: {fillStyle: "lightgray"}, text: {fillStyle: "black"}},
+        "$disabled": {box: {fillStyle: "lightgray"}, text: {fillStyle: "gray"}},
+        "$hover": {box: {fillStyle: "gray"}, text: {fillStyle: "black"}},
+    }
 	
 	/** Render button the button. */
 	this.render = function(context) {
@@ -73,34 +79,48 @@ gui.Button = function Button(parent, x, y, w, h, text, mousedown) {
         /* Save the state of the context. */
         context.save();
         
+        /* General styles. */
+        for (var key in this.styles.base) context[key] = this.styles.base[key];
+        
+        /* Select a style mode. */
+        var mode = "$disabled";
+        if (this.hover) mode = "$hover";
+        else if (this.state == gui.STATE.NORMAL) mode = "$normal";
+                
         /* Draw the box. */
-        for (var key in this.styles.box) this.context[key] = this.styles.box[name];
+        for (var key in this.styles[mode].box) context[key] = this.styles[mode].box[key];
 		context.fillRect(transform.x, transform.y, this.width, this.height);
 		context.strokeRect(transform.x, transform.y, this.width, this.height);
         
         /* Draw the text. */
-        for (var key in this.styles.text) this.context[key] = this.styles.text[name];
-		context.fillText(this.text, this.x + this.parent.x + this.textOffLeft, this.y + this.parent.y + this.textOffTop);
+        for (var key in this.styles[mode].text) context[key] = this.styles[mode].text[key];
+		context.fillText(this.text, transform.x + this.width / 2, transform.y + this.height / 2);
         
         /* Restore the context. */
         context.restore();
-        
+    
 	}
 	
     /** Update the button. */
 	this.update = function(delta) {
-		if(this.parent.engine.input.mouse.x > this.x && this.parent.engine.input.mouse.x < this.x + this.width &&
-		this.parent.engine.input.mouse.y > this.y && this.parent.engine.input.mouse.y < this.y + this.height 
-		&& this.state != Button.LOCKED) {
-			this.state = Button.MOUSE_OVER;
-			if(this.parent.engine.input.mouse.left)
-				this.onPress();
+
+        var transform = this.relative;
+
+	    /** Check hover and click. */
+	    if (geometry.Vector.inside(this.engine.input.mouse, transform.x, transform.y, this.width, this.height) && this.state != gui.Button.DISABLED) {
+            this.hover = true;
+			if (this.engine.input.mouse.left == input.STATE.PRESSED) this.callback();
+		} else {
+		    this.hover = false;
+		    this.state = gui.STATE.NORMAL;
 		}
+	
 	}
+	
 }
 
-/* Button state constants */
-gui.Button.prototype.HOVER = 2;
+/* Inherit the prototype. */
+gui.Button.prototype = gui.Component.prototype;
 
 function Text(x, y, parent, tex, style, font, align) {
 	this.align = align;
@@ -191,23 +211,23 @@ function InputField(x, y, w, fontsize, parent) {
 InputField.CLEAR = 0;
 InputField.SELECTED = 1;
 
-function GUI(engine) {
-	this.engine = engine;
-	this.components = {};
-	
-	this.addComponent = function(name, component) {
-		this.components[name] = component;
-		return component;
-	}
-	
-	this.update = function() {
-		
-		for(comp in this.components) {
-			var current = this.components[comp];
+/** The main GUI manager. */
+gui.Manager = function Manager(engine) {
 
-			if(current.state == Component.ACTIVE) {
-				current.update();
-			}
-		}
-	}
+    /* Store the engine and children. */
+	this.engine = engine;
+	this.children = {};
+	
+    /** Add a child to the component. */
+    this.adopt = function(name, child) { return this.children[name] = child; }
+    
+    /** Remove a child from the component. */
+    this.remove = function(name) { name in this.children && delete this.children[name]; }
+	
+    /** Render the component. */
+    this.render = function(context) { for (var name in this.children) this.children[name].render(context); }
+    
+	/** Update the GUI manager. */
+	this.update = function(delta) { for (var name in this.children) this.children[name].update(delta); }
+
 }

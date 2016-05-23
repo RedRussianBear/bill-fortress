@@ -1,53 +1,68 @@
-var STATE = {};
-STATE.NULL = 0;
-STATE.START = 1;
-STATE.OVERWORLD = 2;
-STATE.DEBATE = 3;
+/** Global engine states. */
+var STATE = {NULL: 0, START: 1, PAUSE: 2, OVERWORLD: 3, DEBATE: 4};
 
 var FONT = "Franklin Gothic Medium";
 
+/** The Bill Fortress game engine. */
 function Fortress(canvas) {
     
     /* Super constructor and superclass reference. */
 	Engine.call(this, canvas);
     var superclass = new Engine();
 	
-	this.entities.gui = new GUI(this);
+	/** Create the main menu. */
+	this.entities.gui = new gui.Manager(this);
     this.state = STATE.START;
-	this.context.textBaseline = "top";
-	
+    	
 	/* Build Start menu */
-	var startm = this.entities.gui.addComponent("start", new Component(0, 0, this.canvas.width, this.canvas.height, this, this.entities.gui, "none"));
-	startm.addChild(new Text(this.canvas.width/2, 200, startm, "Bill Fortress", "black", "36px " + FONT, "center"));
-	startm.addChild(new Text(this.canvas.width/2, 240, startm, "A game of legislation", "black", "24px " + FONT, "center"));
-	startm.addChild(new Button(this.canvas.width/2 - 50, 300, 100, 40, startm, "New Game", function(){engine.state = STATE.OVERWORLD;}, function(){return true;}));
-	startm.addChild(new InputField(200, 400, 200, 20, startm));
+	this.setup = function() {
 	
+	    /* Create the start menu. */
+	    var menu = this.entities.gui.adopt("start", new gui.Component(this, this.entities.gui, 0, 0, this.canvas.width, this.canvas.height, {}));
+	    var startbutton = new gui.Button(this, menu, this.canvas.width/2 - 150, 300, 300, 40, "New Game", function() { console.log(5); });
+        menu.adopt("start", startbutton);
+        
+        //startm.addChild(new Text(this.canvas.width/2, 200, startm, "Bill Fortress", "black", "36px " + FONT, "center"));
+        //startm.addChild(new Text(this.canvas.width/2, 240, startm, "A game of legislation", "black", "24px " + FONT, "center"));
+        //startm.addChild(new InputField(200, 400, 200, 20, startm));
+    }
+    
 	/* Update loop. */
     this.update = function(delta) {
-		/* Update GUI */
-		this.entities.gui.update();
+    
+		/* Update GUI. */
+		if (this.state == STATE.START) this.entities.gui.update(delta);
 		
 		/* Update input. */
 		this.input.update(delta);
+
 	}
 	
     /* Render. */
 	this.render = function(delta) {
+	
         /* Clear. */
         this.context.fillStyle = "white";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		
-		switch(this.state)
-		{
-			case(STATE.START):
-				this.entities.gui.components["start"].render(this.context);
+		/* Rendering states. */
+		switch (this.state) {
+		
+		    /* Start menu. */
+			case STATE.START:
+				this.entities.gui.render(this.context);
 				break;
 
-			case(STATE.OVERWORLD):
+            /* Paused. */
+            case STATE.PAUSED:
+                break;
+            
+            /* Overworld. */
+			case STATE.OVERWORLD:
 				break;
 
-			case(STATE.DEBATE):
+            /* Debate battle. */
+			case STATE.DEBATE:
 				break;
 		}
 	}
