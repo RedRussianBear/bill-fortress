@@ -13,35 +13,22 @@ world.World = function World(engine) {
 	this.transform = new sprite.Transform(World.OFFSETX, World.OFFSETY);
 	
 	this.state = World.PASSIVE;
-	this.grid = [][];
 	this.cells = [];
 	
-	this.update = function(delta) {
-		switch(this.state) {
-			case World.PASSIVE:
-				break;
-			case World.NORTH:
-				this.transform.y += World.SPEED * (delta/this.engine._update.interval);
-				break;
-			case World.EAST:
-				this.transform.x += World.SPEED * (delta/this.engine._update.interval);
-				break;
-			case World.SOUTH:
-				this.transform.y -= World.SPEED * (delta/this.engine._update.interval);
-				break;
-			case World.WEST:
-				this.transform.x -= World.SPEED * (delta/this.engine._update.interval);
-				break;
-		}
-		
-		
-	}
+	this.update = function(delta) {}
 	
-	this.render = function(context) { 
+	this.render = function(context, offx, offy) { 
 		context.drawImage(this.image, this.transform.x, this.transform.y); 
 		for(var i = 0; i < cells.length; i++) {
-			cells[i].render(context);
+			cells[i].render(context, offx, offy);
 		}
+	}
+	
+	this.loadLevel = function() {
+		var c, r;
+		grid = new Array(c);
+		for(var i = 0; i < c; i++)
+			grid[i] = new Array(r);
 	}
 	
 }
@@ -53,5 +40,5 @@ world.Cell = function Cell(world, x, y, image) {
 	/* Sprite Super Constructor */
 	sprite.Sprite.call(this, x, y, world.BOXSIZE, world.BOXSIZE);
 	
-	this.render = function(context) { context.drawImage(this.image, this.transform.x + this.world.transform.x, this.transform.y + this.world.transform.y, this.width, this.height); }
+	this.render = function(context, offx, offy) { context.drawImage(this.image, this.transform.x + offx, this.transform.y + offy, this.width, this.height); }
 } 

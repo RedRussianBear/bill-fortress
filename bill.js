@@ -1,4 +1,4 @@
-function Bill(engine, name, type) {
+function Bill(engine) {
 	
 	/* Sprite super constructor */
 	sprite.Sprite.call(this, Bill.XPOS, Bill.YPOS, Bill.WIDTH, Bill.HEIGHT);
@@ -6,7 +6,24 @@ function Bill(engine, name, type) {
 	/* State */
 	this.state = Bill.PASSIVE;
 	
-	this.render = function(context) {	}
+	this.render = function(context) {
+		
+		
+		switch(this.state) {
+			case Bill.PASSIVE:
+				break;
+			case Bill.UP:
+				break;
+			case Bill.LEFT:
+				break;
+			case Bill.DOWN:
+				break;
+			case Bill.RIGHT:
+				break;
+		}
+		
+		context.drawImage(this.img, this.engine.canvas.width/2 - this.width/2, this.engine.canvas.height/2 - this.height/2, this.width, this.height);
+	}
 	
 	this.update = function(delta) {
 		this.state = Bill.PASSIVE;
@@ -15,52 +32,28 @@ function Bill(engine, name, type) {
 			switch(key) {
 				case "W":
 					this.state = Bill.UP;
-					if(this.canMove(Bill.UP, dist))
+					if(!(grid[Math.floor(this.transform.x/world.BOXSIZE)][Math.floor((this.transform.y - dist)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x + this.width)/world.BOXSIZE)][Math.floor((this.transform.y - dist)/world.BOXSIZE)]))
 						this.transform.y -= dist;
 					break;
 				case "A":
 					this.state = Bill.LEFT;
-					if(this.canMove(Bill.LEFT, dist))
+					if(!(grid[Math.floor((this.transform.x - dist)/world.BOXSIZE)][Math.floor((this.transform.y)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x - dist)/world.BOXSIZE)][Math.floor((this.transform.y + this.height)/world.BOXSIZE)]))
 						this.transform.x -= dist;
 					break;
 				case "S":
 					this.state = Bill.DOWN;
-					if(this.canMove(Bill.DOWN, dist))
+					if(!(grid[Math.floor(this.transform.x/world.BOXSIZE)][Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x + this.width)/world.BOXSIZE)][Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)]))
 						this.transform.y += dist;
 					break;
 				case "D":
 					this.state = Bill.RIGHT;
-					if(this.canMove(Bill.RIGHT, dist))
+					if(!(grid[Math.floor((this.transform.x + width + dist)/world.BOXSIZE)][Math.floor((this.transform.y)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x + width + dist)/world.BOXSIZE)][Math.floor((this.transform.y + this.height)/world.BOXSIZE)]))
 						this.transform.x += dist;
 					break;
 			}
 		}
 	}
-	
-	this.canMove = function(direction, dist) {
-		var grid = this.engine.getWorld().grid;
-		
-		switch(direction){
-			case Bill.UP:
-				if(grid[Math.floor(this.transform.x/world.BOXSIZE)][Math.floor((this.transform.y - dist)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x + this.width)/world.BOXSIZE)][Math.floor((this.transform.y - dist)/world.BOXSIZE)])
-					return false;
-				break;
-			case Bill.DOWN:
-				if(grid[Math.floor(this.transform.x/world.BOXSIZE)][Math.floor((this.transform.y + dist)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x + this.width)/world.BOXSIZE)][Math.floor((this.transform.y + dist)/world.BOXSIZE)])
-					return false;
-				break;
-			case Bill.EAST:
-				if(grid[Math.floor((this.transform.x - dist)/world.BOXSIZE)][Math.floor((this.transform.y)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x - dist)/world.BOXSIZE)][Math.floor((this.transform.y + this.height)/world.BOXSIZE)])
-					return false;
-				break;
-			case Bill.WEST:
-				if(grid[Math.floor((this.transform.x + dist)/world.BOXSIZE)][Math.floor((this.transform.y)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x + dist)/world.BOXSIZE)][Math.floor((this.transform.y + this.height)/world.BOXSIZE)])
-					return false;
-				break;
-		}
-		
-		return true;
-	}
+
 }
 
 Bill.PASSIVE = 0;

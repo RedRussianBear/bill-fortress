@@ -21,8 +21,18 @@ function Fortress(canvas) {
 	this.entities.gui = new gui.Manager(this);
     this.state = STATE.START;
     	
-	/* Build Start menu */
 	this.setup = function() {
+	
+	
+		/* Create the player */
+		this.entities.player = this.player = new Bill(this);
+		
+		/* Load resources */
+		this.resources.queue("billsprite", resource.IMAGE, "sprites/bill/West/frame1.png");
+		var that = this;
+		this.resources.load(function() {
+			that.player.img = that.resources.$("billsprite");
+		});
 	
 	    /* Create the start menu. */
 	    var menu = this.entities.gui.adopt("start", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {})); 
@@ -38,16 +48,18 @@ function Fortress(canvas) {
 	        this, this.canvas.width/2 - 150, 380, 300, 40, "New Game", function() { console.log("start!"); }
 	    ));
 
+		
     }
     
 	/* Update loop. */
     this.update = function(delta) {
-    
-		/* Update GUI. */
-		if (this.state == STATE.START) this.entities.gui.update(delta);
-		
 		/* Update input. */
 		this.input.update(delta);
+	
+		/* Update GUI. */
+		this.entities.gui.update(delta);
+		
+//		if(this.state == )
 
 	}
 	
@@ -57,15 +69,21 @@ function Fortress(canvas) {
         /* Clear. */
         this.context.fillStyle = "white";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+		this.entities.gui.render(this.context);
+
         
 		/* Rendering states. */
 		switch (this.state) {
 		
 		    /* Start menu. */
 			case STATE.START:
-				this.entities.gui.render(this.context);
 				break;
 
+			/* Overworld */
+			case STATE.OVERWORLD:
+				this.entities.world.render(this.context, this.entities.player.x, this.entities.player.y);
+				this.entities.player.render(this.context);
+				break;
 		}
 	
 	}
