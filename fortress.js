@@ -29,14 +29,14 @@ function Fortress(canvas) {
 		
 		/* Create world */
 		this.entities.world = new world.World(engine);
-		//this.entities.world.loadLevel("levels/test.lvl");
 		
 		/* Load resources */
 		this.resources.queue("billsprite", resource.IMAGE, "sprites/bill/West/frame1.png");
-		this.resources.queue("tile", resource.IMAGE, "tiles/walkable.png");
+		this.resources.queue("walkable", resource.IMAGE, "tiles/walkable.png");
 		var that = this;
 		this.resources.load(function() {
 			that.entities.player.img = that.resources.$("billsprite");
+			world.TILE.FLOOR = that.resources.$("walkable");
 			console.log("Loaded reources");
 		});
 	
@@ -51,8 +51,14 @@ function Fortress(canvas) {
 	        this, this.canvas.width/2, 250, "A game of legislation", {base: {font: "30px Verdana"}}
 	    ));
 	    menu.adopt("start", new gui.Button(
-	        this, this.canvas.width/2 - 150, 380, 300, 40, "New Game", function() { this.parent.state = gui.STATE.DISABLED; this.parent.visible = false; this.parent.engine.state = STATE.OVERWORLD; }
-	    ));
+	        this, this.canvas.width/2 - 150, 380, 300, 40, "New Game", function() {
+				this.parent.state = gui.STATE.DISABLED; this.parent.visible = false;
+				this.parent.engine.entities.world.loadLevel(levels.TEST);
+				this.parent.engine.entities.player.transform.x = this.parent.engine.entities.world.playerx;
+				this.parent.engine.entities.player.transform.y = this.parent.engine.entities.world.playery;
+				this.parent.engine.state = STATE.OVERWORLD; 
+				
+		}));
 
 		
     }
@@ -87,8 +93,7 @@ function Fortress(canvas) {
         this.context.fillStyle = "black";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		this.entities.gui.render(this.context);
-
-        
+ 
 		/* Rendering states. */
 		switch (this.state) {
 		
@@ -98,7 +103,7 @@ function Fortress(canvas) {
 
 			/* Overworld */
 			case STATE.OVERWORLD:
-				this.entities.world.render(this.context, this.entities.player.x, this.entities.player.y);
+				this.entities.world.render(this.context, this.entities.player.transform.x - this.canvas.width/2 + this.entities.player.width/2, this.entities.player.transform.y - this.canvas.height/2 + this.entities.player.height/2);
 				this.entities.player.render(this.context);
 				break;
 		}

@@ -31,22 +31,22 @@ function Bill(engine) {
 		
 		if(this.engine.input.keyboard[input.KEY.W] == input.STATE.DOWN) {
 			this.state = Bill.UP;
-			if(!(grid[Math.floor(this.transform.x/world.BOXSIZE)][Math.floor((this.transform.y - dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.x + this.width)/world.BOXSIZE)][Math.floor((this.transform.y - dist)/world.BOXSIZE)] == world.CELL.WALL))
+			if(!(grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)] == world.CELL.WALL))
 				this.transform.y -= dist;
 		}
 		if(this.engine.input.keyboard[input.KEY.A] == input.STATE.DOWN) {
 			this.state = Bill.LEFT;
-			if(!(grid[Math.floor((this.transform.x - dist)/world.BOXSIZE)][Math.floor((this.transform.y)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.x - dist)/world.BOXSIZE)][Math.floor((this.transform.y + this.height)/world.BOXSIZE)] == world.CELL.WALL))
+			if(!(grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)] == world.CELL.WALL))
 				this.transform.x -= dist;
 		}
 		if(this.engine.input.keyboard[input.KEY.S] == input.STATE.DOWN) {
 			this.state = Bill.DOWN;
-			if(!(grid[Math.floor(this.transform.x/world.BOXSIZE)][Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.x + this.width)/world.BOXSIZE)][Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)] == world.CELL.WALL))
+			if(!(grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)] == world.CELL.WALL))
 				this.transform.y += dist;
 		}
 		if(this.engine.input.keyboard[input.KEY.D] == input.STATE.DOWN) {
 			this.state = Bill.RIGHT;
-			if(!(grid[Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)][Math.floor((this.transform.y)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)][Math.floor((this.transform.y + this.height)/world.BOXSIZE)] == world.CELL.WALL))
+			if(!(grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)] == world.CELL.WALL))
 				this.transform.x += dist;
 		}
 	}
