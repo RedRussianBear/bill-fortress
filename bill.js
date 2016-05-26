@@ -3,12 +3,11 @@ function Bill(engine) {
 	/* Sprite super constructor */
 	sprite.Sprite.call(this, Bill.XPOS, Bill.YPOS, Bill.WIDTH, Bill.HEIGHT);
 
-	/* State */
+	/* State and engine*/
 	this.state = Bill.PASSIVE;
+	this.engine = engine;
 	
 	this.render = function(context) {
-		
-		
 		switch(this.state) {
 			case Bill.PASSIVE:
 				break;
@@ -28,29 +27,27 @@ function Bill(engine) {
 	this.update = function(delta) {
 		this.state = Bill.PASSIVE;
 		var dist = Bill.SPEED * (delta/this.engine._update.interval);
-		for(key in this.engine.input.keyboard) {
-			switch(key) {
-				case "W":
-					this.state = Bill.UP;
-					if(!(grid[Math.floor(this.transform.x/world.BOXSIZE)][Math.floor((this.transform.y - dist)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x + this.width)/world.BOXSIZE)][Math.floor((this.transform.y - dist)/world.BOXSIZE)]))
-						this.transform.y -= dist;
-					break;
-				case "A":
-					this.state = Bill.LEFT;
-					if(!(grid[Math.floor((this.transform.x - dist)/world.BOXSIZE)][Math.floor((this.transform.y)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x - dist)/world.BOXSIZE)][Math.floor((this.transform.y + this.height)/world.BOXSIZE)]))
-						this.transform.x -= dist;
-					break;
-				case "S":
-					this.state = Bill.DOWN;
-					if(!(grid[Math.floor(this.transform.x/world.BOXSIZE)][Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x + this.width)/world.BOXSIZE)][Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)]))
-						this.transform.y += dist;
-					break;
-				case "D":
-					this.state = Bill.RIGHT;
-					if(!(grid[Math.floor((this.transform.x + width + dist)/world.BOXSIZE)][Math.floor((this.transform.y)/world.BOXSIZE)] != 0 || grid[Math.floor((this.transform.x + width + dist)/world.BOXSIZE)][Math.floor((this.transform.y + this.height)/world.BOXSIZE)]))
-						this.transform.x += dist;
-					break;
-			}
+		var grid = this.engine.entities.world.grid;
+		
+		if(this.engine.input.keyboard[input.KEY.W] == input.STATE.DOWN) {
+			this.state = Bill.UP;
+			if(!(grid[Math.floor(this.transform.x/world.BOXSIZE)][Math.floor((this.transform.y - dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.x + this.width)/world.BOXSIZE)][Math.floor((this.transform.y - dist)/world.BOXSIZE)] == world.CELL.WALL))
+				this.transform.y -= dist;
+		}
+		if(this.engine.input.keyboard[input.KEY.A] == input.STATE.DOWN) {
+			this.state = Bill.LEFT;
+			if(!(grid[Math.floor((this.transform.x - dist)/world.BOXSIZE)][Math.floor((this.transform.y)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.x - dist)/world.BOXSIZE)][Math.floor((this.transform.y + this.height)/world.BOXSIZE)] == world.CELL.WALL))
+				this.transform.x -= dist;
+		}
+		if(this.engine.input.keyboard[input.KEY.S] == input.STATE.DOWN) {
+			this.state = Bill.DOWN;
+			if(!(grid[Math.floor(this.transform.x/world.BOXSIZE)][Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.x + this.width)/world.BOXSIZE)][Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)] == world.CELL.WALL))
+				this.transform.y += dist;
+		}
+		if(this.engine.input.keyboard[input.KEY.D] == input.STATE.DOWN) {
+			this.state = Bill.RIGHT;
+			if(!(grid[Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)][Math.floor((this.transform.y)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)][Math.floor((this.transform.y + this.height)/world.BOXSIZE)] == world.CELL.WALL))
+				this.transform.x += dist;
 		}
 	}
 

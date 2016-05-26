@@ -146,7 +146,7 @@ gui.Text = function Text(engine, x, y, text, styles) {
     
     /* Instance. */
     this.text = text;
-    this.styles = {base: {font: "20px Verdana", textAlign: "center", textBaseline: "middle", fillStyle: "black"}};
+    this.styles = {base: {font: "20px Verdana", textAlign: "center", textBaseline: "middle", fillStyle: "white"}};
     if (styles) merge(styles, this.styles);
 
     /** Render the text. */	

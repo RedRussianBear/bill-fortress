@@ -15,23 +15,29 @@ function Fortress(canvas) {
     
     /* Super constructor and superclass reference. */
 	Engine.call(this, canvas);
-    var superclass = new Engine();
+    var superclass = new Engine();	
 	
-	/** Create the main menu. */
+	/* Basic things */
 	this.entities.gui = new gui.Manager(this);
     this.state = STATE.START;
     	
 	this.setup = function() {
-	
+		this.context.imageSmoothingEnabled= false
 	
 		/* Create the player */
 		this.entities.player = this.player = new Bill(this);
 		
+		/* Create world */
+		this.entities.world = new world.World(engine);
+		//this.entities.world.loadLevel("levels/test.lvl");
+		
 		/* Load resources */
 		this.resources.queue("billsprite", resource.IMAGE, "sprites/bill/West/frame1.png");
+		this.resources.queue("tile", resource.IMAGE, "tiles/walkable.png");
 		var that = this;
 		this.resources.load(function() {
-			that.player.img = that.resources.$("billsprite");
+			that.entities.player.img = that.resources.$("billsprite");
+			console.log("Loaded reources");
 		});
 	
 	    /* Create the start menu. */
@@ -45,7 +51,7 @@ function Fortress(canvas) {
 	        this, this.canvas.width/2, 250, "A game of legislation", {base: {font: "30px Verdana"}}
 	    ));
 	    menu.adopt("start", new gui.Button(
-	        this, this.canvas.width/2 - 150, 380, 300, 40, "New Game", function() { console.log("start!"); }
+	        this, this.canvas.width/2 - 150, 380, 300, 40, "New Game", function() { this.parent.state = gui.STATE.DISABLED; this.parent.visible = false; this.parent.engine.state = STATE.OVERWORLD; }
 	    ));
 
 		
@@ -53,21 +59,32 @@ function Fortress(canvas) {
     
 	/* Update loop. */
     this.update = function(delta) {
-		/* Update input. */
-		this.input.update(delta);
-	
 		/* Update GUI. */
 		this.entities.gui.update(delta);
 		
-//		if(this.state == )
+		/* Update input. */
+		this.input.update(delta);
+		
+		/* Update states. */
+		switch (this.state) {
+		
+		    /* Start menu. */
+			case STATE.START:
+				break;
 
+			/* Overworld */
+			case STATE.OVERWORLD:
+				this.entities.world.update(delta);
+				this.entities.player.update(delta);
+				break;
+		}
 	}
 	
     /* Render. */
 	this.render = function(delta) {
 	
         /* Clear. */
-        this.context.fillStyle = "white";
+        this.context.fillStyle = "black";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		this.entities.gui.render(this.context);
 
