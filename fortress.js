@@ -31,11 +31,92 @@ function Fortress(canvas) {
 		this.entities.world = new world.World(engine);
 		
 		/* Load resources */
-		this.resources.queue("billsprite", resource.IMAGE, "sprites/bill/West/frame1.png");
+		this.resources.queue("billsprite_0", resource.IMAGE, "sprites/bill/West/frame1.png");
+		this.resources.queue("billsprite_1", resource.IMAGE, "sprites/bill/West/frame2.png");
+		
+		/* Democratic congressperson */
+		this.resources.queue("de0", resource.IMAGE, "sprites/congressdem/East/frame1.png");
+		this.resources.queue("de1", resource.IMAGE, "sprites/congressdem/East/frame2.png");
+		this.resources.queue("dw0", resource.IMAGE, "sprites/congressdem/West/frame1.png");
+		this.resources.queue("dw1", resource.IMAGE, "sprites/congressdem/West/frame2.png");
+		this.resources.queue("dn0", resource.IMAGE, "sprites/congressdem/North/frame1.png");
+		this.resources.queue("dn1", resource.IMAGE, "sprites/congressdem/North/frame2.png");
+		this.resources.queue("dn2", resource.IMAGE, "sprites/congressdem/North/frame3.png");
+		this.resources.queue("dn3", resource.IMAGE, "sprites/congressdem/North/frame4.png");
+		this.resources.queue("ds0", resource.IMAGE, "sprites/congressdem/South/frame1.png");
+		this.resources.queue("ds1", resource.IMAGE, "sprites/congressdem/South/frame2.png");
+		this.resources.queue("ds2", resource.IMAGE, "sprites/congressdem/South/frame3.png");
+		this.resources.queue("ds3", resource.IMAGE, "sprites/congressdem/South/frame4.png");
+
+		/* Republican congressperson */
+		this.resources.queue("re0", resource.IMAGE, "sprites/congressrep/East/frame1.png");
+		this.resources.queue("re1", resource.IMAGE, "sprites/congressrep/East/frame2.png");
+		this.resources.queue("rw0", resource.IMAGE, "sprites/congressrep/West/frame1.png");
+		this.resources.queue("rw1", resource.IMAGE, "sprites/congressrep/West/frame2.png");
+		this.resources.queue("rn0", resource.IMAGE, "sprites/congressrep/North/frame1.png");
+		this.resources.queue("rn1", resource.IMAGE, "sprites/congressrep/North/frame2.png");
+		this.resources.queue("rn2", resource.IMAGE, "sprites/congressrep/North/frame3.png");
+		this.resources.queue("rn3", resource.IMAGE, "sprites/congressrep/North/frame4.png");
+		this.resources.queue("rs0", resource.IMAGE, "sprites/congressrep/South/frame1.png");
+		this.resources.queue("rs1", resource.IMAGE, "sprites/congressrep/South/frame2.png");
+		this.resources.queue("rs2", resource.IMAGE, "sprites/congressrep/South/frame3.png");
+		this.resources.queue("rs3", resource.IMAGE, "sprites/congressrep/South/frame4.png");
+
 		this.resources.queue("walkable", resource.IMAGE, "tiles/walkable.png");
 		var that = this;
 		this.resources.load(function() {
-			that.entities.player.img = that.resources.$("billsprite");
+			/* Player sprite */
+			that.entities.player.images[Bill.DIRECTION.LEFT] = new Array();
+			that.entities.player.images[Bill.DIRECTION.LEFT].push(that.resources.$("billsprite_0"));
+			that.entities.player.images[Bill.DIRECTION.LEFT].push(that.resources.$("billsprite_1"));
+			that.entities.player.images[Bill.DIRECTION.UP] = new Array();
+			that.entities.player.images[Bill.DIRECTION.UP].push(that.resources.$("billsprite_0"));
+			that.entities.player.images[Bill.DIRECTION.UP].push(that.resources.$("billsprite_1"));
+			that.entities.player.images[Bill.DIRECTION.RIGHT] = new Array();
+			that.entities.player.images[Bill.DIRECTION.RIGHT].push(that.resources.$("billsprite_0"));
+			that.entities.player.images[Bill.DIRECTION.RIGHT].push(that.resources.$("billsprite_1"));
+			that.entities.player.images[Bill.DIRECTION.DOWN] = new Array();
+			that.entities.player.images[Bill.DIRECTION.DOWN].push(that.resources.$("billsprite_0"));
+			that.entities.player.images[Bill.DIRECTION.DOWN].push(that.resources.$("billsprite_1"));
+		
+			/* Democratic congressperson */
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT] = new Array();
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT] = new Array();
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT].push(that.resources.$("de0"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT].push(that.resources.$("de1"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT] = new Array();
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT].push(that.resources.$("dw0"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT].push(that.resources.$("dw1"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP] = new Array();
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP].push(that.resources.$("dn0"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP].push(that.resources.$("dn1"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP].push(that.resources.$("dn2"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP].push(that.resources.$("dn3"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.DOWN] = new Array();
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.DOWN].push(that.resources.$("ds0"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.DOWN].push(that.resources.$("ds1"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.DOWN].push(that.resources.$("ds2"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.DOWN].push(that.resources.$("ds3"));
+						
+			/* Republican congressperson */
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN] = new Array();
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT] = new Array();
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT].push(that.resources.$("re0"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT].push(that.resources.$("re1"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT] = new Array();
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT].push(that.resources.$("rw0"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT].push(that.resources.$("rw1"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP] = new Array();
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP].push(that.resources.$("rn0"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP].push(that.resources.$("rn1"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP].push(that.resources.$("rn2"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP].push(that.resources.$("rn3"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN] = new Array();
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs0"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs1"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs2"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs3"));
+		
 			world.TILE.FLOOR = that.resources.$("walkable");
 			console.log("Loaded reources");
 		});
@@ -65,6 +146,7 @@ function Fortress(canvas) {
     
 	/* Update loop. */
     this.update = function(delta) {
+
 		/* Update GUI. */
 		this.entities.gui.update(delta);
 		
@@ -88,7 +170,9 @@ function Fortress(canvas) {
 	
     /* Render. */
 	this.render = function(delta) {
-	
+		/* Get time of execution */
+		var time = Date.now();
+		
         /* Clear. */
         this.context.fillStyle = "black";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -103,8 +187,8 @@ function Fortress(canvas) {
 
 			/* Overworld */
 			case STATE.OVERWORLD:
-				this.entities.world.render(this.context, this.entities.player.transform.x - this.canvas.width/2 + this.entities.player.width/2, this.entities.player.transform.y - this.canvas.height/2 + this.entities.player.height/2);
-				this.entities.player.render(this.context);
+				this.entities.world.render(this.context, this.entities.player.transform.x - this.canvas.width/2 + this.entities.player.width/2, this.entities.player.transform.y - this.canvas.height/2 + this.entities.player.height/2, time);
+				this.entities.player.render(this.context, time);
 				break;
 		}
 	

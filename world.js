@@ -6,7 +6,7 @@ world.STATE = {PASSIVE: 0, NORTH: 1, EAST: 2, SOUTH: 3, WEST: 4};
 world.OFFSETX = 0;
 world.OFFSETY = 0;
 world.SPEED = 20;
-world.BOXSIZE = 256;
+world.BOXSIZE = 128;
 
 world.CELL = {WALL: 0, FLOOR: 1, PLAYER: 2};
 world.TILE = {};
@@ -17,17 +17,26 @@ world.World = function World(engine) {
 	this.state = World.PASSIVE;
 	this.grid = [];
 	this.cells = [];
-	this.update = function(delta) {}
+	this.mobs = new mobs.Manager(this);
 	
-	this.render = function(context, offx, offy) { 
+	this.update = function(delta) {
+		this.mobs.update(delta);
+	}
+	
+	this.render = function(context, offx, offy, time) { 
+		this.mobs.render(context, offx, offy, time);
+		
 		for(var i = 0; i < this.cells.length; i++) {
 			this.cells[i].render(context, offx, offy);
 		}
 	}
 	
-	this.loadLevel = function(text) {
+	this.loadLevel = function(level) {
+		var text = level.map;
 		var current = [];
 		this.grid.push(current);
+		
+		/* Process map string into cell grid */
 		for(var i = 0; i < text.length; i++) {
 			if(text.charAt(i) == "\n") {
 				current = [];
@@ -48,6 +57,7 @@ world.World = function World(engine) {
 			}
 		}
 		
+		/* Create cell objects for all non-solid tiles */
 		for(var i = 0; i < this.grid.length; i++) {
 			for(var j = 0; j < this.grid[i].length; j++) {
 				switch(this.grid[i][j]) {
@@ -60,6 +70,8 @@ world.World = function World(engine) {
 				}
 			}
 		}
+		
+		
 	}
 	
 }
