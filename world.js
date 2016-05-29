@@ -24,11 +24,11 @@ world.World = function World(engine) {
 	}
 	
 	this.render = function(context, offx, offy, time) { 
-		this.mobs.render(context, offx, offy, time);
-		
 		for(var i = 0; i < this.cells.length; i++) {
 			this.cells[i].render(context, offx, offy);
 		}
+
+		this.mobs.render(context, offx, offy, time);
 	}
 	
 	this.loadLevel = function(level) {
@@ -71,6 +71,13 @@ world.World = function World(engine) {
 			}
 		}
 		
+		/* Create mobs */
+		var moblist = level.mobs;
+		this.mobs.clear();
+		for(var i = 0; i < moblist.length; i++) {
+			var cur = moblist[i];
+			this.mobs.adopt(new mobs.Politician(cur.X*world.BOXSIZE, cur.Y*world.BOXSIZE, cur.PARTY, cur.RANK, cur.ONDEFEAT));
+		}
 		
 	}
 	

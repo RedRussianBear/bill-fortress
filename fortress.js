@@ -30,6 +30,9 @@ function Fortress(canvas) {
 		/* Create world */
 		this.entities.world = new world.World(engine);
 		
+		/* Load level files */
+		mklevels();
+		
 		/* Load resources */
 		this.resources.queue("billsprite_0", resource.IMAGE, "sprites/bill/West/frame1.png");
 		this.resources.queue("billsprite_1", resource.IMAGE, "sprites/bill/West/frame2.png");

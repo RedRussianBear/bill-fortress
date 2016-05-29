@@ -1,4 +1,6 @@
-levels = {};
+var levels = {};
+
+var mklevels = function() {
 
 levels.TEST = {}
 
@@ -30,4 +32,6 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
 ";
 
-levels.TEST.mobs = [];
+levels.TEST.mobs = [{X: 17, Y: 12, PARTY: mobs.PARTY.DEMOCRAT, RANK: mobs.RANK.CONGRESSPERSON, ONDEFEAT: function(){} }];
+
+}
