@@ -1,3 +1,8 @@
+@font-face {
+	font-family: bitfont;
+	src: url('8bit.ttf');
+}
+
 body {
 	font-family: 'Franklin Gothic Medium', sans-serif;
 	background-color: #F0F0F0;

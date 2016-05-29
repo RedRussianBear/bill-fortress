@@ -78,7 +78,7 @@ gui.Button = function Button(engine, x, y, w, h, text, callback, styles) {
 
 	/* Draw Styling */
     this.styles = styles || {
-        base: {font: "20px Verdana", textAlign: "center", textBaseline: "middle", lineWidth: 1e-10},
+        base: {font: "20px bitfont", textAlign: "center", textBaseline: "middle", lineWidth: 1e-10},
         "$normal": {box: {fillStyle: "lightgray"}, text: {fillStyle: "black"}},
         "$disabled": {box: {fillStyle: "lightgray"}, text: {fillStyle: "gray"}},
         "$hover": {box: {fillStyle: "gray"}, text: {fillStyle: "black"}},
@@ -146,7 +146,7 @@ gui.Text = function Text(engine, x, y, text, styles) {
     
     /* Instance. */
     this.text = text;
-    this.styles = {base: {font: "20px Verdana", textAlign: "center", textBaseline: "middle", fillStyle: "white"}};
+    this.styles = {base: {font: "20px bitfont", textAlign: "center", textBaseline: "middle", fillStyle: "white"}};
     if (styles) merge(styles, this.styles);
 
     /** Render the text. */	
@@ -189,7 +189,7 @@ function InputField(x, y, w, fontsize, parent) {
 	
 	/* Text format variables */
 	this.fontsize = this.height - 6;
-	this.font = this.fontsize + "px Franklin Gothic Medium";
+	this.font = this.fontsize + "px bitfont";
 	this.fontHeight = 20;
 	this.align = "left";
 	this.textOffTop = this.height/2 - this.fontHeight/2;

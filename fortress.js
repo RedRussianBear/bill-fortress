@@ -8,7 +8,7 @@ STATE.DEBATE = 4;
 STATE.CHARACTER = 5;
 
 /* Global font. */
-var FONT = "Franklin Gothic Medium";
+var FONT = "bitfont";
 
 /** The Bill Fortress game engine. */
 function Fortress(canvas) {
@@ -129,10 +129,10 @@ function Fortress(canvas) {
 	    
 	    /* Some graphical interface components. */
 	    menu.adopt("title", new gui.Text(
-	        this, this.canvas.width/2, 200, "Bill Fortress", {base: {font: "60px Verdana"}}
+	        this, this.canvas.width/2, 200, "Bill Fortress", {base: {font: "60px bitfont"}}
 	    ));
 	    menu.adopt("tagline", new gui.Text(
-	        this, this.canvas.width/2, 250, "A game of legislation", {base: {font: "30px Verdana"}}
+	        this, this.canvas.width/2, 250, "A game of legislation", {base: {font: "30px bitfont"}}
 	    ));
 	    menu.adopt("start", new gui.Button(
 	        this, this.canvas.width/2 - 150, 380, 300, 40, "New Game", function() {
