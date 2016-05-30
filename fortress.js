@@ -65,6 +65,20 @@ function Fortress(canvas) {
 		this.resources.queue("rs2", resource.IMAGE, "sprites/congressrep/South/frame3.png");
 		this.resources.queue("rs3", resource.IMAGE, "sprites/congressrep/South/frame4.png");
 
+		/* Sanders congressperson */
+		this.resources.queue("se0", resource.IMAGE, "sprites/congresssan/East/frame1.png");
+		this.resources.queue("se1", resource.IMAGE, "sprites/congresssan/East/frame2.png");
+		this.resources.queue("sw0", resource.IMAGE, "sprites/congresssan/West/frame1.png");
+		this.resources.queue("sw1", resource.IMAGE, "sprites/congresssan/West/frame2.png");
+		this.resources.queue("sn0", resource.IMAGE, "sprites/congresssan/North/frame1.png");
+		this.resources.queue("sn1", resource.IMAGE, "sprites/congresssan/North/frame2.png");
+		this.resources.queue("sn2", resource.IMAGE, "sprites/congresssan/North/frame3.png");
+		this.resources.queue("sn3", resource.IMAGE, "sprites/congresssan/North/frame4.png");
+		this.resources.queue("ss0", resource.IMAGE, "sprites/congresssan/South/frame1.png");
+		this.resources.queue("ss1", resource.IMAGE, "sprites/congresssan/South/frame2.png");
+		this.resources.queue("ss2", resource.IMAGE, "sprites/congresssan/South/frame3.png");
+		this.resources.queue("ss3", resource.IMAGE, "sprites/congresssan/South/frame4.png");
+		
 		this.resources.queue("walkable", resource.IMAGE, "tiles/walkable.png");
 		var that = this;
 		this.resources.load(function() {
@@ -119,6 +133,25 @@ function Fortress(canvas) {
 			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs1"));
 			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs2"));
 			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs3"));
+			
+			/* Sanders congressperson */
+			mobs.SPRITES[mobs.PARTY.SANDERS] = new Array();
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT] = new Array();
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT].push(that.resources.$("se0"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT].push(that.resources.$("se1"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT] = new Array();
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT].push(that.resources.$("sw0"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT].push(that.resources.$("sw1"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP] = new Array();
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP].push(that.resources.$("sn0"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP].push(that.resources.$("sn1"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP].push(that.resources.$("sn2"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP].push(that.resources.$("sn3"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN] = new Array();
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss0"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss1"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss2"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss3"));
 		
 			world.TILE.FLOOR = that.resources.$("walkable");
 			console.log("Loaded reources");
@@ -126,25 +159,42 @@ function Fortress(canvas) {
 	
 	    /* Create the start menu. */
 	    var menu = this.entities.gui.adopt("start", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {})); 
-	    
-	    /* Some graphical interface components. */
 	    menu.adopt("title", new gui.Text(
-	        this, this.canvas.width/2, 200, "Bill Fortress", {base: {font: "60px bitfont"}}
+	        this, this.canvas.width/2, 200, "Bill Fortress", {base: {font: "60px " + FONT}}
 	    ));
 	    menu.adopt("tagline", new gui.Text(
-	        this, this.canvas.width/2, 250, "A game of legislation", {base: {font: "30px bitfont"}}
+	        this, this.canvas.width/2, 250, "A game of legislation", {base: {font: "30px " + FONT}}
 	    ));
 	    menu.adopt("start", new gui.Button(
 	        this, this.canvas.width/2 - 150, 380, 300, 40, "New Game", function() {
-				this.parent.state = gui.STATE.DISABLED; this.parent.visible = false;
-				this.parent.engine.entities.world.loadLevel(levels.TEST);
-				this.parent.engine.entities.player.transform.x = this.parent.engine.entities.world.playerx;
-				this.parent.engine.entities.player.transform.y = this.parent.engine.entities.world.playery;
-				this.parent.engine.state = STATE.OVERWORLD; 
-				
+				this.parent.state = gui.STATE.DISABLED; 
+				this.parent.visible = false;
+				this.parent.engine.entities.gui.children.mkchar.state = gui.STATE.NORMAL;
+				this.parent.engine.entities.gui.children.mkchar.visible = true;
+		}));
+		menu.state = gui.STATE.NORMAL;
+		menu.visible = true;
+		
+		/* Character creation menu */
+		var mkchar = this.entities.gui.adopt("mkchar", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {}));
+		mkchar.adopt("title", new gui.Text(this, this.canvas.width/2, 30, "Character Creation", {base: {font: "46px " + FONT}}));
+		mkchar.adopt("nmtxt", new gui.Text(this, 10, 90, "Bill Name:", {base: {font: "32px " + FONT, textAlign: "left"}}));
+		mkchar.adopt("nameinput", new gui.InputField(this, 10, 118, 400, 30));
+		mkchar.adopt("begin", new gui.Button(
+				this, this.canvas.width/2 - 150, 500, 300, 40, "Begin", function() {
+					this.parent.state = gui.STATE.DISABLED; 
+					this.parent.visible = false;
+					this.parent.engine.entities.gui.children.hud.state = gui.STATE.NORMAL;
+					this.parent.engine.entities.gui.children.hud.visible = true;
+					this.parent.engine.entities.gui.children.hud.children.nmtxt.text = this.parent.children.nameinput.text;
+					this.parent.engine.entities.world.loadLevel(levels.TEST);
+					this.parent.engine.entities.player.transform.x = this.parent.engine.entities.world.playerx;
+					this.parent.engine.entities.player.transform.y = this.parent.engine.entities.world.playery;
+					this.parent.engine.state = STATE.OVERWORLD; 	
 		}));
 
-		
+		var hud = this.entities.gui.adopt("hud", new gui.Component(this, 0, 0, this.canvas.width, 40, {fillStyle: "black"}));
+		hud.adopt("nmtxt", new gui.Text(this, 5, 15, "[playername]", {base: {font: "32px " + FONT, textAlign: "left"}}));
     }
     
 	/* Update loop. */
@@ -179,7 +229,6 @@ function Fortress(canvas) {
         /* Clear. */
         this.context.fillStyle = "black";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-		this.entities.gui.render(this.context);
  
 		/* Rendering states. */
 		switch (this.state) {
@@ -194,7 +243,9 @@ function Fortress(canvas) {
 				this.entities.player.render(this.context, time);
 				break;
 		}
-	
+		
+		/* Render gui */
+		this.entities.gui.render(this.context);
 	}
 
 }

@@ -26,8 +26,8 @@ gui.Component = function Component(engine, x, y, w, h, style) {
     
     /** Instance. */
     this.parent;
-    this.visible = true;
-    this.state = gui.STATE.NORMAL;
+    this.visible = false;
+    this.state = gui.STATE.DISABLED;
     this.children = {};
     
     /** Add a child to the component. */
@@ -45,6 +45,10 @@ gui.Component = function Component(engine, x, y, w, h, style) {
     /** Render the component. */
     this.render = function(context) {
         if (!this.visible) return;
+		if(this.style.fillStyle) {
+			context.fillStyle = this.style.fillStyle;
+			context.fillRect(this.transform.x, this.transform.y, this.width, this.height);
+		}
         for (var name in this.children) this.children[name].render(context);
     }
     
@@ -77,7 +81,7 @@ gui.Button = function Button(engine, x, y, w, h, text, callback, styles) {
 	this.callback = callback;	
 
 	/* Draw Styling */
-    this.styles = styles || {
+    this.styles = {
         base: {font: "20px bitfont", textAlign: "center", textBaseline: "middle", lineWidth: 1e-10},
         "$normal": {box: {fillStyle: "lightgray"}, text: {fillStyle: "black"}},
         "$disabled": {box: {fillStyle: "lightgray"}, text: {fillStyle: "gray"}},
@@ -174,31 +178,31 @@ gui.Text = function Text(engine, x, y, text, styles) {
 gui.Text.prototype = gui.Component.prototype;
 
 
-function InputField(x, y, w, fontsize, parent) {
+gui.InputField = function InputField(engine, x, y, w, h) {
+	
+	gui.Component.call(this, engine, x, y);
+	
 	/* Basic variables */
-	this.x = x;
-	this.y = y;
 	this.width = w;
 	this.height = h;
 	
 	
 	/* State variables */
-	this.state = InputField.CLEAR;
+	this.state = gui.InputField.CLEAR;
 	this.text = "";
-	this.maxChars = 16;
+	this.maxChars = 28;
 	
 	/* Text format variables */
 	this.fontsize = this.height - 6;
 	this.font = this.fontsize + "px bitfont";
-	this.fontHeight = 20;
 	this.align = "left";
-	this.textOffTop = this.height/2 - this.fontHeight/2;
+	this.textOffTop = this.height/2 - this.fontsize/2;
 	this.textOffLeft = 3;
 	
 	/* Draw Styling */
 	this.styles = [];
-	this.styles[InputField.CLEAR] = {BOX: "white", BORDER: "gray", TEXT: "black"};
-	this.styles[InputField.SELECTED] = {BOX: "gray", BORDER: "black", TEXT: "black"};
+	this.styles[gui.InputField.CLEAR] = {BOX: "white", BORDER: "gray", TEXT: "black"};
+	this.styles[gui.InputField.SELECTED] = {BOX: "gray", BORDER: "black", TEXT: "black"};
 	
 	this.render = function(context) {
 		context.fillStyle = this.styles[this.state].BOX;
@@ -209,23 +213,24 @@ function InputField(x, y, w, fontsize, parent) {
 		context.font = this.font;
 		context.textAlign = this.align;
 		context.fillStyle = this.styles[this.state].TEXT;
+		context.textBaseline = "top";
 		context.fillText(this.text, this.transform.position.x + this.parent.transform.position.x + this.textOffLeft, this.transform.position.y + this.parent.transform.position.y + this.textOffTop);
 	}
 	
 	this.update = function() {
-		if(this.state == InputField.SELECTED) {
+		if(this.state == gui.InputField.SELECTED) {
 			for(key in this.parent.engine.input.keyboard) {
 				if(this.parent.engine.input.keyboard[key] == input.STATE.PRESSED) {
 					if(key == input.KEY.BACK_SPACE)
 						this.text = this.text.substring(0, this.text.length - 1);
 					else if(key == input.KEY.ENTER || key == input.KEY.RETURN)
-						this.state = InputField.CLEAR;
-					else if(key >= input.KEY.A && key <= input.KEY.Z) {
+						this.state = gui.InputField.CLEAR;
+					else if(key >= input.KEY.A && key <= input.KEY.Z && this.text.length < this.maxChars) {
 						if(!(this.parent.engine.input.keyboard[input.KEY.SHIFT]))
 							key = parseInt(key) + 32;
 						this.text += String.fromCharCode(key);
 					}
-					else if(key == input.KEY.SPACE)
+					else if(key == input.KEY.SPACE && this.text.length < this.maxChars)
 						this.text += " ";
 				}
 			}
@@ -234,17 +239,17 @@ function InputField(x, y, w, fontsize, parent) {
 		if(this.parent.engine.input.mouse.left){
 			if(this.parent.engine.input.mouse.x > this.transform.position.x && this.parent.engine.input.mouse.x < this.transform.position.x + this.width &&
 			this.parent.engine.input.mouse.y > this.transform.position.y && this.parent.engine.input.mouse.y < this.transform.position.y + this.height) {
-				this.state = InputField.SELECTED;
+				this.state = gui.InputField.SELECTED;
 			}
 			else {
-				this.state = InputField.CLEAR;
+				this.state = gui.InputField.CLEAR;
 			}
 		}
 	}
 }
 
-InputField.CLEAR = 0;
-InputField.SELECTED = 1;
+gui.InputField.CLEAR = 0;
+gui.InputField.SELECTED = 1;
 
 /** The main GUI manager. */
 gui.Manager = function Manager(engine) {
