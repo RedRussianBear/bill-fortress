@@ -9,6 +9,12 @@ function Bill(engine) {
 	this.images = [];
 	this.moving = false;
 	
+	/* Stats */
+	this.maxhealth = 100;
+	this.health = 100;
+	this.endorsements = 0;
+	this.attacks = [];
+	
 	this.render = function(context, time) {
 		context.drawImage(this.images[this.state][Math.floor(time/100)%(this.moving ? this.images[this.state].length : 1)], this.engine.canvas.width/2 - this.width/2, this.engine.canvas.height/2 - this.height/2, this.width, this.height);
 	}

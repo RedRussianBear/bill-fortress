@@ -49,8 +49,10 @@ gui.Component = function Component(engine, x, y, w, h, style) {
 			context.fillStyle = this.style.fillStyle;
 			context.fillRect(this.transform.x, this.transform.y, this.width, this.height);
 		}
-        for (var name in this.children) this.children[name].render(context);
-    }
+        for (var name in this.children){ 
+			this.children[name].render(context);
+		}
+	}
     
     /** Update the component. */
     this.update = function(delta) {
@@ -176,6 +178,46 @@ gui.Text = function Text(engine, x, y, text, styles) {
 }
 
 gui.Text.prototype = gui.Component.prototype;
+
+gui.StatBar = function StatBar(engine, x, y, w, h, max, init, styles) {
+	/* Component superclass. */
+	gui.Component.call(this, engine, x, y, w, h);
+
+	/* States and functions */
+	this.state = gui.STATE.NORMAL;
+	this.hover = false;
+
+	/* Draw Styling */
+    this.styles = {
+		bar: {strokeStyle: "white", fillStyle: "red"},
+        text: {font: "20px bitfont", textAlign: "center", textBaseline: "middle", lineWidth: 1e-10, fillStyle: "white"}
+    };
+    if (styles) merge(styles, this.styles);
+	
+	/* Stat bar specific */
+	this.max = max;
+	this.val = init;
+	
+	this.render = function(context) {
+        /* Save the state of the context. */
+        context.save();
+        
+		/* Draw bar */
+        for (var key in this.styles.bar) context[key] = this.styles.bar[key];
+		context.fillRect(this.transform.x + this.parent.transform.x, this.transform.y + this.parent.transform.y, this.width * (this.val/this.max), this.height);
+		context.strokeRect(this.transform.x + this.parent.transform.x, this.transform.y + this.parent.transform.y, this.width, this.height)
+		
+        /* Draw stat */
+        for (var key in this.styles.text) context[key] = this.styles.text[key];
+		context.fillText(this.val + "/" + this.max, this.transform.x + this.parent.transform.x + this.width/2, this.transform.y + this.parent.transform.y + this.height/2);
+		
+		/* Restore the context. */
+		context.restore();
+		
+	}
+}
+
+gui.StatBar.prototype = gui.Component.prototype;
 
 
 gui.InputField = function InputField(engine, x, y, w, h) {

@@ -1,11 +1,5 @@
 /** States. */
-var STATE = {};
-STATE.NULL = 0;
-STATE.START = 1;
-STATE.PAUSE = 2;
-STATE.OVERWORLD = 3;
-STATE.DEBATE = 4;
-STATE.CHARACTER = 5;
+var STATE = {NULL: 0, START: 1, PAUSE: 2, OVERWORLD: 3, DEBATE: 4, CHARACTER: 5};
 
 /* Global font. */
 var FONT = "bitfont";
@@ -26,9 +20,12 @@ function Fortress(canvas) {
 	
 		/* Create the player */
 		this.entities.player = this.player = new Bill(this);
-		
+		this.player.attacks.push(new debate.Attack("An attack", function(enemy){console.log("wow")}, 0, 0));
 		/* Create world */
-		this.entities.world = new world.World(engine);
+		this.entities.world = new world.World(this);
+		
+		/* Create debate manager */
+		this.entities.debate = new debate.Manager(this);
 		
 		/* Load level files */
 		mklevels();
@@ -201,16 +198,59 @@ function Fortress(canvas) {
 					this.parent.engine.entities.gui.children.hud.state = gui.STATE.NORMAL;
 					this.parent.engine.entities.gui.children.hud.visible = true;
 					this.parent.engine.entities.gui.children.hud.children.nmtxt.text = this.parent.children.nameinput.text;
+					this.parent.engine.entities.player.name = this.parent.children.nameinput.text;
+					this.parent.engine.entities.gui.children.debate.children.bill.children.name.text = this.parent.children.nameinput.text;
 					this.parent.engine.entities.world.loadLevel(levels.TEST);
 					this.parent.engine.entities.player.transform.x = this.parent.engine.entities.world.playerx;
 					this.parent.engine.entities.player.transform.y = this.parent.engine.entities.world.playery;
-					this.parent.engine.state = STATE.OVERWORLD; 	
+					this.parent.engine.state = STATE.OVERWORLD;
 		}));
 
-		var hud = this.entities.gui.adopt("hud", new gui.Component(this, 0, 0, this.canvas.width, 40, {fillStyle: "black"}));
+		/* HUD */
+		var hud = this.entities.gui.adopt("hud", new gui.Component(this, 0, 0, this.canvas.width, 35, {fillStyle: "black"}));
 		hud.adopt("nmtxt", new gui.Text(this, 5, 15, "[playername]", {base: {font: "32px " + FONT, textAlign: "left"}}));
+		
+		/* Debate menu */
+		var debatem = this.entities.gui.adopt("debate", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {}));
+		var psubm = debatem.adopt("bill", new gui.Component(this, 0, 400, this.canvas.width, 200, {fillStyle: "black"}));
+		var esubm = debatem.adopt("enemy", new gui.Component(this, 0, 0, this.canvas.width, 100, {fillStyle: "black"}));
+		/* Debate menu, enemy sub-menu */
+		esubm.adopt("name", new gui.Text(this, 20, 25, "[enemyname]", {base: {font: "46px " + FONT, textAlign: "left"}}));
+		esubm.adopt("health", new gui.StatBar(this, this.canvas.width/2, 10, this.canvas.width/2 - 10, 80, 100, 60, {}));
+		esubm.state = gui.STATE.NORMAL;
+		esubm.visible = true;
+		/* Debate menu, player sub-menu */
+		psubm.adopt("name", new gui.Text(this, 20, 25, "[playername]", {base: {font: "46px " + FONT, textAlign: "left"}}));
+		psubm.adopt("health", new gui.StatBar(this, 20, 100, this.canvas.width/2 - 30, 80, 100, 60, {}));
+		psubm.state = gui.STATE.NORMAL;
+		psubm.visible = true;
+		var attackm = psubm.adopt("actions", new gui.Component(this, 0, 0, this.canvas.width/2, 200, {}));
+		attackm.state = gui.STATE.NORMAL;
+		attackm.visible = true;
     }
     
+	this.initdebate = function(enemy) {
+		this.state = STATE.DEBATE;
+		this.entities.gui.children.hud.visible = false;
+		this.entities.gui.children.hud.state = gui.STATE.DISABLED;
+		this.entities.gui.children.debate.children.enemy.children.name.text = enemy.name;
+		this.entities.gui.children.debate.children.enemy.children.health.max = enemy.maxhealth;
+		this.entities.gui.children.debate.children.enemy.children.health.val = enemy.health;
+		this.entities.gui.children.debate.children.bill.children.health.max = enemy.maxhealth;
+		this.entities.gui.children.debate.children.bill.children.health.val = enemy.health;
+		this.entities.debate.start(enemy);
+		this.entities.gui.children.debate.state = gui.STATE.NORMAL;
+		this.entities.gui.children.debate.visible = true;
+	}
+	
+	this.findebate = function() {
+		this.state = STATE.OVERWORLD;
+		this.entities.gui.children.hud.visible = true;
+		this.entities.gui.children.hud.state = gui.STATE.NORMAL;
+		this.entities.gui.children.debate.visible = false;
+		this.entities.gui.children.debate.state = gui.STATE.DISABLED;
+	}
+	
 	/* Update loop. */
     this.update = function(delta) {
 
@@ -231,6 +271,11 @@ function Fortress(canvas) {
 			case STATE.OVERWORLD:
 				this.entities.world.update(delta);
 				this.entities.player.update(delta);
+				break;
+				
+			/* Debate */
+			case STATE.DEBATE:
+				this.entities.debate.update(delta);
 				break;
 		}
 	}
@@ -255,6 +300,11 @@ function Fortress(canvas) {
 			case STATE.OVERWORLD:
 				this.entities.world.render(this.context, this.entities.player.transform.x - this.canvas.width/2 + this.entities.player.width/2, this.entities.player.transform.y - this.canvas.height/2 + this.entities.player.height/2, time);
 				this.entities.player.render(this.context, time);
+				break;
+				
+			/* Debate */
+			case STATE.DEBATE:
+				this.entities.debate.render(this.context);
 				break;
 		}
 		

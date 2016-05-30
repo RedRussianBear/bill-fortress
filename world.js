@@ -76,7 +76,7 @@ world.World = function World(engine) {
 		this.mobs.clear();
 		for(var i = 0; i < moblist.length; i++) {
 			var cur = moblist[i];
-			this.mobs.adopt(new mobs.Politician(cur.X*world.BOXSIZE, cur.Y*world.BOXSIZE, cur.PARTY, cur.RANK, cur.ONDEFEAT));
+			this.mobs.adopt(new mobs.Politician(cur.X*world.BOXSIZE, cur.Y*world.BOXSIZE, cur.NAME, cur.PARTY, cur.RANK, cur.ONDEFEAT));
 		}
 		
 	}

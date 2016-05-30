@@ -9,12 +9,16 @@ mobs.HEIGHT = 96;
 
 mobs.SPRITES = [];
 
-mobs.Politician = function Politician (x, y, party, rank, ondefeat) {
+mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
 	
 	sprite.Sprite.call(this, x, y, mobs.WIDTH, mobs.HEIGHT);
 	
 	this.direction = Math.floor(4 * Math.random());
 	this.party = party;
+	this.name = name;
+	this.maxhealth = 100;
+	this.health = 100;
+	this.attacks = [];
 	this.moving = false;
 	this.rank = rank || mobs.RANK.CONGRESPERSON;
 	
