@@ -34,8 +34,18 @@ function Fortress(canvas) {
 		mklevels();
 		
 		/* Load resources */
-		this.resources.queue("billsprite_0", resource.IMAGE, "sprites/bill/West/frame1.png");
-		this.resources.queue("billsprite_1", resource.IMAGE, "sprites/bill/West/frame2.png");
+		this.resources.queue("bw0", resource.IMAGE, "sprites/bill/West/frame1.png");
+		this.resources.queue("bw1", resource.IMAGE, "sprites/bill/West/frame2.png");
+		this.resources.queue("be0", resource.IMAGE, "sprites/bill/East/frame1.png");
+		this.resources.queue("be1", resource.IMAGE, "sprites/bill/East/frame2.png");
+		this.resources.queue("bn0", resource.IMAGE, "sprites/bill/North/frame1.png");
+		this.resources.queue("bn1", resource.IMAGE, "sprites/bill/North/frame2.png");
+		this.resources.queue("bn2", resource.IMAGE, "sprites/bill/North/frame3.png");
+		this.resources.queue("bn3", resource.IMAGE, "sprites/bill/North/frame4.png");
+		this.resources.queue("bs0", resource.IMAGE, "sprites/bill/South/frame1.png");
+		this.resources.queue("bs1", resource.IMAGE, "sprites/bill/South/frame2.png");
+		this.resources.queue("bs2", resource.IMAGE, "sprites/bill/South/frame3.png");
+		this.resources.queue("bs3", resource.IMAGE, "sprites/bill/South/frame4.png");
 		
 		/* Democratic congressperson */
 		this.resources.queue("de0", resource.IMAGE, "sprites/congressdem/East/frame1.png");
@@ -84,17 +94,21 @@ function Fortress(canvas) {
 		this.resources.load(function() {
 			/* Player sprite */
 			that.entities.player.images[Bill.DIRECTION.LEFT] = new Array();
-			that.entities.player.images[Bill.DIRECTION.LEFT].push(that.resources.$("billsprite_0"));
-			that.entities.player.images[Bill.DIRECTION.LEFT].push(that.resources.$("billsprite_1"));
+			that.entities.player.images[Bill.DIRECTION.LEFT].push(that.resources.$("bw0"));
+			that.entities.player.images[Bill.DIRECTION.LEFT].push(that.resources.$("bw1"));
 			that.entities.player.images[Bill.DIRECTION.UP] = new Array();
-			that.entities.player.images[Bill.DIRECTION.UP].push(that.resources.$("billsprite_0"));
-			that.entities.player.images[Bill.DIRECTION.UP].push(that.resources.$("billsprite_1"));
+			that.entities.player.images[Bill.DIRECTION.UP].push(that.resources.$("bn0"));
+			that.entities.player.images[Bill.DIRECTION.UP].push(that.resources.$("bn1"));
+			that.entities.player.images[Bill.DIRECTION.UP].push(that.resources.$("bn2"));
+			that.entities.player.images[Bill.DIRECTION.UP].push(that.resources.$("bn3"))
 			that.entities.player.images[Bill.DIRECTION.RIGHT] = new Array();
-			that.entities.player.images[Bill.DIRECTION.RIGHT].push(that.resources.$("billsprite_0"));
-			that.entities.player.images[Bill.DIRECTION.RIGHT].push(that.resources.$("billsprite_1"));
+			that.entities.player.images[Bill.DIRECTION.RIGHT].push(that.resources.$("be0"));
+			that.entities.player.images[Bill.DIRECTION.RIGHT].push(that.resources.$("be1"));
 			that.entities.player.images[Bill.DIRECTION.DOWN] = new Array();
-			that.entities.player.images[Bill.DIRECTION.DOWN].push(that.resources.$("billsprite_0"));
-			that.entities.player.images[Bill.DIRECTION.DOWN].push(that.resources.$("billsprite_1"));
+			that.entities.player.images[Bill.DIRECTION.DOWN].push(that.resources.$("bs0"));
+			that.entities.player.images[Bill.DIRECTION.DOWN].push(that.resources.$("bs1"));
+			that.entities.player.images[Bill.DIRECTION.DOWN].push(that.resources.$("bs2"));
+			that.entities.player.images[Bill.DIRECTION.DOWN].push(that.resources.$("bs3"));
 		
 			/* Democratic congressperson */
 			mobs.SPRITES[mobs.PARTY.DEMOCRAT] = new Array();
