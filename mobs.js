@@ -60,8 +60,8 @@ mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
 				if(!(grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)] == world.CELL.WALL))
 					this.transform.x += dist;
 			}
-		
 		}
+		
 		if(geometry.Vector.distance(this.transform, player.transform) < world.BOXSIZE) {
 			this.parent.level.engine.initdebate(this);
 		}
