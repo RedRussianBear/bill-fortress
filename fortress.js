@@ -85,6 +85,11 @@ function Fortress(canvas) {
 		this.resources.queue("ss1", resource.IMAGE, "sprites/congresssan/South/frame2.png");
 		this.resources.queue("ss2", resource.IMAGE, "sprites/congresssan/South/frame3.png");
 		this.resources.queue("ss3", resource.IMAGE, "sprites/congresssan/South/frame4.png");
+        
+        /* Sound effects. */
+        this.resources.queue("ambient01", resource.AUDIO, "sounds/america.wav");
+        this.resources.queue("ambient02", resource.AUDIO, "sounds/battlecry.wav");
+        this.resources.queue("alarm", resource.AUDIO, "sounds/sfx/alert.wav");
 		
 		this.resources.queue("walkable", resource.IMAGE, "tiles/walkable.png");
 		var that = this;
@@ -200,7 +205,7 @@ function Fortress(canvas) {
 					this.parent.engine.entities.gui.children.hud.children.nmtxt.text = this.parent.children.nameinput.text;
 					this.parent.engine.entities.player.name = this.parent.children.nameinput.text;
 					this.parent.engine.entities.gui.children.debate.children.bill.children.name.text = this.parent.children.nameinput.text;
-					this.parent.engine.entities.world.loadLevel(levels.TEST);
+					this.parent.engine.entities.world.load(levels.TEST);
 					this.parent.engine.entities.player.transform.x = this.parent.engine.entities.world.playerx;
 					this.parent.engine.entities.player.transform.y = this.parent.engine.entities.world.playery;
 					this.parent.engine.state = STATE.OVERWORLD;
