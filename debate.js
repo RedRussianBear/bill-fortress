@@ -6,6 +6,7 @@ debate.Manager = function Manager(engine) {
 	
 	this.start = function(enemy) {
 		this.amenu = this.engine.entities.gui.children.debate.children.bill.children.actions;
+		this.mbuf = this.engine.entities.gui.children.debate.children.message;
 		this.enemy = enemy;
 		this.turnnum = 0;
 		
@@ -26,8 +27,10 @@ debate.Manager = function Manager(engine) {
 		for(var i = 0; i < pat.length; i++) {
 			var that = this;
 			var temp = pat[i];
-			this.amenu.adopt(temp.name, new gui.Button(this.engine, this.engine.canvas.width/2, 5 + 40*i, 280, 35, temp.name, function(){temp.exec(); temp.available = false; temp.lastused = that.turnnum;}));
+			this.amenu.adopt(temp.name, new gui.Button(this.engine, this.engine.canvas.width/2 + 5, 5 + 40*i, 280, 35, temp.name, function(){temp.exec(that.enemy); temp.available = false; temp.lastused = that.turnnum;}));
 		}
+		
+		this.mbuf.text = "Battle begins!";
 	}
 	
 	this.step = function() {
@@ -70,6 +73,8 @@ debate.Manager = function Manager(engine) {
 	this.render = function(context) {
 		context.fillStyle = "white";
 		context.fillRect(0, 0, this.engine.canvas.width, this.engine.canvas.height);
+		context.drawImage(this.engine.entities.player.images[Bill.DIRECTION.RIGHT][0], 80, 175, 96, 144);
+		context.drawImage(mobs.SPRITES[this.enemy.party][mobs.DIRECTION.LEFT][0], 624, 175, 96, 144);
 	}
 }
 

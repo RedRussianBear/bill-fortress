@@ -190,7 +190,7 @@ gui.StatBar = function StatBar(engine, x, y, w, h, max, init, styles) {
 	/* Draw Styling */
     this.styles = {
 		bar: {strokeStyle: "white", fillStyle: "red"},
-        text: {font: "20px bitfont", textAlign: "center", textBaseline: "middle", lineWidth: 1e-10, fillStyle: "white"}
+        text: {font: "32px bitfont", textAlign: "center", textBaseline: "middle", lineWidth: 1e-10, fillStyle: "white"}
     };
     if (styles) merge(styles, this.styles);
 	
@@ -232,7 +232,7 @@ gui.InputField = function InputField(engine, x, y, w, h) {
 	/* State variables */
 	this.state = gui.InputField.CLEAR;
 	this.text = "";
-	this.maxChars = 28;
+	this.maxChars = 15;
 	
 	/* Text format variables */
 	this.fontsize = this.height - 6;

@@ -110,11 +110,11 @@ function Fortress(canvas) {
 			/* Democratic congressperson */
 			mobs.SPRITES[mobs.PARTY.DEMOCRAT] = new Array();
 			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT] = new Array();
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT].push(that.resources.$("de0"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT].push(that.resources.$("de1"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT].push(that.resources.$("dw0"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT].push(that.resources.$("dw1"));
 			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT] = new Array();
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT].push(that.resources.$("dw0"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT].push(that.resources.$("dw1"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT].push(that.resources.$("de0"));
+			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT].push(that.resources.$("de1"));
 			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP] = new Array();
 			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP].push(that.resources.$("dn0"));
 			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP].push(that.resources.$("dn1"));
@@ -129,11 +129,11 @@ function Fortress(canvas) {
 			/* Republican congressperson */
 			mobs.SPRITES[mobs.PARTY.REPUBLICAN] = new Array();
 			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT] = new Array();
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT].push(that.resources.$("re0"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT].push(that.resources.$("re1"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT].push(that.resources.$("rw0"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT].push(that.resources.$("rw1"));
 			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT] = new Array();
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT].push(that.resources.$("rw0"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT].push(that.resources.$("rw1"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT].push(that.resources.$("re0"));
+			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT].push(that.resources.$("re1"));
 			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP] = new Array();
 			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP].push(that.resources.$("rn0"));
 			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP].push(that.resources.$("rn1"));
@@ -148,11 +148,11 @@ function Fortress(canvas) {
 			/* Sanders congressperson */
 			mobs.SPRITES[mobs.PARTY.SANDERS] = new Array();
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT] = new Array();
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT].push(that.resources.$("se0"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT].push(that.resources.$("se1"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT].push(that.resources.$("sw0"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT].push(that.resources.$("sw1"));
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT] = new Array();
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT].push(that.resources.$("sw0"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT].push(that.resources.$("sw1"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT].push(that.resources.$("se0"));
+			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT].push(that.resources.$("se1"));
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP] = new Array();
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP].push(that.resources.$("sn0"));
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP].push(that.resources.$("sn1"));
@@ -214,6 +214,7 @@ function Fortress(canvas) {
 		var debatem = this.entities.gui.adopt("debate", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {}));
 		var psubm = debatem.adopt("bill", new gui.Component(this, 0, 400, this.canvas.width, 200, {fillStyle: "black"}));
 		var esubm = debatem.adopt("enemy", new gui.Component(this, 0, 0, this.canvas.width, 100, {fillStyle: "black"}));
+		debatem.adopt("message", new gui.Text(this, this.canvas.width/2, 350, "[message]", {base: {font: "42px " + FONT, fillStyle: "black"}}));
 		/* Debate menu, enemy sub-menu */
 		esubm.adopt("name", new gui.Text(this, 20, 25, "[enemyname]", {base: {font: "46px " + FONT, textAlign: "left"}}));
 		esubm.adopt("health", new gui.StatBar(this, this.canvas.width/2, 10, this.canvas.width/2 - 10, 80, 100, 60, {}));
@@ -297,6 +298,7 @@ function Fortress(canvas) {
 				break;
 
 			/* Overworld */
+			case STATE.PAUSE:
 			case STATE.OVERWORLD:
 				this.entities.world.render(this.context, this.entities.player.transform.x - this.canvas.width/2 + this.entities.player.width/2, this.entities.player.transform.y - this.canvas.height/2 + this.entities.player.height/2, time);
 				this.entities.player.render(this.context, time);
