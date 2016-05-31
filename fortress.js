@@ -20,7 +20,7 @@ function Fortress(canvas) {
 	
 		/* Create the player */
 		this.entities.player = this.player = new Bill(this);
-		this.player.attacks.push(new debate.Attack("An attack", function(enemy){console.log("wow")}, 0, 0));
+		this.player.attacks.push(new debate.Attack("An attack", function(enemy){enemy.health-=10;}, 0, 0));
 		/* Create world */
 		this.entities.world = new world.World(this);
 		
@@ -207,8 +207,11 @@ function Fortress(canvas) {
 		}));
 
 		/* HUD */
-		var hud = this.entities.gui.adopt("hud", new gui.Component(this, 0, 0, this.canvas.width, 35, {fillStyle: "black"}));
+		var hud = this.entities.gui.adopt("hud", new gui.Component(this, 0, 0, this.canvas.width, 40, {fillStyle: "black"}));
 		hud.adopt("nmtxt", new gui.Text(this, 5, 15, "[playername]", {base: {font: "32px " + FONT, textAlign: "left"}}));
+		hud.adopt("endtxt", new gui.Text(this, this.canvas.width/2 + 5, 20, "Endorsements:", {base: {font: "32px " + FONT, textAlign: "left"}}));
+		hud.adopt("endorsements", new gui.StatBar(this, 630, 5, 160, 30, 16, 0, {bar: {fillStyle: "green"}, text: {font: "30px " + FONT}}));
+
 		
 		/* Debate menu */
 		var debatem = this.entities.gui.adopt("debate", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {}));

@@ -7,6 +7,8 @@ debate.Manager = function Manager(engine) {
 	this.start = function(enemy) {
 		this.amenu = this.engine.entities.gui.children.debate.children.bill.children.actions;
 		this.mbuf = this.engine.entities.gui.children.debate.children.message;
+		this.pbar = this.engine.entities.gui.children.debate.children.bill.children.health;
+		this.ebar = this.engine.entities.gui.children.debate.children.enemy.children.health;
 		this.enemy = enemy;
 		this.turnnum = 0;
 		
@@ -27,7 +29,7 @@ debate.Manager = function Manager(engine) {
 		for(var i = 0; i < pat.length; i++) {
 			var that = this;
 			var temp = pat[i];
-			this.amenu.adopt(temp.name, new gui.Button(this.engine, this.engine.canvas.width/2 + 5, 5 + 40*i, 280, 35, temp.name, function(){temp.exec(that.enemy); temp.available = false; temp.lastused = that.turnnum;}));
+			this.amenu.adopt(temp.name, new gui.Button(this.engine, this.engine.canvas.width/2 + 5, 5 + 40*i, 280, 35, temp.name, function(){temp.exec(that.enemy); temp.available = false; temp.lastused = that.turnnum; that.step();}));
 		}
 		
 		this.mbuf.text = "Battle begins!";
@@ -39,12 +41,12 @@ debate.Manager = function Manager(engine) {
 		/* Update attacks */
 		var pat = this.engine.entities.player.attacks;
 		for(var i = 0; i < pat.length; i++)
-			if(!pat[i].available && turnnum - pat[i].lastused > pat[i].cooldown)
+			if(!pat[i].available && this.turnnum - pat[i].lastused > pat[i].cooldown)
 				pat[i].available = true;
 		
 		/* Reset this.enemy attacks */
 		for(var i = 0; i < this.enemy.attacks.length; i++)
-			if(this.enemy.attacks[i].available && turnnum - this.enemy.attacks[i].lastused > this.enemy.attacks[i].cooldown)
+			if(this.enemy.attacks[i].available && this.turnnum - this.enemy.attacks[i].lastused > this.enemy.attacks[i].cooldown)
 				this.enemy.attacks[i].available = true;
 		
 		this.enemy.attacks.sort(debate.powcomp);
@@ -56,7 +58,17 @@ debate.Manager = function Manager(engine) {
 				this.enemy.attacks[i].available = false;
 				break;
 			}
-		 
+		
+		this.pbar.val = this.engine.player.health;
+		this.ebar.val = this.enemy.health;
+		
+		if(this.enemy.health <= 0) {
+			this.engine.entities.world.mobs.children.splice(this.engine.entities.world.mobs.children.indexOf(this.enemy), 1);
+			this.engine.findebate();
+		}
+		
+		if(this.engine.player.health <= 0) {
+		}
 	}
 	
 	this.update = function(delta) {
@@ -68,6 +80,7 @@ debate.Manager = function Manager(engine) {
 			else {
 				this.amenu.children[pat[i].name].state = gui.STATE.DISABLED;
 			}
+		
 	}
 	
 	this.render = function(context) {
