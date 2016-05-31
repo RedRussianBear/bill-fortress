@@ -32,6 +32,6 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
 ";
 
-levels.TEST.mobs = [{X: 17, Y: 12, NAME: "Ted Cruz", PARTY: mobs.PARTY.DEMOCRAT, RANK: mobs.RANK.CONGRESSPERSON, ONDEFEAT: function(){} }];
+levels.TEST.mobs = [{X: 17, Y: 12, NAME: "Ted Cruz", PARTY: mobs.PARTY.DEMOCRAT, RANK: mobs.RANK.CONGRESSPERSON, ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} }];
 
 }

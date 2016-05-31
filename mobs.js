@@ -22,6 +22,7 @@ mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
 	this.attacks = [];
 	this.moving = false;
 	this.rank = rank || mobs.RANK.CONGRESPERSON;
+	this.ondefeat = ondefeat || function(player) {player.endorsements++; player.funds += 10;};
 	
 	this.render = function(context, offx, offy, time) {
 		context.drawImage(mobs.SPRITES[this.party][this.direction][Math.floor(time/100)%(this.moving ? mobs.SPRITES[this.party][this.direction].length : 1)], (this.transform.x - offx), (this.transform.y - offy), this.width, this.height);

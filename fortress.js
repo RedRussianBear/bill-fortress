@@ -1,5 +1,5 @@
 /** States. */
-var STATE = {NULL: 0, START: 1, PAUSE: 2, OVERWORLD: 3, DEBATE: 4, CHARACTER: 5};
+var STATE = {NULL: 0, START: 1, PAUSE: 2, OVERWORLD: 3, DEBATE: 4, CHARACTER: 5, VICTORY: 6, DEFEAT: 7};
 
 /* Global font. */
 var FONT = "bitfont";
@@ -208,10 +208,10 @@ function Fortress(canvas) {
 
 		/* HUD */
 		var hud = this.entities.gui.adopt("hud", new gui.Component(this, 0, 0, this.canvas.width, 40, {fillStyle: "black"}));
-		hud.adopt("nmtxt", new gui.Text(this, 5, 15, "[playername]", {base: {font: "32px " + FONT, textAlign: "left"}}));
-		hud.adopt("endtxt", new gui.Text(this, this.canvas.width/2 + 5, 20, "Endorsements:", {base: {font: "32px " + FONT, textAlign: "left"}}));
+		hud.adopt("nmtxt", new gui.Text(this, 5, 20, "[playername]", {base: {font: "32px " + FONT, textAlign: "left"}}));
+		hud.adopt("endtxt", new gui.Text(this, 625, 20, "Endorse.:", {base: {font: "32px " + FONT, textAlign: "right"}}));
 		hud.adopt("endorsements", new gui.StatBar(this, 630, 5, 160, 30, 16, 0, {bar: {fillStyle: "green"}, text: {font: "30px " + FONT}}));
-
+		hud.adopt("funds", new gui.Text(this, this.canvas.width/2 - 125, 20, "Funds: $0k", {base: {font: "32px " + FONT, textAlign: "left"}}));
 		
 		/* Debate menu */
 		var debatem = this.entities.gui.adopt("debate", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {}));
@@ -310,6 +310,12 @@ function Fortress(canvas) {
 			/* Debate */
 			case STATE.DEBATE:
 				this.entities.debate.render(this.context);
+				break;
+				
+			case STATE.DEFEAT:
+				this.context.textAlign = "center";
+				this.context.fillStyle = "white";
+				this.context.fillText("YOU LOSE", this.canvas.width/2, this.canvas.height/2);
 				break;
 		}
 		

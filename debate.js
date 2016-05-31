@@ -63,11 +63,15 @@ debate.Manager = function Manager(engine) {
 		this.ebar.val = this.enemy.health;
 		
 		if(this.enemy.health <= 0) {
+			this.enemy.ondefeat(this.engine.player);
 			this.engine.entities.world.mobs.children.splice(this.engine.entities.world.mobs.children.indexOf(this.enemy), 1);
 			this.engine.findebate();
 		}
 		
 		if(this.engine.player.health <= 0) {
+			this.engine.entities.gui.children.debate.state = gui.STATE.DISABLED;
+			this.engine.entities.gui.children.debate.visible = false;
+			this.engine.state = STATE.DEFEAT;
 		}
 	}
 	
