@@ -10,6 +10,9 @@ mobs.SPEED = 4;
 
 mobs.SPRITES = [];
 
+mobs.ATTACKS = [];
+mobs.ATTACKS[mobs.RANK.CONGRESPERSON] = [{NAME: "Strawman", EXEC: function(player){player.health -= 5;}, COOLDOWN: 1, POWER: 5}];
+
 mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
 	
 	sprite.Sprite.call(this, x, y, mobs.WIDTH, mobs.HEIGHT);
@@ -23,6 +26,11 @@ mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
 	this.moving = false;
 	this.rank = rank || mobs.RANK.CONGRESPERSON;
 	this.ondefeat = ondefeat || function(player) {player.endorsements++; player.funds += 10;};
+	
+	var asource = mobs.ATTACKS[this.rank];
+	for(var i = 0; i < asource.length; i++) {
+		this.attacks.push(new debate.Attack(asource[i].NAME, asource[i].EXEC, asource[i].COOLDOWN, asource[i].POWER));
+	}
 	
 	this.render = function(context, offx, offy, time) {
 		context.drawImage(mobs.SPRITES[this.party][this.direction][Math.floor(time/100)%(this.moving ? mobs.SPRITES[this.party][this.direction].length : 1)], (this.transform.x - offx), (this.transform.y - offy), this.width, this.height);

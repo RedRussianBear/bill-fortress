@@ -79,11 +79,13 @@ world.World = function World(engine) {
 		/* Create cell objects for all non-solid tiles. */
 		for (var i = 0; i < this.grid.length; i++) {
 			for (var j = 0; j < this.grid[i].length; j++) {
-				if (this.grid[i][j] == world.CELL.PLAYER) {
-				    this.playerx = j*world.BOXSIZE;
-				    this.playery = i*world.BOXSIZE;
-                } else if (this.grid[i][j] == world.CELL.FLOOR) {
-				    this.cells.push(new world.Cell(j, i, world.TILE.FLOOR));
+				switch(this.grid[i][j]) {
+					case world.CELL.PLAYER:
+						this.playerx = j*world.BOXSIZE;
+						this.playery = i*world.BOXSIZE;
+					case world.CELL.FLOOR:
+						this.cells.push(new world.Cell(j, i, world.TILE.FLOOR));
+						break;
 				}
 			}
 		}

@@ -46,18 +46,25 @@ debate.Manager = function Manager(engine) {
 		
 		/* Reset this.enemy attacks */
 		for(var i = 0; i < this.enemy.attacks.length; i++)
-			if(this.enemy.attacks[i].available && this.turnnum - this.enemy.attacks[i].lastused > this.enemy.attacks[i].cooldown)
+			if(!this.enemy.attacks[i].available && this.turnnum - this.enemy.attacks[i].lastused > this.enemy.attacks[i].cooldown)
 				this.enemy.attacks[i].available = true;
 		
 		this.enemy.attacks.sort(debate.powcomp);
 		
-		for(var i = 0; i < this.enemy.attacks.length; i++)
+		var i = 0;
+		for(; i < this.enemy.attacks.length; i++) {
 			if(this.enemy.attacks[i].available) {
 				this.enemy.attacks[i].exec(this.engine.entities.player);
 				this.enemy.attacks[i].lastused = this.turnnum;
 				this.enemy.attacks[i].available = false;
+				this.mbuf.text = this.enemy.name + " used " + this.enemy.attacks[i].name;
 				break;
 			}
+		}
+		
+		if(i == this.enemy.attacks.length) {
+			this.mbuf.text = this.enemy.name + " refused to comment";			
+		}
 		
 		this.pbar.val = this.engine.player.health;
 		this.ebar.val = this.enemy.health;
