@@ -10,6 +10,7 @@ debate.Manager = function Manager(engine) {
 		this.pbar = this.engine.entities.gui.children.debate.children.bill.children.health;
 		this.ebar = this.engine.entities.gui.children.debate.children.enemy.children.health;
 		this.enemy = enemy;
+		this.player = this.engine.player;
 		this.turnnum = 0;
 		
 		/* Reset player attacks */
@@ -25,11 +26,15 @@ debate.Manager = function Manager(engine) {
 			this.enemy.attacks[i].lastused = -1;
 		}
 		
+		var that = this;
+		var men = this.amenu;
+		
 		/* Create player action menu */
 		for(var i = 0; i < pat.length; i++) {
-			var that = this;
-			var temp = pat[i];
-			this.amenu.adopt(temp.name, new gui.Button(this.engine, this.engine.canvas.width/2 + 5, 5 + 40*i, 280, 35, temp.name, function(){temp.exec(that.enemy); temp.available = false; temp.lastused = that.turnnum; that.step();}));
+			(function(i){
+				var b = men.adopt(pat[i].name, new gui.Button(this.engine, this.engine.canvas.width/2 + 5, 5 + 40*i, 280, 35, pat[i].name, function(){pat[i].exec(that.enemy, that.player); pat[i].available = false; pat[i].lastused = that.turnnum; that.step();}));
+				b.tooltip = new gui.ToolTip(this.engine, 210, 32, pat[i].info);
+			})(i);
 		}
 		
 		this.mbuf.text = "Battle begins!";
@@ -54,7 +59,7 @@ debate.Manager = function Manager(engine) {
 		var i = 0;
 		for(; i < this.enemy.attacks.length; i++) {
 			if(this.enemy.attacks[i].available) {
-				this.enemy.attacks[i].exec(this.engine.entities.player);
+				this.enemy.attacks[i].exec(this.player, this.enemy);
 				this.enemy.attacks[i].lastused = this.turnnum;
 				this.enemy.attacks[i].available = false;
 				this.mbuf.text = this.enemy.name + " used " + this.enemy.attacks[i].name;
@@ -83,7 +88,7 @@ debate.Manager = function Manager(engine) {
 	}
 	
 	this.update = function(delta) {
-		var pat = this.engine.entities.player.attacks;
+		var pat = this.player.attacks;
 		for(var i = 0; i < pat.length; i++)
 			if(pat[i].available) {
 				this.amenu.children[pat[i].name].state = gui.STATE.NORMAL;
@@ -97,18 +102,19 @@ debate.Manager = function Manager(engine) {
 	this.render = function(context) {
 		context.fillStyle = "white";
 		context.fillRect(0, 0, this.engine.canvas.width, this.engine.canvas.height);
-		context.drawImage(this.engine.entities.player.images[Bill.DIRECTION.RIGHT][0], 80, 175, 96, 144);
+		context.drawImage(this.engine.entities.player.images[bill.DIRECTION.RIGHT][0], 80, 175, 96, 144);
 		context.drawImage(mobs.SPRITES[this.enemy.party][mobs.DIRECTION.LEFT][0], 624, 175, 96, 144);
 	}
 }
 
-debate.Attack = function(name, exec, cooldown, power) {
+debate.Attack = function(name, exec, cooldown, power, info) {
 	this.exec = exec;
 	this.name = name;
 	this.available = true;
 	this.cooldown = cooldown || 0;
 	this.lastused = 0;
 	this.power = power;
+	this.info = info || "An attack";
 }
 
 debate.powcomp = function (a1, a2) {return a1.power - a2.power}

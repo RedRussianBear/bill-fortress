@@ -49,9 +49,16 @@ gui.Component = function Component(engine, x, y, w, h, style) {
 			context.fillStyle = this.style.fillStyle;
 			context.fillRect(this.transform.x, this.transform.y, this.width, this.height);
 		}
+		
         for (var name in this.children){ 
 			var child = this.children[name];
 			child.render(context);
+			if(child.tooltip && child.showtip)
+				child.tooltip.render(context, child.mx, child.my);
+		}
+		
+		for (var name in this.children){ 
+			var child = this.children[name];
 			if(child.tooltip && child.showtip)
 				child.tooltip.render(context, child.mx, child.my);
 		}
@@ -63,7 +70,7 @@ gui.Component = function Component(engine, x, y, w, h, style) {
         for (var name in this.children){
 			var child = this.children[name];
 			child.update(delta);
-			if(child.tooltip && geometry.Vector.inside(this.engine.input.mouse, child.transform, child.width, child.height)){
+			if(child.tooltip && geometry.Vector.inside(this.engine.input.mouse, child.relative, child.width, child.height)){
 				child.showtip = true;
 				child.mx = this.engine.input.mouse.x;
 				child.my = this.engine.input.mouse.y;
@@ -98,9 +105,9 @@ gui.Button = function Button(engine, x, y, w, h, text, callback, styles) {
 	/* Draw Styling */
     this.styles = {
         base: {font: "20px bitfont", textAlign: "center", textBaseline: "middle", lineWidth: 1e-10},
-        "$normal": {box: {fillStyle: "lightgray"}, text: {fillStyle: "black"}},
-        "$disabled": {box: {fillStyle: "lightgray"}, text: {fillStyle: "gray"}},
-        "$hover": {box: {fillStyle: "gray"}, text: {fillStyle: "black"}},
+		"$normal": {box: {fillStyle: "lightgray"}, text: {fillStyle: "black"}},
+		"$disabled": {box: {fillStyle: "lightgray"}, text: {fillStyle: "gray"}},
+		"$hover": {box: {fillStyle: "gray"}, text: {fillStyle: "black"}},
     };
     if (styles) merge(styles, this.styles);
 	
@@ -142,7 +149,7 @@ gui.Button = function Button(engine, x, y, w, h, text, callback, styles) {
         var transform = this.relative;
 
 	    /** Check hover and click. */
-	    if (geometry.Vector.inside(this.engine.input.mouse, transform, this.width, this.height) && this.state != gui.Button.DISABLED) {
+	    if (geometry.Vector.inside(this.engine.input.mouse, transform, this.width, this.height) && this.state != gui.STATE.DISABLED) {
             this.hover = true;
 			if (this.engine.input.mouse.left == input.STATE.PRESSED) this.callback();
 		} else {
@@ -312,7 +319,7 @@ gui.ToolTip = function ToolTip(engine, w, h, text, styles) {
 	this.engine = engine;
 	this.text = text;
 
-	this.styles = {base: {fillStyle: "black", strokeStyle: "grey"}, text: {fillStyle: "white", font: "20px bitfont"}};
+	this.styles = {base: {fillStyle: "black", strokeStyle: "grey"}, text: {fillStyle: "white", font: "28px bitfont"}};
 	
     if (styles) merge(styles, this.styles);
 
@@ -334,6 +341,10 @@ gui.ToolTip = function ToolTip(engine, w, h, text, styles) {
 		
 		context.fillText(this.text, mx + 3, my, this.width);
 	}	
+}
+
+gui.Dropdown = function Dropdown(engine) {
+	
 }
 
 /** The main GUI manager. */
