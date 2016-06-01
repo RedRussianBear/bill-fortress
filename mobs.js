@@ -11,7 +11,8 @@ mobs.SPEED = 4;
 mobs.SPRITES = [];
 
 mobs.ATTACKS = [];
-mobs.ATTACKS[mobs.RANK.CONGRESPERSON] = [{NAME: "Strawman", EXEC: function(player){player.health -= 5;}, COOLDOWN: 1, POWER: 5}];
+mobs.ATTACKS[mobs.RANK.CONGRESPERSON] = [
+];
 
 mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
 	

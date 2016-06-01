@@ -204,7 +204,7 @@ gui.StatBar = function StatBar(engine, x, y, w, h, max, init, styles) {
         
 		/* Draw bar */
         for (var key in this.styles.bar) context[key] = this.styles.bar[key];
-		context.fillRect(this.transform.x + this.parent.transform.x, this.transform.y + this.parent.transform.y, this.width * (this.val/this.max), this.height);
+		context.fillRect(this.transform.x + this.parent.transform.x, this.transform.y + this.parent.transform.y, Math.max(0, Math.min(this.width, this.width * (this.val/this.max))), this.height);
 		context.strokeRect(this.transform.x + this.parent.transform.x, this.transform.y + this.parent.transform.y, this.width, this.height)
 		
         /* Draw stat */
