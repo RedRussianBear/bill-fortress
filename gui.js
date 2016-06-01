@@ -50,15 +50,28 @@ gui.Component = function Component(engine, x, y, w, h, style) {
 			context.fillRect(this.transform.x, this.transform.y, this.width, this.height);
 		}
         for (var name in this.children){ 
-			this.children[name].render(context);
+			var child = this.children[name];
+			child.render(context);
+			if(child.tooltip && child.showtip)
+				child.tooltip.render(context, child.mx, child.my);
 		}
 	}
     
     /** Update the component. */
     this.update = function(delta) {
         if (this.state == gui.STATE.DISABLED) return;
-        for (var name in this.children) this.children[name].update(delta);
-    }
+        for (var name in this.children){
+			var child = this.children[name];
+			child.update(delta);
+			if(child.tooltip && geometry.Vector.inside(this.engine.input.mouse, child.transform, child.width, child.height)){
+				child.showtip = true;
+				child.mx = this.engine.input.mouse.x;
+				child.my = this.engine.input.mouse.y;
+			}
+			else
+				child.showtip = false;
+		}
+	}
 
 }
 
@@ -292,6 +305,36 @@ gui.InputField = function InputField(engine, x, y, w, h) {
 
 gui.InputField.CLEAR = 0;
 gui.InputField.SELECTED = 1;
+
+gui.ToolTip = function ToolTip(engine, w, h, text, styles) {
+	this.width = w;
+	this.height = h;
+	this.engine = engine;
+	this.text = text;
+
+	this.styles = {base: {fillStyle: "black", strokeStyle: "grey"}, text: {fillStyle: "white", font: "20px bitfont"}};
+	
+    if (styles) merge(styles, this.styles);
+
+	
+	this.render = function(context, mx, my) {
+		for (var key in this.styles.base) context[key] = this.styles.base[key];
+		
+		if(mx + this.width > this.engine.canvas.width)
+			mx = this.engine.canvas.width - this.width;
+		
+		if(my + this.height > this.engine.canvas.height)
+			my = this.engine.canvas.height - this.height;
+		
+		context.fillRect(mx, my, this.width, this.height);
+		context.strokeRect(mx, my, this.width, this.height);
+		
+		
+		for (var key in this.styles.text) context[key] = this.styles.text[key];
+		
+		context.fillText(this.text, mx + 3, my, this.width);
+	}	
+}
 
 /** The main GUI manager. */
 gui.Manager = function Manager(engine) {
