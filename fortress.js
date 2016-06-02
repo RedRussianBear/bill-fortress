@@ -91,6 +91,7 @@ function Fortress(canvas) {
         this.resources.queue("alarm", resource.AUDIO, "sounds/sfx/alert.wav");
 		
 		this.resources.queue("walkable", resource.IMAGE, "tiles/walkable.png");
+		//this.resources.queue("exit", resource.IMAGE, "tiles/exit.png");
 		var that = this;
 		this.resources.load(function() {
 			/* Player sprite */
@@ -169,6 +170,7 @@ function Fortress(canvas) {
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss3"));
 		
 			world.TILE.FLOOR = that.resources.$("walkable");
+			//world.TILE.EXIT = that.resources.$("exit");
 			console.log("Loaded reources");
 		});
 	
@@ -204,9 +206,7 @@ function Fortress(canvas) {
 					this.parent.engine.entities.gui.children.hud.children.nmtxt.text = this.parent.children.nameinput.text;
 					this.parent.engine.entities.player.name = this.parent.children.nameinput.text;
 					this.parent.engine.entities.gui.children.debate.children.bill.children.name.text = this.parent.children.nameinput.text;
-					this.parent.engine.entities.world.load(levels.TEST);
-					this.parent.engine.entities.player.transform.x = this.parent.engine.entities.world.playerx;
-					this.parent.engine.entities.player.transform.y = this.parent.engine.entities.world.playery;
+					this.parent.engine.nextLevel();
 					this.parent.engine.state = STATE.OVERWORLD;
 		}));
 
@@ -236,7 +236,19 @@ function Fortress(canvas) {
 		var attackm = psubm.adopt("actions", new gui.Component(this, 0, 0, this.canvas.width/2, 200, {}));
 		attackm.state = gui.STATE.NORMAL;
 		attackm.visible = true;
+		
+		this.levelnum = 0;
     }
+	
+	this.nextLevel = function() {
+		this.entities.world.load(levels[levels.LIST[this.levelnum]]);
+		this.entities.gui.children.hud.children.endorsements.max = this.entities.world.endorsereq;
+		this.entities.gui.children.hud.children.endorsements.val = 0;
+		this.entities.player.transform.x = this.entities.world.playerx;
+		this.entities.player.transform.y = this.entities.world.playery;
+		this.entities.player.endorsements = 0;
+		this.levelnum++;
+	}
     
 	this.initdebate = function(enemy) {
 		this.state = STATE.DEBATE;

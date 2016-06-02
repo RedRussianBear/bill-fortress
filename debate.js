@@ -32,7 +32,13 @@ debate.Manager = function Manager(engine) {
 		/* Create player action menu */
 		for(var i = 0; i < pat.length; i++) {
 			(function(i){
-				var b = men.adopt(pat[i].name, new gui.Button(this.engine, this.engine.canvas.width/2 + 5, 5 + 40*i, 280, 35, pat[i].name, function(){pat[i].exec(that.enemy, that.player); pat[i].available = false; pat[i].lastused = that.turnnum; that.step();}));
+				var b = men.adopt(pat[i].name, new gui.Button(this.engine, this.engine.canvas.width/2 + 5, 5 + 40*i, 280, 35, pat[i].name, function(){
+					pat[i].exec(that.enemy, that.player);
+					pat[i].available = false;
+					pat[i].lastused = that.turnnum;
+					that.step();
+				}));
+				
 				b.tooltip = new gui.ToolTip(this.engine, pat[i].info);
 			})(i);
 		}

@@ -11,7 +11,7 @@ world.SPEED = 20;
 world.BOXSIZE = 128;
 
 /** World tile types. */
-world.CELL = {WALL: 0, FLOOR: 1, PLAYER: 2};
+world.CELL = {WALL: 0, FLOOR: 1, PLAYER: 2, EXIT: 3};
 world.TILE = {};
 
 /** World objects. */
@@ -51,6 +51,8 @@ world.World = function World(engine) {
 	
     /** Load a level. */
 	this.load = function(level) {
+		this.cells = [];
+		this.grid = [];
         
         /* Load the text and grid. */
 		var text = level.map;
@@ -69,9 +71,23 @@ world.World = function World(engine) {
             /* Add tiles by character. */
 			else {
                 var c = text.charAt(i);
-                if (c == "X") current.push(world.CELL.WALL);
-                else if (c == "_") current.push(world.CELL.FLOOR);
-                else if (c == "P") current.push(world.CELL.PLAYER);
+				switch(c){
+					case "X":
+						current.push(world.CELL.WALL);
+						break;
+					case "_":
+						current.push(world.CELL.FLOOR);
+						break;
+					case "P":
+						current.push(world.CELL.PLAYER);
+						break;
+					case "E":
+						current.push(world.CELL.EXIT);
+						break;
+					default:
+						current.push(world.CELL.WALL);
+						break;
+				}
 			}
             
 		}
@@ -84,7 +100,10 @@ world.World = function World(engine) {
 						this.playerx = j*world.BOXSIZE;
 						this.playery = i*world.BOXSIZE;
 					case world.CELL.FLOOR:
-						this.cells.push(new world.Cell(j, i, world.TILE.FLOOR));
+						this.cells.push(new world.Cell(j, i, world.TILE.FLOOR, world.CELL.FLOOR));
+						break;
+					case world.CELL.EXIT:
+						this.cells.push(new world.Cell(j, i, world.TILE.FLOOR, world.CELL.EXIT));
 						break;
 				}
 			}
@@ -110,14 +129,17 @@ world.World = function World(engine) {
             }
         }
 		
+		/* Load endorsement requirement */
+		this.endorsereq = level.endorsereq;
+		
 	}
 	
 }
 
-world.Cell = function Cell(c, r, image) {
+world.Cell = function Cell(c, r, image, type) {
     
 	this.image = image;
-	
+	this.type = type;
 	this.row = r;
 	this.col = c;
 	
@@ -128,3 +150,8 @@ world.Cell = function Cell(c, r, image) {
 		context.drawImage(this.image, (this.transform.x - offx), (this.transform.y - offy), this.width, this.height);
 	}
 } 
+
+world.Loot = function Loot(c, r, reward, type, image) {
+	
+	
+}
