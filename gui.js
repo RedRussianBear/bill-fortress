@@ -313,15 +313,19 @@ gui.InputField = function InputField(engine, x, y, w, h) {
 gui.InputField.CLEAR = 0;
 gui.InputField.SELECTED = 1;
 
-gui.ToolTip = function ToolTip(engine, w, h, text, styles) {
-	this.width = w;
-	this.height = h;
+gui.ToolTip = function ToolTip(engine, text, styles) {
 	this.engine = engine;
 	this.text = text;
+	
 
 	this.styles = {base: {fillStyle: "black", strokeStyle: "grey"}, text: {fillStyle: "white", font: "28px bitfont"}};
 	
     if (styles) merge(styles, this.styles);
+
+	for (var key in this.styles.text) this.engine.context[key] = this.styles.text[key];
+	
+	this.width = this.engine.context.measureText(this.text).width + 4;
+	this.height = 32;
 
 	
 	this.render = function(context, mx, my) {

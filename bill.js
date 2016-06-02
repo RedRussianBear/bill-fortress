@@ -1,9 +1,9 @@
 bill = {};
 
 bill.ATTACKS_INIT = [
-	{NAME: "Logic", EXEC: function(enemy, caster){enemy.health -= 10; console.log("used logic");}, COOLDOWN: 0, POWER: 1, INFO: "Logic your foe for 5 dmg"},
-	{NAME: "Merit", EXEC: function(enemy, caster){caster.health += 20; console.log("used merit");}, COOLDOWN: 4, POWER: 3, INFO: "Recover 20 health by sheer merit"},
-	{NAME: "Holier Than Thou", EXEC: function(enemy, caster){enemy.health -= 15; caster.health += 15; console.log("used h");}, COOLDOWN: 10, INFO: "Divert your opponent's base with ideological extremism"}
+	{NAME: "Logic", EXEC: function(enemy, caster){enemy.health -= 10;}, COOLDOWN: 0, POWER: 1, INFO: "Logic your foe for 5 dmg"},
+	{NAME: "Merit", EXEC: function(enemy, caster){caster.health += 20;}, COOLDOWN: 4, POWER: 3, INFO: "Recover 20 health by sheer merit"},
+	{NAME: "Holier Than Thou", EXEC: function(enemy, caster){enemy.health -= 15; caster.health += 15;}, COOLDOWN: 10, INFO: "Divert your opponent's base with ideological extremism"}
 ];
 
 bill.ATTACKS_EXTRA = {
