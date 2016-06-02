@@ -169,8 +169,9 @@ function Fortress(canvas) {
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss2"));
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss3"));
 		
-			world.TILE.FLOOR = that.resources.$("walkable");
-			//world.TILE.EXIT = that.resources.$("exit");
+			world.SPRITES.FLOOR = that.resources.$("walkable");
+			world.SPRITES.EXIT = that.resources.$("walkable");
+			world.SPRITES.CHEST = that.resources.$("walkable");
 			console.log("Loaded reources");
 		});
 	

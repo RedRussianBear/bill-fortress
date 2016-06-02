@@ -103,6 +103,7 @@ mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
 		if(geometry.Vector.distance(this.transform, player.transform) < world.BOXSIZE) {
 			this.parent.level.engine.initdebate(this);
 		}
+		
 	}
 }
 

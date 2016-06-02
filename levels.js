@@ -52,6 +52,15 @@ var mklevels = function() {
         }
     ];
 	
+	levels.TEST.loot = [
+		{
+			X: 17, Y: 13,
+			REWARD: function(player) {player.maxhealth += 20;},
+			NAME: "Lobby Support",
+			INFO: "You gain 20 HP with money backing"
+		}
+	];
+	
 	levels.TEST.endorsereq = 1;
 
 /* Level One: COMMITTEE */
@@ -97,6 +106,7 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 levels.COMMITTEE.mobs = [];
 levels.COMMITTEE.endorsereq = 20;
 levels.COMMITTEE.atmosphere = [];
+levels.COMMITTEE.loot = [];
 
 /* Level Two: HOUSE */
 
@@ -163,6 +173,9 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ";
 
 levels.HOUSE.mobs = [];
+levels.HOUSE.endorsereq = 20;
+levels.HOUSE.atmosphere = [];
+levels.HOUSE.loot = [];
 
 /* Level Three: SENATE */
 levels.SENATE = {};
@@ -270,5 +283,8 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
 ";
 
-levels.SENATE.mobs = {};
+levels.SENATE.mobs = [];
+levels.SENATE.endorsereq = 20;
+levels.SENATE.atmosphere = [];
+levels.SENATE.loot = [];
 }

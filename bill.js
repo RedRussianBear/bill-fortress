@@ -91,5 +91,9 @@ bill.Bill = function Bill(engine) {
 			this.engine.nextLevel();
 		}
 	}
+	
+	this.amend = function(name, info, reward) {
+		reward(this);
+	}
 
 }

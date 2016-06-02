@@ -9,10 +9,11 @@ world.OFFSETX = 0;
 world.OFFSETY = 0;
 world.SPEED = 20;
 world.BOXSIZE = 128;
+world.LOOTSIZE = 64;
 
 /** World tile types. */
 world.CELL = {WALL: 0, FLOOR: 1, PLAYER: 2, EXIT: 3};
-world.TILE = {};
+world.SPRITES = {};
 
 /** World objects. */
 world.World = function World(engine) {
@@ -24,6 +25,7 @@ world.World = function World(engine) {
 	this.state = World.PASSIVE;
 	this.grid = [];
 	this.cells = [];
+	this.loot = [];
     
     /* World managers. */
     this.atmosphere = new atmosphere.Manager(this);
@@ -35,6 +37,9 @@ world.World = function World(engine) {
         /* Update the managers. */
 		this.mobs.update(delta);
         this.atmosphere.update(delta);
+		
+		for(var i = 0; i < this.loot.length; i++)
+			this.loot[i].update(delta, i);
         
     }
 	
@@ -84,9 +89,6 @@ world.World = function World(engine) {
 					case "E":
 						current.push(world.CELL.EXIT);
 						break;
-					default:
-						current.push(world.CELL.WALL);
-						break;
 				}
 			}
             
@@ -100,10 +102,10 @@ world.World = function World(engine) {
 						this.playerx = j*world.BOXSIZE;
 						this.playery = i*world.BOXSIZE;
 					case world.CELL.FLOOR:
-						this.cells.push(new world.Cell(j, i, world.TILE.FLOOR, world.CELL.FLOOR));
+						this.cells.push(new world.Cell(j, i, world.SPRITES.FLOOR, world.CELL.FLOOR));
 						break;
 					case world.CELL.EXIT:
-						this.cells.push(new world.Cell(j, i, world.TILE.FLOOR, world.CELL.EXIT));
+						this.cells.push(new world.Cell(j, i, world.SPRITES.EXIT, world.CELL.EXIT));
 						break;
 				}
 			}
@@ -129,6 +131,12 @@ world.World = function World(engine) {
             }
         }
 		
+		/* Create loot */
+		var lootlist = level.loot;
+		for(var i = 0; i < lootlist.length; i++) {
+			this.loot.push(new world.Loot(this.engine, this, lootlist[i].X, lootlist[i].Y, lootlist[i].REWARD, lootlist[i].NAME, lootlist[i].INFO));
+		}
+		
 		/* Load endorsement requirement */
 		this.endorsereq = level.endorsereq;
 		
@@ -151,7 +159,28 @@ world.Cell = function Cell(c, r, image, type) {
 	}
 } 
 
-world.Loot = function Loot(c, r, reward, type, image) {
+world.Loot = function Loot(engine, parent, c, r, reward, name, info, image) {
+	this.engine = engine;
+	this.reward = reward;
+	this.name = name;
+	this.parent = parent;
+	this.info = info;
+	this.image = image || world.SPRITES.CHEST;
 	
+	/* Sprite Super Constructor */
+	sprite.Sprite.call(this, c*world.BOXSIZE + world.BOXSIZE/2 - world.LOOTSIZE/2, r*world.BOXSIZE + world.BOXSIZE/2 - world.LOOTSIZE/2, world.LOOTSIZE, world.LOOTSIZE);
 	
+	this.update = function(delta, i) {
+		if(geometry.inside(this.engine.player.transform.x, this.engine.player.transform.y, this.transform.x, this.transform.y, this.width, this.height)
+		|| geometry.inside(this.engine.player.transform.x + this.engine.player.width, this.engine.player.transform.y, this.transform.x, this.transform.y, this.width, this.height)
+		|| geometry.inside(this.engine.player.transform.x, this.engine.player.transform.y + this.engine.player.height, this.transform.x, this.transform.y, this.width, this.height)
+		|| geometry.inside(this.engine.player.transform.x + this.engine.player.width, this.engine.player.transform.y + this.engine.player.height, this.transform.x, this.transform.y, this.width, this.height)) {
+			this.engine.player.amend(this.name, this.info, this.reward);
+			this.parent.loot.splice(i, 1);
+		}
+	}
+	
+	this.render = function(context) {
+		context.drawImage(this.image, this.transform.x, this.transform.y, this.width, this.height);
+	}
 }
