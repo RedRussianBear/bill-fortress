@@ -143,6 +143,11 @@ world.World = function World(engine) {
 		/* Load endorsement requirement */
 		this.endorsereq = level.endorsereq;
 		
+		level.map = null;
+		level.mobs = null;
+		level.atmosphere = null;
+		level.loot = null;
+		
 	}
 	
 }

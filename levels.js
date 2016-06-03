@@ -1,7 +1,7 @@
 var levels = {};
 
 var mklevels = function() {
-	levels.LIST = ["TEST", "COMMITTEE"];
+	levels.LIST = ["TEST", "COMMITTEE", "HOUSE", "SENATE", "CONFERENCE", "PRESIDENT"];
 
     levels.TEST = {}
 
@@ -168,7 +168,7 @@ levels.COMMITTEE.mobs = [
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
-            X: 30, Y: 32, 
+            X: 31, Y: 32, 
             NAME: "John Lewis", 
             PARTY: mobs.PARTY.DEMOCRAT, 
             RANK: mobs.RANK.CONGRESSPERSON, 
@@ -182,7 +182,7 @@ levels.COMMITTEE.mobs = [
             ONDEFEAT: function(player) {player.endorsements+=2; player.funds += 30;} 
         }
     ];
-levels.COMMITTEE.endorsereq = 12;
+levels.COMMITTEE.endorsereq = 11;
 levels.COMMITTEE.atmosphere = [];
 levels.COMMITTEE.loot = [];
 
