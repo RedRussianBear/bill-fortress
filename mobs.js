@@ -43,7 +43,7 @@ mobs.ATTACKS[mobs.RANK.COMCHAIR] = [
 	{NAME: "Attach Controversial Rider", EXEC: function(enemy, caster){enemy.health -= 50; caster.health += 50;}, COOLDOWN: 10, POWER: 10}
 ];
 
-mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
+mobs.Politician = function Politician (engine, x, y, name, party, rank, ondefeat) {
 	
 	sprite.Sprite.call(this, x, y, mobs.WIDTH, mobs.HEIGHT);
 	
@@ -51,6 +51,7 @@ mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
 	this.party = party;
 	this.name = name;
 	this.maxhealth = 100;
+	this.engine = engine;
 	this.health = 100;
 	this.attacks = [];
 	this.moving = false;
@@ -63,12 +64,15 @@ mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
 	}
 	
 	this.render = function(context, offx, offy, time) {
-		context.drawImage(mobs.SPRITES[this.party][this.direction][Math.floor(time/100)%(this.moving ? mobs.SPRITES[this.party][this.direction].length : 1)], (this.transform.x - offx), (this.transform.y - offy), this.width, this.height);
+		var offedx = this.transform.x - offx;
+		var offedy = this.transform.y - offy;
+		if(offedx + this.width < 0 || offedy > this.engine.canvas.height || offedx > this.engine.canvas.width || offedy + this.height < 0) return;
+		context.drawImage(mobs.SPRITES[this.party][this.direction][Math.floor(time/100)%(this.moving ? mobs.SPRITES[this.party][this.direction].length : 1)], offedx, offedy, this.width, this.height);
 	}
 	
 	this.update = function(delta) {
-		var dist = mobs.SPEED * (delta/this.parent.level.engine._update.interval);
-		var player = this.parent.level.engine.entities.player;
+		var dist = mobs.SPEED * (delta/this.engine._update.interval);
+		var player = this.engine.entities.player;
 		var grid = this.parent.level.grid;
 		this.moving = false;
 		
@@ -101,14 +105,15 @@ mobs.Politician = function Politician (x, y, name, party, rank, ondefeat) {
 		}
 		
 		if(geometry.Vector.distance(this.transform, player.transform) < world.BOXSIZE) {
-			this.parent.level.engine.initdebate(this);
+			this.engine.initdebate(this);
 		}
 		
 	}
 }
 
-mobs.Manager = function Manager(level) {
+mobs.Manager = function Manager(engine, level) {
 	this.level = level;
+	this.engine = engine;
 	this.children = [];
 	
 	this.render = function(context, offx, offy, time) {

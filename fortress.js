@@ -266,6 +266,12 @@ function Fortress(canvas) {
 	}
 	
 	this.findebate = function() {
+		/* Update HUD */
+		var hud = this.entities.gui.children.hud.children;
+		hud.endorsements.val = this.player.endorsements;
+		hud.funds.text = "Funds: $" + this.player.funds + "k";
+		
+		/* Revert to Overworld */
 		this.state = STATE.OVERWORLD;
 		this.entities.gui.children.hud.visible = true;
 		this.entities.gui.children.hud.state = gui.STATE.NORMAL;
@@ -301,6 +307,19 @@ function Fortress(canvas) {
 				break;
 		}
 	}
+	
+	/** Display engine statistics. */
+    this.display = function() { 
+        
+        /* Draw the frames per second. */
+        var fps = this._render.history.map(function(x) { return 1000/x; }).reduce(function(a, b) { return a+b; }, 0) / this._render.history.length;
+        this.context.fillStyle = "white";
+        this.context.textAlign = "left";
+        this.context.textBaseline = "hanging";
+        this.context.font = "16px bitfont";
+        this.context.fillText(Math.round(fps) + " fps", 10, 10);
+        
+    }
 	
     /* Render. */
 	this.render = function(delta) {
@@ -339,6 +358,7 @@ function Fortress(canvas) {
 		
 		/* Render gui */
 		this.entities.gui.render(this.context);
+		//this.display();
 	}
 
 }

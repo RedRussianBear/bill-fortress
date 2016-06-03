@@ -78,11 +78,6 @@ bill.Bill = function Bill(engine) {
 				this.transform.x += dist;
 		}
 		
-		/* Update HUD */
-		var hud = this.engine.entities.gui.children.hud.children;
-		hud.endorsements.val = this.endorsements;
-		hud.funds.text = "Funds: $" + this.funds + "k";
-		
 		if( this.endorsements >= this.engine.entities.world.endorsereq
 		&& (grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)] == world.CELL.EXIT
 		|| grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)] == world.CELL.EXIT

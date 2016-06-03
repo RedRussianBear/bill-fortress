@@ -13,6 +13,12 @@ debate.Manager = function Manager(engine) {
 		this.player = this.engine.player;
 		this.turnnum = 0;
 		
+		this.player.health = this.player.maxhealth;
+		this.engine.entities.gui.children.debate.children.bill.children.health.val = this.player.health;
+		this.engine.entities.gui.children.debate.children.enemy.children.health.val = this.enemy.health;
+		this.engine.entities.gui.children.debate.children.bill.children.health.max = this.player.maxhealth;
+		this.engine.entities.gui.children.debate.children.enemy.children.health.max = this.enemy.maxhealth;
+		
 		/* Reset player attacks */
 		var pat = this.engine.entities.player.attacks;
 		for(var i = 0; i < pat.length; i++) {

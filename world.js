@@ -29,7 +29,7 @@ world.World = function World(engine) {
     
     /* World managers. */
     this.atmosphere = new atmosphere.Manager(this);
-	this.mobs = new mobs.Manager(this);
+	this.mobs = new mobs.Manager(this.engine, this);
 	
     /** Update the world. */
 	this.update = function(delta) {
@@ -38,8 +38,7 @@ world.World = function World(engine) {
 		this.mobs.update(delta);
         this.atmosphere.update(delta);
 		
-		for(var i = 0; i < this.loot.length; i++)
-			this.loot[i].update(delta, i);
+		for(var i = 0; i < this.loot.length; i++) this.loot[i].update(delta, i);
         
     }
 	
@@ -52,12 +51,16 @@ world.World = function World(engine) {
         /** Render mobs. */
         this.mobs.render(context, offx, offy, time);
 	
+		for(var i = 0; i < this.loot.length; i++) this.loot[i].render(context, offx, offy);
     }
 	
     /** Load a level. */
 	this.load = function(level) {
 		this.cells = [];
 		this.grid = [];
+		this.loot = [];
+		this.atmosphere = new atmosphere.Manager(this);
+		this.mobs = new mobs.Manager(this.engine, this);
         
         /* Load the text and grid. */
 		var text = level.map;
@@ -102,10 +105,10 @@ world.World = function World(engine) {
 						this.playerx = j*world.BOXSIZE;
 						this.playery = i*world.BOXSIZE;
 					case world.CELL.FLOOR:
-						this.cells.push(new world.Cell(j, i, world.SPRITES.FLOOR, world.CELL.FLOOR));
+						this.cells.push(new world.Cell(this.engine, j, i, world.SPRITES.FLOOR, world.CELL.FLOOR));
 						break;
 					case world.CELL.EXIT:
-						this.cells.push(new world.Cell(j, i, world.SPRITES.EXIT, world.CELL.EXIT));
+						this.cells.push(new world.Cell(this.engine, j, i, world.SPRITES.EXIT, world.CELL.EXIT));
 						break;
 				}
 			}
@@ -116,7 +119,7 @@ world.World = function World(engine) {
 		this.mobs.clear();
 		for(var i = 0; i < moblist.length; i++) {
 			var cur = moblist[i];
-			this.mobs.adopt(new mobs.Politician(cur.X*world.BOXSIZE, cur.Y*world.BOXSIZE, cur.NAME, cur.PARTY, cur.RANK, cur.ONDEFEAT));
+			this.mobs.adopt(new mobs.Politician(this.engine, cur.X*world.BOXSIZE, cur.Y*world.BOXSIZE, cur.NAME, cur.PARTY, cur.RANK, cur.ONDEFEAT));
 		}
         
         /* Create atmosphere. */
@@ -144,8 +147,8 @@ world.World = function World(engine) {
 	
 }
 
-world.Cell = function Cell(c, r, image, type) {
-    
+world.Cell = function Cell(engine, c, r, image, type) {
+    this.canvas = engine.canvas;
 	this.image = image;
 	this.type = type;
 	this.row = r;
@@ -155,7 +158,10 @@ world.Cell = function Cell(c, r, image, type) {
 	sprite.Sprite.call(this, c * world.BOXSIZE, r * world. BOXSIZE, world.BOXSIZE, world.BOXSIZE);
 	
 	this.render = function(context, offx, offy) { 
-		context.drawImage(this.image, (this.transform.x - offx), (this.transform.y - offy), this.width, this.height);
+		var offedx = this.transform.x - offx;
+		var offedy = this.transform.y - offy;
+		if(offedx + this.canvas.width < 0 || offedy > this.canvas.height || offedx > this.canvas.width || offedy + this.height < 0) return;
+		context.drawImage(this.image, offedx, offedy, this.width, this.height);
 	}
 } 
 
@@ -180,7 +186,10 @@ world.Loot = function Loot(engine, parent, c, r, reward, name, info, image) {
 		}
 	}
 	
-	this.render = function(context) {
-		context.drawImage(this.image, this.transform.x, this.transform.y, this.width, this.height);
+	this.render = function(context, offx, offy) {
+		var offedx = this.transform.x - offx;
+		var offedy = this.transform.y - offy;
+		if(offedx + this.width < 0 || offedy > this.engine.canvas.height || offedx > this.engine.canvas.width || offedy + this.height < 0) return;
+		context.drawImage(this.image, offedx, offedy, this.width, this.height);
 	}
 }
