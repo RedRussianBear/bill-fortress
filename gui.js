@@ -165,12 +165,13 @@ gui.Button = function Button(engine, x, y, w, h, text, callback, styles) {
 gui.Button.prototype = gui.Component.prototype;
 
 /** A static text element. */
-gui.Text = function Text(engine, x, y, text, styles) {
+gui.Text = function Text(engine, x, y, text, styles, maxw) {
 
     /* Component superclass. */
     gui.Component.call(this, engine, x, y);
     
     /* Instance. */
+	this.maxw = maxw;
     this.text = text;
     this.styles = {base: {font: "20px bitfont", textAlign: "center", textBaseline: "middle", fillStyle: "white"}};
     if (styles) merge(styles, this.styles);
@@ -188,7 +189,8 @@ gui.Text = function Text(engine, x, y, text, styles) {
         var transform = this.relative;
         
         /* Create the text. */
-		context.fillText(this.text, transform.x, transform.y);
+		if(this.maxw) context.fillText(this.text, transform.x, transform.y, this.maxw);
+		else context.fillText(this.text, transform.x, transform.y);
 		
 		/* Restore the context. */
 		context.restore();

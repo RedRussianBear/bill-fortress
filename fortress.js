@@ -213,7 +213,7 @@ function Fortress(canvas) {
 
 		/* HUD */
 		var hud = this.entities.gui.adopt("hud", new gui.Component(this, 0, 0, this.canvas.width, 40, {fillStyle: "black"}));
-		hud.adopt("nmtxt", new gui.Text(this, 5, 20, "[playername]", {base: {font: "32px " + FONT, textAlign: "left"}}));
+		hud.adopt("nmtxt", new gui.Text(this, 5, 20, "[playername]", {base: {font: "32px " + FONT, textAlign: "left"}}, 270));
 		hud.adopt("endtxt", new gui.Text(this, 625, 20, "Endorse.:", {base: {font: "32px " + FONT, textAlign: "right"}}));
 		hud.adopt("endorsements", new gui.StatBar(this, 630, 5, 160, 30, 16, 0, {bar: {fillStyle: "green"}, text: {font: "30px " + FONT}}));
 		hud.children.endorsements.tooltip = new gui.ToolTip(this, "How close you are to beating the level");
@@ -225,12 +225,12 @@ function Fortress(canvas) {
 		var esubm = debatem.adopt("enemy", new gui.Component(this, 0, 0, this.canvas.width, 100, {fillStyle: "black"}));
 		debatem.adopt("message", new gui.Text(this, this.canvas.width/2, 350, "[message]", {base: {font: "42px " + FONT, fillStyle: "black"}}));
 		/* Debate menu, enemy sub-menu */
-		esubm.adopt("name", new gui.Text(this, 20, 25, "[enemyname]", {base: {font: "46px " + FONT, textAlign: "left"}}));
+		esubm.adopt("name", new gui.Text(this, 20, 25, "[enemyname]", {base: {font: "46px " + FONT, textAlign: "left"}}, 360));
 		esubm.adopt("health", new gui.StatBar(this, this.canvas.width/2, 10, this.canvas.width/2 - 10, 80, 100, 60, {}));
 		esubm.state = gui.STATE.NORMAL;
 		esubm.visible = true;
 		/* Debate menu, player sub-menu */
-		psubm.adopt("name", new gui.Text(this, 20, 25, "[playername]", {base: {font: "46px " + FONT, textAlign: "left"}}));
+		psubm.adopt("name", new gui.Text(this, 20, 25, "[playername]", {base: {font: "46px " + FONT, textAlign: "left"}}, this.canvas.width/2 - 30));
 		psubm.adopt("health", new gui.StatBar(this, 20, 100, this.canvas.width/2 - 30, 80, 100, 60, {}));
 		psubm.state = gui.STATE.NORMAL;
 		psubm.visible = true;

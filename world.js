@@ -65,7 +65,6 @@ world.World = function World(engine) {
         /* Load the text and grid. */
 		var text = level.map;
 		var current = [];
-		this.grid.push(current);
 		
 		/* Process map string into cell grid */
 		for (var i = 0; i < text.length; i++) {
@@ -119,7 +118,7 @@ world.World = function World(engine) {
 		this.mobs.clear();
 		for(var i = 0; i < moblist.length; i++) {
 			var cur = moblist[i];
-			this.mobs.adopt(new mobs.Politician(this.engine, cur.X*world.BOXSIZE, cur.Y*world.BOXSIZE, cur.NAME, cur.PARTY, cur.RANK, cur.ONDEFEAT));
+			this.mobs.adopt(new mobs.Politician(this.engine, cur.C*world.BOXSIZE, cur.R*world.BOXSIZE, cur.NAME, cur.PARTY, cur.RANK, cur.ONDEFEAT));
 		}
         
         /* Create atmosphere. */
@@ -129,7 +128,7 @@ world.World = function World(engine) {
             var cur = triggers[i];
             if (cur.TYPE == "proximity") {
                 this.atmosphere.add(
-                    new atmosphere.ProximitySound(this.engine, cur.X*world.BOXSIZE, cur.Y*world.BOXSIZE, cur.R*world.BOXSIZE, this.engine.resources.$(cur.SOUND))
+                    new atmosphere.ProximitySound(this.engine, cur.C*world.BOXSIZE, cur.R*world.BOXSIZE, cur.RAD*world.BOXSIZE, this.engine.resources.$(cur.SOUND))
                 );
             }
         }
@@ -137,7 +136,7 @@ world.World = function World(engine) {
 		/* Create loot */
 		var lootlist = level.loot;
 		for(var i = 0; i < lootlist.length; i++) {
-			this.loot.push(new world.Loot(this.engine, this, lootlist[i].X, lootlist[i].Y, lootlist[i].REWARD, lootlist[i].NAME, lootlist[i].INFO));
+			this.loot.push(new world.Loot(this.engine, this, lootlist[i].C, lootlist[i].R, lootlist[i].REWARD, lootlist[i].NAME, lootlist[i].INFO));
 		}
 		
 		/* Load endorsement requirement */
