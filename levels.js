@@ -103,8 +103,86 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
 ";
 
-levels.COMMITTEE.mobs = [];
-levels.COMMITTEE.endorsereq = 20;
+levels.COMMITTEE.mobs = [
+        {
+            X: 1, Y: 25, 
+            NAME: "Sam Johnson", 
+            PARTY: mobs.PARTY.REPUBLICAN, 
+            RANK: mobs.RANK.CONGRESSPERSON, 
+            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
+        },
+		{
+            X: 10, Y: 10, 
+            NAME: "Devin Nunes", 
+            PARTY: mobs.PARTY.REPUBLICAN, 
+            RANK: mobs.RANK.CONGRESSPERSON, 
+            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
+        },
+		{
+            X: 11, Y: 25, 
+            NAME: "Pat Tiberi", 
+            PARTY: mobs.PARTY.REPUBLICAN, 
+            RANK: mobs.RANK.CONGRESSPERSON, 
+            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
+        },
+		{
+            X: 11, Y: 490, 
+            NAME: "Dave Reichert", 
+            PARTY: mobs.PARTY.REPUBLICAN, 
+            RANK: mobs.RANK.CONGRESSPERSON, 
+            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
+        },
+		{
+            X: 14, Y: 27, 
+            NAME: "Charles Boustany", 
+            PARTY: mobs.PARTY.REPUBLICAN, 
+            RANK: mobs.RANK.CONGRESSPERSON, 
+            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
+        },
+		{
+            X: 16, Y: 50, 
+            NAME: "Peter Roskam", 
+            PARTY: mobs.PARTY.REPUBLICAN, 
+            RANK: mobs.RANK.CONGRESSPERSON, 
+            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
+        },
+		{
+            X: 18, Y: 66, 
+            NAME: "Sander Levin", 
+            PARTY: mobs.PARTY.DEMOCRAT, 
+            RANK: mobs.RANK.CONGRESSPERSON, 
+            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
+        },
+		{
+            X: 20, Y: 62, 
+            NAME: "Charles Rangel", 
+            PARTY: mobs.PARTY.DEMOCRAT, 
+            RANK: mobs.RANK.CONGRESSPERSON, 
+            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
+        },
+		{
+            X: 25, Y: 15, 
+            NAME: "Jim McDermott", 
+            PARTY: mobs.PARTY.DEMOCRAT, 
+            RANK: mobs.RANK.CONGRESSPERSON, 
+            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
+        },
+		{
+            X: 30, Y: 32, 
+            NAME: "John Lewis", 
+            PARTY: mobs.PARTY.DEMOCRAT, 
+            RANK: mobs.RANK.CONGRESSPERSON, 
+            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
+        },
+		{
+            X: 25, Y: 65, 
+            NAME: "Kevin Brady (Chairman)", 
+            PARTY: mobs.PARTY.REPUBLICAN, 
+            RANK: mobs.RANK.COMCHAIR, 
+            ONDEFEAT: function(player) {player.endorsements+=2; player.funds += 30;} 
+        }
+    ];
+levels.COMMITTEE.endorsereq = 12;
 levels.COMMITTEE.atmosphere = [];
 levels.COMMITTEE.loot = [];
 
@@ -177,7 +255,7 @@ XXX___________________________________________________XXXXXXXXXXXXXX___XXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
 ";
 
-levels.TEST.mobs = [
+levels.HOUSE.mobs = [
         {
             X: 1, Y: 59, 
             NAME: "Scott Tipton", 
