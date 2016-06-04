@@ -1,67 +1,7 @@
 var levels = {};
 
 var mklevels = function() {
-	levels.LIST = ["TEST", "COMMITTEE", "HOUSE", "SENATE", "CONFERENCE", "PRESIDENT"];
-
-    levels.TEST = {}
-
-    levels.TEST.map = "\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    X___XXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    X_P_______________XXXXXXXXXXX\n\
-    X___XXXXXXXXXXXXX_XXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXX_XXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXX_XXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXX_XXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXX_XXXXXXXXXXX\n\
-    XXXXXXXXXXXXX_________XXXXXXX\n\
-    XXXXXXXXXXXXX_________XXXXXXX\n\
-    XXXXXXXXXXXXX_________XXXXXXX\n\
-    XXXXXXXXXXXXX_________XXXXXXX\n\
-    XXXXXXXXXXXXXXXXXEXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\
-    ";
-
-    levels.TEST.mobs = [
-        {
-            R: 12, C: 17, 
-            NAME: "Ted Cruz", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
-            ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
-        }
-    ];
-
-    levels.TEST.atmosphere = [
-        {
-            R: 12, C: 17, RAD: 3,
-            NAME: "Ted Cruz Alarm",
-            SOUND: "alarm",
-            TYPE: "proximity",
-        }
-    ];
-	
-	levels.TEST.loot = [
-		{
-			R: 13, C: 17,
-			REWARD: function(player) {player.maxhealth += 20;},
-			NAME: "Lobby Support",
-			INFO: "You gain 20 HP with money backing"
-		}
-	];
-	
-	levels.TEST.endorsereq = 1;
+levels.LIST = ["COMMITTEE", "HOUSE", "SENATE", "CONFERENCE", "PRESIDENT"];
 
 /* Level One: COMMITTEE */
 levels.COMMITTEE = {};
@@ -184,7 +124,14 @@ levels.COMMITTEE.mobs = [
     ];
 levels.COMMITTEE.endorsereq = 11;
 levels.COMMITTEE.atmosphere = [];
-levels.COMMITTEE.loot = [];
+levels.COMMITTEE.loot = [
+		{
+			R: 29, C: 76,
+			REWARD: function(player) {player.maxhealth += 20;},
+			NAME: "Lobby Support",
+			INFO: "You gain 20 HP with money backing"
+		}
+	];
 
 /* Level Two: HOUSE */
 

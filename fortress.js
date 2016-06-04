@@ -95,6 +95,7 @@ function Fortress(canvas) {
 		var that = this;
 		this.resources.load(function() {
 			/* Player sprite */
+			that.entities.gui.children.character.children.picture.image = that.resources.$("be0");
 			that.entities.player.images[bill.DIRECTION.LEFT] = new Array();
 			that.entities.player.images[bill.DIRECTION.LEFT].push(that.resources.$("bw0"));
 			that.entities.player.images[bill.DIRECTION.LEFT].push(that.resources.$("bw1"));
@@ -193,6 +194,7 @@ function Fortress(canvas) {
 		menu.state = gui.STATE.NORMAL;
 		menu.visible = true;
 		
+		
 		/* Character creation menu */
 		var mkchar = this.entities.gui.adopt("mkchar", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {}));
 		mkchar.adopt("title", new gui.Text(this, this.canvas.width/2, 30, "Character Creation", {base: {font: "46px " + FONT}}));
@@ -207,6 +209,7 @@ function Fortress(canvas) {
 					this.parent.engine.entities.gui.children.hud.children.nmtxt.text = this.parent.children.nameinput.text;
 					this.parent.engine.entities.player.name = this.parent.children.nameinput.text;
 					this.parent.engine.entities.gui.children.debate.children.bill.children.name.text = this.parent.children.nameinput.text;
+					this.parent.engine.entities.gui.children.character.children.name.text = this.parent.children.nameinput.text;
 					this.parent.engine.nextLevel();
 					this.parent.engine.state = STATE.OVERWORLD;
 		}));
@@ -237,6 +240,12 @@ function Fortress(canvas) {
 		var attackm = psubm.adopt("actions", new gui.Component(this, 0, 0, this.canvas.width/2, 200, {}));
 		attackm.state = gui.STATE.NORMAL;
 		attackm.visible = true;
+		
+		/* Character View Menu */
+		var cha = this.entities.gui.adopt("character", new gui.Component(this, 100, 50, 600, 500, {fillStyle: "lightgrey"}));
+		cha.adopt("name", new gui.Text(this, 10, 10, "[playername]", {base: {font: "50px " + FONT, textAlign: "left", fillStyle: "black", textBaseline: "top"}}, 280));
+		cha.adopt("amend", new gui.Text(this, 310, 10, "Amendments", {base: {font: "50px " + FONT, textAlign: "left", fillStyle: "black", textBaseline: "top"}}, 280));
+		cha.adopt("picture", new gui.Image(this, 20, 70, 256, 384));
 		
 		this.levelnum = 0;
     }
@@ -285,9 +294,23 @@ function Fortress(canvas) {
 		/* Update GUI. */
 		this.entities.gui.update(delta);
 		
+		/* Check for ESC */
+		if(this.input.keyboard[input.KEY.ESCAPE] == input.STATE.PRESSED) {
+			if(this.state == STATE.CHARACTER){
+				this.state = STATE.OVERWORLD;
+				this.entities.gui.children.character.state = gui.STATE.DISABLED;
+				this.entities.gui.children.character.visible = false;
+			}
+			else if(this.state == STATE.OVERWORLD){
+				this.state = STATE.CHARACTER;
+				this.entities.gui.children.character.state = gui.STATE.NORMAL;
+				this.entities.gui.children.character.visible = true;
+			}
+		}
+		
 		/* Update input. */
 		this.input.update(delta);
-		
+	
 		/* Update states. */
 		switch (this.state) {
 		
@@ -306,6 +329,7 @@ function Fortress(canvas) {
 				this.entities.debate.update(delta);
 				break;
 		}
+		
 	}
 	
 	/** Display engine statistics. */
@@ -353,6 +377,10 @@ function Fortress(canvas) {
 				this.context.textAlign = "center";
 				this.context.fillStyle = "white";
 				this.context.fillText("YOU LOSE", this.canvas.width/2, this.canvas.height/2);
+				break;
+				
+			case STATE.CHARACTER:
+				this.entities.world.render(this.context, this.entities.player.transform.x - this.canvas.width/2 + this.entities.player.width/2, this.entities.player.transform.y - this.canvas.height/2 + this.entities.player.height/2, time);
 				break;
 		}
 		

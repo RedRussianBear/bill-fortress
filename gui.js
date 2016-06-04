@@ -349,9 +349,21 @@ gui.ToolTip = function ToolTip(engine, text, styles) {
 	}	
 }
 
-gui.Dropdown = function Dropdown(engine) {
+gui.Image = function Image(engine, x, y, w, h, image) {
+	this.image = image;
 	
+	sprite.Sprite.call(this, x, y, w, h);
+	
+	this.update = function(delta) {}
+	
+	this.render = function(context) {
+		var transform = this.relative;
+		
+		context.drawImage(this.image, this.relative.x, this.relative.y, this.width, this.height);
+	}
 }
+
+gui.Image.prototype = gui.Component.prototype;
 
 /** The main GUI manager. */
 gui.Manager = function Manager(engine) {
