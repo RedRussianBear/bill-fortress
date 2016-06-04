@@ -1,13 +1,14 @@
 bill = {};
 
 bill.ATTACKS_INIT = [
-	{NAME: "Logic", EXEC: function(enemy, caster){enemy.health -= 10;}, COOLDOWN: 0, POWER: 1, INFO: "Logic your foe for 5 dmg"},
-	{NAME: "Merit", EXEC: function(enemy, caster){caster.health += 20;}, COOLDOWN: 4, POWER: 3, INFO: "Recover 20 health by sheer merit"},
-	{NAME: "Holier Than Thou", EXEC: function(enemy, caster){enemy.health -= 15; caster.health += 15;}, COOLDOWN: 10, INFO: "Divert your opponent's base with ideological extremism"}
+	{NAME: "Logic", EXEC: function(enemy, caster){enemy.health -= caster.power*10;}, COOLDOWN: 0, POWER: 1, INFO: "Logic your foe for 10 dmg"},
+	{NAME: "Merit", EXEC: function(enemy, caster){caster.health += caster.power*20;}, COOLDOWN: 4, POWER: 3, INFO: "Recover 20 health by sheer merit"},
+	{NAME: "Holier Than Thou", EXEC: function(enemy, caster){enemy.health -= caster.power*15; caster.health += caster.power*15;}, COOLDOWN: 10, INFO: "Divert your opponent's base with ideological extremism"}
 ];
 
 bill.ATTACKS_EXTRA = {
-	
+	LOBBY: {NAME: "Call a Lobbyist", EXEC: function(enemy, caster){enemy.health -= caster.power*80;}, COOLDOWN: 6, POWER: 8, INFO: "Call in the special interest cavalry"},
+	QUOTE: {NAME: "Quote Lincoln", EXEC: function(enemy, caster){caster.health = caster.maxhealth;}, COOLDOWN: 12, INFO: "Restore your resilience with a quote from honest abe"}
 };
 
 bill.DIRECTION = {LEFT: 0, UP: 1, RIGHT: 2, DOWN: 3};
@@ -38,6 +39,7 @@ bill.Bill = function Bill(engine) {
 	this.funds = 0;
 	this.attacks = [];
 	this.acount = 0;
+	this.power = 1;
 	
 	for(var i = 0; i < bill.ATTACKS_INIT.length; i++){
 		var cur = bill.ATTACKS_INIT[i];
