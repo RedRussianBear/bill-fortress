@@ -1062,7 +1062,7 @@ levels.SENATE.mobs = [
 		{
             R: 29, C: 77, 
             NAME: "Bernie Sanders", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            PARTY: mobs.PARTY.SANDERS, 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
