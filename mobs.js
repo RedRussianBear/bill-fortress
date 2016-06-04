@@ -43,6 +43,13 @@ mobs.ATTACKS[mobs.RANK.COMCHAIR] = [
 	{NAME: "Attach Controversial Rider", EXEC: function(enemy, caster){enemy.health -= 50; caster.health += 50;}, COOLDOWN: 10, POWER: 10}
 ];
 
+mobs.health = [];
+
+mobs.health[mobs.RANK.CONGRESPERSON] = 100;
+mobs.health[mobs.RANK.SENATOR] = 300;
+mobs.health[mobs.RANK.SPEAKER] = 350;
+mobs.health[mobs.RANK.COMCHAIR] = 200;
+
 mobs.Politician = function Politician (engine, x, y, name, party, rank, ondefeat) {
 	
 	sprite.Sprite.call(this, x, y, mobs.WIDTH, mobs.HEIGHT);
@@ -50,7 +57,7 @@ mobs.Politician = function Politician (engine, x, y, name, party, rank, ondefeat
 	this.direction = Math.floor(4 * Math.random());
 	this.party = party;
 	this.name = name;
-	this.maxhealth = 100;
+	this.maxhealth = mobs.health[rank];
 	this.engine = engine;
 	this.health = 100;
 	this.attacks = [];
