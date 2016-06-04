@@ -1243,8 +1243,8 @@ levels.SENATE.loot = [
 		{
 			R: 13, C: 27,
 			REWARD: function(player) {player.maxhealth += 30;},
-			NAME: "Think tank support",
-			INFO: "You gain 30 HP because a major policy think tank supports you"
+			NAME: "PAC support",
+			INFO: "You gain 30 HP because Patriotic PAC has spent money to support you"
 		}
 	];
 
