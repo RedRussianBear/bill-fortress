@@ -3,7 +3,7 @@ bill = {};
 bill.ATTACKS_INIT = [
 	{NAME: "Logic", EXEC: function(enemy, caster){enemy.health -= caster.power*10;}, COOLDOWN: 0, POWER: 1, INFO: "Logic your foe for 10 dmg"},
 	{NAME: "Merit", EXEC: function(enemy, caster){caster.health += caster.power*20;}, COOLDOWN: 4, POWER: 3, INFO: "Recover 20 health by sheer merit"},
-	{NAME: "Holier Than Thou", EXEC: function(enemy, caster){enemy.health -= caster.power*15; caster.health += caster.power*15;}, COOLDOWN: 10, INFO: "Divert your opponent's base with ideological extremism"}
+	{NAME: "Holier Than Thou", EXEC: function(enemy, caster){enemy.health -= caster.power*15; caster.health += caster.power*15;}, COOLDOWN: 10, INFO: "Divert your opponent's base with ideological purism"}
 ];
 
 bill.ATTACKS_EXTRA = {
