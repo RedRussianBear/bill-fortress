@@ -91,7 +91,9 @@ function Fortress(canvas) {
         this.resources.queue("alarm", resource.AUDIO, "sounds/sfx/alert.wav");
 		
 		this.resources.queue("walkable", resource.IMAGE, "tiles/walkable.png");
-		//this.resources.queue("exit", resource.IMAGE, "tiles/exit.png");
+		this.resources.queue("exit", resource.IMAGE, "tiles/exit.png");
+		this.resources.queue("chest", resource.IMAGE, "assets/chest.png");
+
 		var that = this;
 		this.resources.load(function() {
 			/* Player sprite */
@@ -171,8 +173,8 @@ function Fortress(canvas) {
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss3"));
 		
 			world.SPRITES.FLOOR = that.resources.$("walkable");
-			world.SPRITES.EXIT = that.resources.$("walkable");
-			world.SPRITES.CHEST = that.resources.$("walkable");
+			world.SPRITES.EXIT = that.resources.$("exit");
+			world.SPRITES.CHEST = that.resources.$("chest");
 			console.log("Loaded reources");
 		});
 	

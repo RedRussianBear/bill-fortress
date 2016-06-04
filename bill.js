@@ -90,7 +90,7 @@ bill.Bill = function Bill(engine) {
 	
 	this.amend = function(name, info, reward) {
 		var pmen = this.engine.entities.gui.children.character;
-		pmen.adopt(name, new gui.Text(this.engine, 310, 55 + 50*this.acount, name, {base: {font: "46px " + FONT, textAlign: "left", fillStyle: "black", textBaseline: "top"}}, 280));
+		pmen.adopt(name, new gui.Text(this.engine, 310, 55 + 50*this.acount, name, {base: {font: "46px " + FONT, textAlign: "left", fillStyle: "black", textBaseline: "top"}}, 280, 44));
 		pmen.children[name].tooltip = new gui.ToolTip(this.engine, info);
 		reward(this);
 		this.acount++;

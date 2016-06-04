@@ -165,11 +165,14 @@ gui.Button = function Button(engine, x, y, w, h, text, callback, styles) {
 gui.Button.prototype = gui.Component.prototype;
 
 /** A static text element. */
-gui.Text = function Text(engine, x, y, text, styles, maxw) {
+gui.Text = function Text(engine, x, y, text, styles, maxw, bbh) {
 
     /* Component superclass. */
     gui.Component.call(this, engine, x, y);
     
+	this.width = maxw || 400;
+	this.height = bbh || 32;
+	
     /* Instance. */
 	this.maxw = maxw;
     this.text = text;
