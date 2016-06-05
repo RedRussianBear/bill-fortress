@@ -126,9 +126,9 @@ world.World = function World(engine) {
         this.atmosphere.clear();
         for (var i = 0; i < triggers.length; i++) {
             var cur = triggers[i];
-            if (cur.TYPE == "proximity") {
+            if (cur.TYPE == "background") {
                 this.atmosphere.add(
-                    new atmosphere.ProximitySound(this.engine, cur.C*world.BOXSIZE, cur.R*world.BOXSIZE, cur.RAD*world.BOXSIZE, this.engine.resources.$(cur.SOUND))
+                    new atmosphere.BackgroundPlaylist(this.engine, cur.SOUNDS)
                 );
             }
         }

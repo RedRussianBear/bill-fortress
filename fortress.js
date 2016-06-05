@@ -88,7 +88,9 @@ function Fortress(canvas) {
         /* Sound effects. */
         this.resources.queue("ambient01", resource.AUDIO, "sounds/america.wav");
         this.resources.queue("ambient02", resource.AUDIO, "sounds/battlecry.wav");
+        this.resources.queue("ambient03", resource.AUDIO, "sounds/anthem2.wav");
         this.resources.queue("alarm", resource.AUDIO, "sounds/sfx/alert.wav");
+        this.resources.queue("death", resource.AUDIO, "sounds/sfx/shoot.wav");
 		
 		this.resources.queue("walkable", resource.IMAGE, "tiles/walkable.png");
 		this.resources.queue("exit", resource.IMAGE, "tiles/exit.png");

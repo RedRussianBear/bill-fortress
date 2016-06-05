@@ -123,7 +123,13 @@ levels.COMMITTEE.mobs = [
         }
     ];
 levels.COMMITTEE.endorsereq = 11;
-levels.COMMITTEE.atmosphere = [];
+levels.COMMITTEE.atmosphere = [
+        {
+            NAME: "anthem",
+            SOUNDS: ["ambient03"],
+            TYPE: "background",
+        }
+];
 levels.COMMITTEE.loot = [
 		{
 			R: 17, C: 48,

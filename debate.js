@@ -5,6 +5,9 @@ debate.Manager = function Manager(engine) {
 	
 	
 	this.start = function(enemy) {
+        this.engine.resources.$("alarm").volume = 0.2;
+        this.engine.resources.$("alarm").play();
+        
 		this.amenu = this.engine.entities.gui.children.debate.children.bill.children.actions;
 		this.mbuf = this.engine.entities.gui.children.debate.children.message;
 		this.pbar = this.engine.entities.gui.children.debate.children.bill.children.health;
@@ -90,6 +93,8 @@ debate.Manager = function Manager(engine) {
 			this.enemy.ondefeat(this.engine.player);
 			this.engine.entities.world.mobs.children.splice(this.engine.entities.world.mobs.children.indexOf(this.enemy), 1);
 			this.engine.findebate();
+            this.engine.resources.$("death").volume = 0.2;
+            this.engine.resources.$("death").play();
 		}
 		
 		if(this.engine.player.health <= 0) {

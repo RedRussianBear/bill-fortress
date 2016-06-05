@@ -18,6 +18,32 @@ atmosphere.ProximitySound = function ProximitySound(engine, x, y, r, sound) {
 
 }
 
+atmosphere.BackgroundPlaylist = function BackgroundPlaylist(engine, sounds) {
+    
+    this.engine = engine;
+    this.index = -1;
+    this.songs = [];
+    
+    for (var i = 0; i < sounds.length; i++) {
+        this.songs.push(this.engine.resources.$(sounds[i]));
+    }
+    
+    var that = this;
+    
+    this.callback = function() {
+        that.index = (that.index + 1) % that.songs.length;
+        that.songs.onended = function() { console.log("song ended"); that.callback(); }
+        that.songs[that.index].volume = 0.25;
+        that.songs[that.index].play();
+    }
+    
+    this.callback();
+    
+    this.pause = function() { this.songs[this.index].pause(); }
+    this.play = function() { this.songs[this.index].play(); }
+    
+}
+
 atmosphere.Manager = function Manager(engine) {
     
     /* Track the engine. */
@@ -39,7 +65,7 @@ atmosphere.Manager = function Manager(engine) {
     /** Update the triggers. */
     this.update = function(delta) {
         for (var i = 0; i < this.triggers.length; i++) {
-            this.triggers[i].update(delta);
+            if (this.triggers[i].update) this.triggers[i].update(delta);
         }
     }
     
