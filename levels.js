@@ -133,15 +133,15 @@ levels.COMMITTEE.atmosphere = [
 levels.COMMITTEE.loot = [
 		{
 			R: 17, C: 48,
-			REWARD: function(player) {player.maxhealth += 10;},
+			REWARD: function(player) {player.maxhealth += 50;},
 			NAME: "Lobby Support",
-			INFO: "You gain 10 HP with money backing"
+			INFO: "You gain 50 HP with money backing"
 		},
 		{
 			R: 29, C: 76,
-			REWARD: function(player) {player.maxhealth += 20;},
+			REWARD: function(player) {player.power *= 2;},
 			NAME: "Committee Support",
-			INFO: "You gain 20 HP from approval from the Ways and Means Committee"
+			INFO: "Your power doubles from approval from the Ways and Means Committee"
 		}
 	];
 
@@ -830,9 +830,9 @@ levels.HOUSE.atmosphere = [];
 levels.HOUSE.loot = [
 		{
 			R: 23, C: 13,
-			REWARD: function(player) {player.maxhealth += 100;},
+			REWARD: function(player) {player.maxhealth *= 2;},
 			NAME: "Grassroot Action",
-			INFO: "You gain 100 HP because the grassroots began supporting your bill"
+			INFO: "Your HP doubles because the grassroots began supporting your bill"
 		},
 		{
 			R: 25, C: 116,
@@ -844,7 +844,7 @@ levels.HOUSE.loot = [
 			R: 32, C: 118,
 			REWARD: function(player) {player.attacks.push(bill.ATTACKS_EXTRA["Call a Lobbyist"]);},
 			NAME: "Call a Lobbyist",
-			INFO: "You gain the attack \"Call a Lobbyist\" that will help you interest the power of special interest groups"
+			INFO: "You gain the attack \"Call a Lobbyist\" that will help you curry the favor of special interest groups"
 		}
 	];
 
@@ -1238,7 +1238,7 @@ levels.SENATE.loot = [
 			R: 33, C: 48,
 			REWARD: function(player) {player.attacks.push(bill.ATTACKS_EXTRA["Quote Lincoln"]);},
 			NAME: "Quote Lincoln",
-			INFO: "You gain the attack \"Quote Lincoln\""
+			INFO: "You gain the attack \"Quote Lincoln\", which can bring you back from the brink of death"
 		},
 		{
 			R: 29, C: 1,
@@ -1248,9 +1248,9 @@ levels.SENATE.loot = [
 		},
 		{
 			R: 13, C: 27,
-			REWARD: function(player) {player.maxhealth += 30;},
+			REWARD: function(player) {player.maxhealth += 60;},
 			NAME: "PAC support",
-			INFO: "You gain 30 HP because Patriotic PAC has spent money to support you"
+			INFO: "You gain 60 HP because Patriotic PAC has spent money to support you"
 		}
 	];
 
@@ -1304,182 +1304,182 @@ levels.CONFERENCE.mobs = [
             R: 4, C: 15, 
             NAME: "Election Fraud", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 5, C: 23, 
             NAME: "Mitt \"The Choker\" Romney", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 8, C: 21, 
             NAME: "The Donald", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 9, C: 11, 
             NAME: "The Gipper", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 11, C: 17, 
             NAME: "43", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 13, C: 13, 
             NAME: "41", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 13, C: 27, 
             NAME: "The Koch Brothers", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 15, C: 7, 
             NAME: "Sheldon Adelson", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 15, C: 26, 
             NAME: "Gary Johnson", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 17, C: 8, 
             NAME: "Ron Paul", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 18, C: 17, 
             NAME: "Milton Friedman", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 19, C: 24, 
             NAME: "The Evil in the World", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 21, C: 22, 
             NAME: "Jeb! \"Low Energy\" Bush", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 21, C: 28, 
             NAME: "John \"Not a Hero\" McCain", 
             PARTY: mobs.PARTY.REPUBLICAN, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 24, C: 24, 
             NAME: "The Media", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 25, C: 15, 
             NAME: "Rigged Election Process", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 27, C: 29, 
             NAME: "Bill Clinton", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 28, C: 9, 
             NAME: "Crooked Hillary", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 30, C: 20, 
             NAME: "Al Gore", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 31, C: 18, 
             NAME: "John Kerry", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 32, C: 9, 
             NAME: "Ralph Nader", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 34, C: 18, 
             NAME: "Jill Stein", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 35, C: 14, 
             NAME: "FDR", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 35, C: 22, 
             NAME: "JFK", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 32, C: 22, 
             NAME: "LBJ", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 22, C: 10, 
             NAME: "Acadamia", 
             PARTY: mobs.PARTY.DEMOCRAT, 
-            RANK: mobs.RANK.CONGRESSPERSON, 
+            RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         }
 	]

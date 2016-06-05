@@ -27,9 +27,9 @@ mobs.ATTACKS[mobs.RANK.SENATOR] = [
 ];
 
 mobs.ATTACKS[mobs.RANK.SPEAKER] = [
-	{NAME: "Strawman", EXEC: function(enemy, caster){enemy.health -= 5;}, COOLDOWN: 1, POWER: 1},
-	{NAME: "False Rebuttal", EXEC: function(enemy, caster){enemy.health -= 10; caster.health += 20;}, COOLDOWN: 4, POWER: 5},
-	{NAME: "Ad Hominem", EXEC: function(enemy, caster){enemy.health -= 20;}, COOLDOWN: 5, POWER: 4},
+	{NAME: "Strawman", EXEC: function(enemy, caster){enemy.health -= 10;}, COOLDOWN: 1, POWER: 1},
+	{NAME: "False Rebuttal", EXEC: function(enemy, caster){enemy.health -= 15; caster.health += 25;}, COOLDOWN: 4, POWER: 5},
+	{NAME: "Ad Hominem", EXEC: function(enemy, caster){enemy.health -= 30;}, COOLDOWN: 5, POWER: 4},
 	{NAME: "Refusal to Debate", EXEC: function(enemy, caster){enemy.health -= 100;}, COOLDOWN: 5, POWER: 30},
 	{NAME: "Refusal to Refer to Committee", EXEC: function(enemy, caster){enemy.health -= 300;}, COOLDOWN: 100, POWER: 100},
 	{NAME: "Exploit Media Access", EXEC: function(enemy, caster) {caster.health += 80}, COOLDOWN: 8, POWER: 80}
@@ -39,8 +39,8 @@ mobs.ATTACKS[mobs.RANK.COMCHAIR] = [
 	{NAME: "Strawman", EXEC: function(enemy, caster){enemy.health -= 5;}, COOLDOWN: 1, POWER: 1},
 	{NAME: "False Rebuttal", EXEC: function(enemy, caster){enemy.health -= 10; caster.health += 20;}, COOLDOWN: 4, POWER: 5},
 	{NAME: "Ad Hominem", EXEC: function(enemy, caster){enemy.health -= 20;}, COOLDOWN: 5, POWER: 4},
-	{NAME: "Table Motion", EXEC: function(enemy, caster){enemy.health -= 95;}, COOLDOWN: 20, POWER: 20},
-	{NAME: "Attach Controversial Rider", EXEC: function(enemy, caster){enemy.health -= 50; caster.health += 50;}, COOLDOWN: 10, POWER: 10}
+	{NAME: "Table Motion", EXEC: function(enemy, caster){enemy.health -= 80;}, COOLDOWN: 40, POWER: 20},
+	{NAME: "Attach Controversial Rider", EXEC: function(enemy, caster){enemy.health -= 50; caster.health += 20;}, COOLDOWN: 20, POWER: 10}
 ];
 
 mobs.HEALTH = [];
