@@ -1,9 +1,9 @@
 # Bill Fortress
 
 ## Minimal Viable Product
-- Simple, functional overworld depicting the congressional process
-- Functional Debate mode
-- Meme-tastic soundtrack
+- Simple, functional overworld depicting the congressional process ✓
+- Functional Debate mode ✓
+- Meme-tastic soundtrack ✓
 
 ## Game Structure
 - Begins with character creation
