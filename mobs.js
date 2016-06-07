@@ -88,25 +88,25 @@ mobs.Politician = function Politician (engine, x, y, name, party, rank, ondefeat
 			if(player.transform.y + player.height < this.transform.y) {
 				this.moving = true;
 				this.direction = mobs.DIRECTION.UP;
-				if(!(grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)] == world.CELL.WALL))
+				if((grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)].walkable))
 					this.transform.y -= dist;
-			}
-			if(player.transform.x + player.width < this.transform.x) {
-				this.direction = mobs.DIRECTION.LEFT;
-				this.moving = true;
-				if(!(grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)] == world.CELL.WALL))
-					this.transform.x -= dist;
 			}
 			if(player.transform.y > this.transform.y + this.height) {
 				this.moving = true;
 				this.direction = mobs.DIRECTION.DOWN;
-				if(!(grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)] == world.CELL.WALL))
+				if((grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)].walkable))
 					this.transform.y += dist;
+			}
+			if(player.transform.x + player.width < this.transform.x) {
+				this.direction = mobs.DIRECTION.LEFT;
+				this.moving = true;
+				if((grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)].walkable))
+					this.transform.x -= dist;
 			}
 			if(player.transform.x > this.transform.x + this.width) {
 				this.moving = true;
 				this.direction = mobs.DIRECTION.RIGHT;
-				if(!(grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)] == world.CELL.WALL))
+				if((grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)].walkable))
 					this.transform.x += dist;
 			}
 		}

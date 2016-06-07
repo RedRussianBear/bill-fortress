@@ -93,6 +93,7 @@ function Fortress(canvas) {
         this.resources.queue("death", resource.AUDIO, "sounds/sfx/shoot.wav");
 		
 		this.resources.queue("walkable", resource.IMAGE, "tiles/walkable.png");
+		this.resources.queue("wall", resource.IMAGE, "tiles/notwalkable.png");
 		this.resources.queue("exit", resource.IMAGE, "tiles/exit.png");
 		this.resources.queue("chest", resource.IMAGE, "assets/chest.png");
 
@@ -174,8 +175,9 @@ function Fortress(canvas) {
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss2"));
 			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss3"));
 		
-			world.SPRITES.FLOOR = that.resources.$("walkable");
-			world.SPRITES.EXIT = that.resources.$("exit");
+			world.SPRITES[world.CELL.WALL] = that.resources.$("wall");
+			world.SPRITES[world.CELL.FLOOR] = that.resources.$("walkable");
+			world.SPRITES[world.CELL.EXIT] = that.resources.$("exit");
 			world.SPRITES.CHEST = that.resources.$("chest");
 			console.log("Loaded reources");
 		});
@@ -324,7 +326,7 @@ function Fortress(canvas) {
 
 			/* Overworld */
 			case STATE.OVERWORLD:
-				this.entities.world.update(delta);
+				this.entities.world.update(delta, this.offx, this.offy);
 				this.entities.player.update(delta);
 				break;
 				
@@ -334,6 +336,8 @@ function Fortress(canvas) {
 				break;
 		}
 		
+		this.offx = this.entities.player.transform.x - this.canvas.width/2 + this.entities.player.width/2;
+		this.offy = this.entities.player.transform.y - this.canvas.height/2 + this.entities.player.height/2;
 	}
 	
 	/** Display engine statistics. */
@@ -368,7 +372,7 @@ function Fortress(canvas) {
 			/* Overworld */
 			case STATE.PAUSE:
 			case STATE.OVERWORLD:
-				this.entities.world.render(this.context, this.entities.player.transform.x - this.canvas.width/2 + this.entities.player.width/2, this.entities.player.transform.y - this.canvas.height/2 + this.entities.player.height/2, time);
+				this.entities.world.render(this.context, this.offx, this.offy, time);
 				this.entities.player.render(this.context, time);
 				break;
 				

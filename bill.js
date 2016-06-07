@@ -59,25 +59,25 @@ bill.Bill = function Bill(engine) {
 		if(this.engine.input.keyboard[input.KEY.W] == input.STATE.DOWN) {
 			this.moving = true;
 			this.state = bill.DIRECTION.UP;
-			if(!(grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)] == world.CELL.WALL))
+			if((grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)].walkable))
 				this.transform.y -= dist;
-		}
-		if(this.engine.input.keyboard[input.KEY.A] == input.STATE.DOWN) {
-			this.state = bill.DIRECTION.LEFT;
-			this.moving = true;
-			if(!(grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)] == world.CELL.WALL))
-				this.transform.x -= dist;
 		}
 		if(this.engine.input.keyboard[input.KEY.S] == input.STATE.DOWN) {
 			this.moving = true;
 			this.state = bill.DIRECTION.DOWN;
-			if(!(grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)] == world.CELL.WALL))
+			if((grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)].walkable))
 				this.transform.y += dist;
+		}
+		if(this.engine.input.keyboard[input.KEY.A] == input.STATE.DOWN) {
+			this.state = bill.DIRECTION.LEFT;
+			this.moving = true;
+			if((grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)].walkable))
+				this.transform.x -= dist;
 		}
 		if(this.engine.input.keyboard[input.KEY.D] == input.STATE.DOWN) {
 			this.moving = true;
 			this.state = bill.DIRECTION.RIGHT;
-			if(!(grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)] == world.CELL.WALL || grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)] == world.CELL.WALL))
+			if((grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)].walkable))
 				this.transform.x += dist;
 		}
 		

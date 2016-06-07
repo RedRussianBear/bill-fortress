@@ -4,4 +4,4 @@ Respawn page
 No checkpoints
 Moar music
 Better videos
-Implement president leve and create one big map
+Implement president level
