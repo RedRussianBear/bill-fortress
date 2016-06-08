@@ -1,7 +1,11 @@
-Better coliision boxes
-Not 0 instructions
-Respawn page
-No checkpoints
-Moar music
-Better videos
-Implement president level
+# Things to do:
+- Better coliision boxes for loot
+- Add instructions
+- Respawn page
+- Moar music
+- Better videos
+- Implement president level
+- Combat animations
+- Revise health system
+- Add scrollbar menus
+- Add merchants

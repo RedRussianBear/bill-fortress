@@ -12,7 +12,7 @@ world.BOXSIZE = 128;
 world.LOOTSIZE = 64;
 
 /** World tile types. */
-world.CELL = {WALL: 0, FLOOR: 1, PLAYER: 2, EXIT: 3};
+world.CELL = {WALL: 0, FLOOR: 1, PLAYER: 2, EXIT: 3, SECRET: 4};
 world.SPRITES = [];
 
 /** World objects. */
@@ -113,6 +113,9 @@ world.World = function World(engine) {
 					case "E":
 						current.push(world.CELL.EXIT);
 						break;
+					case "S":
+						current.push(world.CELL.SECRET);
+						break;
 				}
 			}
             
@@ -178,11 +181,11 @@ world.Cell = function Cell(engine, c, r, image, type) {
 	this.col = c;
 	this.color = "black";
 	
-	if(this.type == world.CELL.FLOOR) {
+	if(this.type == world.CELL.FLOOR || this.type == world.CELL.SECRET) {
 		this.walkable = true;
 	}
 	
-	if(this.walkable) {
+	if(this.type == world.CELL.FLOOR) {
 		this.color = "lightgrey";
 	}
 	

@@ -179,6 +179,7 @@ function Fortress(canvas) {
 			world.SPRITES[world.CELL.WALL] = that.resources.$("wall");
 			world.SPRITES[world.CELL.FLOOR] = that.resources.$("walkable");
 			world.SPRITES[world.CELL.EXIT] = that.resources.$("exit");
+			world.SPRITES[world.CELL.SECRET] = that.resources.$("wall");
 			world.SPRITES.CHEST = that.resources.$("chest");
 			console.log("Loaded reources");
 		});
