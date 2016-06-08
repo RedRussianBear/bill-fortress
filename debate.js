@@ -96,8 +96,7 @@ debate.Manager = function Manager(engine) {
             this.engine.resources.$("death").volume = 0.2;
             this.engine.resources.$("death").play();
 		}
-		
-		if(this.engine.player.health <= 0) {
+		else if(this.engine.player.health <= 0) {
 			this.engine.entities.gui.children.debate.state = gui.STATE.DISABLED;
 			this.engine.entities.gui.children.debate.visible = false;
 			this.engine.state = STATE.DEFEAT;

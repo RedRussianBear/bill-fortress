@@ -223,11 +223,11 @@ function Fortress(canvas) {
 
 		/* HUD */
 		var hud = this.entities.gui.adopt("hud", new gui.Component(this, 0, 0, this.canvas.width, 40, {fillStyle: "black"}));
-		hud.adopt("nmtxt", new gui.Text(this, 5, 20, "[playername]", {base: {font: "32px " + FONT, textAlign: "left"}}, 270));
+		hud.adopt("nmtxt", new gui.Text(this, 5, 20, "[playername]", {base: {font: "32px " + FONT, textAlign: "left"}}, 260));
 		hud.adopt("endtxt", new gui.Text(this, 625, 20, "Endorse.:", {base: {font: "32px " + FONT, textAlign: "right"}}));
 		hud.adopt("endorsements", new gui.StatBar(this, 630, 5, 160, 30, 16, 0, {bar: {fillStyle: "green"}, text: {font: "30px " + FONT}}));
 		hud.children.endorsements.tooltip = new gui.ToolTip(this, "How close you are to beating the level");
-		hud.adopt("funds", new gui.Text(this, this.canvas.width/2 - 125, 20, "Funds: $0k", {base: {font: "32px " + FONT, textAlign: "left"}}));
+		hud.adopt("funds", new gui.Text(this, 275, 20, "Funds: $0k", {base: {font: "32px " + FONT, textAlign: "left"}}, 200));
 		
 		/* Debate menu */
 		var debatem = this.entities.gui.adopt("debate", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {}));

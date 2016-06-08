@@ -174,7 +174,7 @@ gui.Text = function Text(engine, x, y, text, styles, maxw, bbh) {
 	this.height = bbh || 32;
 	
     /* Instance. */
-	this.maxw = maxw;
+	this.maxw = maxw || engine.canvas.width;
     this.text = text;
     this.styles = {base: {font: "20px bitfont", textAlign: "center", textBaseline: "middle", fillStyle: "white"}};
     if (styles) merge(styles, this.styles);
@@ -257,7 +257,7 @@ gui.InputField = function InputField(engine, x, y, w, h) {
 	/* State variables */
 	this.state = gui.InputField.CLEAR;
 	this.text = "";
-	this.maxChars = 15;
+	this.maxChars = 24;
 	
 	/* Text format variables */
 	this.fontsize = this.height - 6;

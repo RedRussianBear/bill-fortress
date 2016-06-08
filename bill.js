@@ -40,6 +40,7 @@ bill.Bill = function Bill(engine) {
 	this.attacks = [];
 	this.acount = 0;
 	this.power = 1;
+	this.sprint = 360;
 	
 	for(var i = 0; i < bill.ATTACKS_INIT.length; i++){
 		var cur = bill.ATTACKS_INIT[i];
@@ -54,6 +55,15 @@ bill.Bill = function Bill(engine) {
 		var dist = bill.SPEED * (delta/this.engine._update.interval);
 		var grid = this.engine.entities.world.grid;
 		this.moving = false;
+		
+		/* Sprinting */
+		if(this.sprint > 0 && this.engine.input.keyboard[input.KEY.SHIFT] == input.STATE.DOWN){
+			dist *= 2;
+			this.sprint -= 5;
+		}
+		else if(this.sprint < 360 && this.engine.input.keyboard[input.KEY.SHIFT] != input.STATE.DOWN){
+			this.sprint++;
+		}
 		
 		/* Movement */
 		if(this.engine.input.keyboard[input.KEY.W] == input.STATE.DOWN) {
