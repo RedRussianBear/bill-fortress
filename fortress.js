@@ -22,6 +22,7 @@ function Fortress(canvas) {
 		this.entities.player = this.player = new bill.Bill(this);
 		/* Create world */
 		this.entities.world = new world.World(this);
+		this.entities.map = new world.Map(this);
 		
 		/* Create debate manager */
 		this.entities.debate = new debate.Manager(this);
@@ -263,6 +264,7 @@ function Fortress(canvas) {
 		this.entities.player.transform.x = this.entities.world.playerx;
 		this.entities.player.transform.y = this.entities.world.playery;
 		this.entities.player.endorsements = 0;
+		this.entities.map.setWorld(this.entities.world);
 		this.levelnum++;
 	}
     
@@ -313,6 +315,8 @@ function Fortress(canvas) {
 				this.entities.gui.children.character.visible = true;
 			}
 		}
+		
+		if(this.state == STATE.OVERWORLD) this.entities.map.update(delta);
 		
 		/* Update input. */
 		this.input.update(delta);
@@ -374,6 +378,7 @@ function Fortress(canvas) {
 			case STATE.OVERWORLD:
 				this.entities.world.render(this.context, this.offx, this.offy, time);
 				this.entities.player.render(this.context, time);
+				this.entities.map.render(this.context, this.player.transform);
 				break;
 				
 			/* Debate */
@@ -391,6 +396,7 @@ function Fortress(canvas) {
 				this.entities.world.render(this.context, this.entities.player.transform.x - this.canvas.width/2 + this.entities.player.width/2, this.entities.player.transform.y - this.canvas.height/2 + this.entities.player.height/2, time);
 				break;
 		}
+		
 		
 		/* Render gui */
 		this.entities.gui.render(this.context);

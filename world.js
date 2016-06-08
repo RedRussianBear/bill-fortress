@@ -176,9 +176,14 @@ world.Cell = function Cell(engine, c, r, image, type) {
 	this.seen = false;
 	this.row = r;
 	this.col = c;
+	this.color = "black";
 	
 	if(this.type == world.CELL.FLOOR) {
 		this.walkable = true;
+	}
+	
+	if(this.walkable) {
+		this.color = "lightgrey";
 	}
 	
 	/* Sprite Super Constructor */
@@ -198,6 +203,7 @@ world.Loot = function Loot(engine, parent, c, r, reward, name, info, image) {
 	this.parent = parent;
 	this.info = info;
 	this.image = image || world.SPRITES.CHEST;
+
 	
 	/* Sprite Super Constructor */
 	sprite.Sprite.call(this, c*world.BOXSIZE + world.BOXSIZE/2 - world.LOOTSIZE/2, r*world.BOXSIZE + world.BOXSIZE/2 - world.LOOTSIZE/2, world.LOOTSIZE, world.LOOTSIZE);
@@ -228,16 +234,15 @@ world.map.PADDING = 8;
 
 world.map.CELLCOLORS = [];
 
-world.Map = function(engine, player) {
+world.Map = function(engine) {
 	this.engine = engine;
-	this.player = player;
 	this.visible = false;
 	
 	sprite.Sprite.call(this, this.engine.canvas.width/2 - world.map.WIDTH/2, this.engine.canvas.height/2 - world.map.HEIGHT/2, world.map.WIDTH, world.map.HEIGHT);
 	
 	
-	this.setWorld = function(world) {
-		this.grid = world.grid;
+	this.setWorld = function(aworld) {
+		this.grid = aworld.grid;
 		
 		this.segsize = Math.min(Math.floor((this.width - world.map.PADDING)/this.grid[0].length), Math.floor((this.height - world.map.PADDING)/this.grid.length));
 		this.offx = this.transform.x + this.width/2 - this.segsize * this.grid[0].length/2;
@@ -246,30 +251,33 @@ world.Map = function(engine, player) {
 	}
 	
 	this.update = function(delta) {
-		
+		if(this.engine.input.keyboard[input.KEY.M] == input.STATE.PRESSED) this.visible = (this.visible == false);
 	}
 	
-	this.render = function(context) {
-		if(!this.visibility) return;
+	this.render = function(context, ptrans) {
+		if(!this.visible) return;
 		
 		context.fillStyle = "black";
 		context.fillRect(this.transform.x, this.transform.y, this.width, this.height);
 		
-		var accx = 0;
+		var accx = -this.segsize;
 		var accy = 0;
 		
 		for(var i = 0; i < this.grid.length; i++) {
-			for(var j = 0; j < this.grid[j].length; j++) {
+			for(var j = 0; j < this.grid[i].length; j++) {
+				accx += this.segsize;
 				if(!this.grid[i][j].seen) continue;
 				
 				context.fillStyle = this.grid[i][j].color;
 				context.fillRect(this.offx + accx, this.offy + accy, this.segsize, this.segsize);
 				
-				accx += this.segsize;
 			}
 			accy += this.segsize;
-			accx = 0;
+			accx = -this.segsize;
 		}
+		
+		context.fillStyle = "green";
+		context.fillRect(this.offx + Math.floor(ptrans.x/world.BOXSIZE)*this.segsize, this.offy + Math.floor(ptrans.y/world.BOXSIZE)*this.segsize, this.segsize, this.segsize);
 	}
 
 }
