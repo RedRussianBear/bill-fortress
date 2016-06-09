@@ -208,6 +208,9 @@ function Fortress(canvas) {
 		mkchar.adopt("title", new gui.Text(this, this.canvas.width/2, 30, "Character Creation", {base: {font: "46px " + FONT}}));
 		mkchar.adopt("nmtxt", new gui.Text(this, 10, 90, "Bill Name:", {base: {font: "32px " + FONT, textAlign: "left"}}));
 		mkchar.adopt("nameinput", new gui.InputField(this, 10, 118, 400, 30));
+		mkchar.adopt("inst1", new gui.Text(this, 10, 168, "Use WASD to move, M for Map", {base: {font: "32px " + FONT, textAlign: "left"}}));
+		mkchar.adopt("inst2", new gui.Text(this, 10, 196, "Escape to view character", {base: {font: "32px " + FONT, textAlign: "left"}}));
+		mkchar.adopt("inst3", new gui.Text(this, 10, 224, "Collect all endorsements to move on to next level", {base: {font: "32px " + FONT, textAlign: "left"}}));
 		mkchar.adopt("begin", new gui.Button(
 				this, this.canvas.width/2 - 150, 500, 300, 40, "Begin", function() {
 					this.parent.state = gui.STATE.DISABLED; 
