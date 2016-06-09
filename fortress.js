@@ -18,14 +18,7 @@ function Fortress(canvas) {
 	this.setup = function() {
 		this.context.imageSmoothingEnabled= false
 	
-		/* Create the player */
-		this.entities.player = this.player = new bill.Bill(this);
-		/* Create world */
-		this.entities.world = new world.World(this);
-		this.entities.map = new world.Map(this);
-		
-		/* Create debate manager */
-		this.entities.debate = new debate.Manager(this);
+		this.slate();
 		
 		/* Load level files */
 		mklevels();
@@ -196,8 +189,8 @@ function Fortress(canvas) {
 	        this, this.canvas.width/2 - 150, 380, 300, 40, "New Game", function() {
 				this.parent.state = gui.STATE.DISABLED; 
 				this.parent.visible = false;
-				this.parent.engine.entities.gui.children.mkchar.state = gui.STATE.NORMAL;
-				this.parent.engine.entities.gui.children.mkchar.visible = true;
+				this.engine.entities.gui.children.mkchar.state = gui.STATE.NORMAL;
+				this.engine.entities.gui.children.mkchar.visible = true;
 		}));
 		menu.state = gui.STATE.NORMAL;
 		menu.visible = true;
@@ -212,14 +205,14 @@ function Fortress(canvas) {
 				this, this.canvas.width/2 - 150, 500, 300, 40, "Begin", function() {
 					this.parent.state = gui.STATE.DISABLED; 
 					this.parent.visible = false;
-					this.parent.engine.entities.gui.children.hud.state = gui.STATE.NORMAL;
-					this.parent.engine.entities.gui.children.hud.visible = true;
-					this.parent.engine.entities.gui.children.hud.children.nmtxt.text = this.parent.children.nameinput.text;
-					this.parent.engine.entities.player.name = this.parent.children.nameinput.text;
-					this.parent.engine.entities.gui.children.debate.children.bill.children.name.text = this.parent.children.nameinput.text;
-					this.parent.engine.entities.gui.children.character.children.name.text = this.parent.children.nameinput.text;
-					this.parent.engine.nextLevel();
-					this.parent.engine.state = STATE.OVERWORLD;
+					this.engine.entities.gui.children.hud.state = gui.STATE.NORMAL;
+					this.engine.entities.gui.children.hud.visible = true;
+					this.engine.entities.gui.children.hud.children.nmtxt.text = this.parent.children.nameinput.text;
+					this.engine.entities.player.name = this.parent.children.nameinput.text;
+					this.engine.entities.gui.children.debate.children.bill.children.name.text = this.parent.children.nameinput.text;
+					this.engine.entities.gui.children.character.children.name.text = this.parent.children.nameinput.text;
+					this.engine.nextLevel();
+					this.engine.state = STATE.OVERWORLD;
 		}));
 
 		/* HUD */
@@ -255,8 +248,32 @@ function Fortress(canvas) {
 		cha.adopt("amend", new gui.Text(this, 310, 10, "Amendments", {base: {font: "50px " + FONT, textAlign: "left", fillStyle: "black", textBaseline: "top"}}, 280));
 		cha.adopt("picture", new gui.Image(this, 20, 70, 256, 384));
 		
+		/* Defeat Menu */
+		var def = this.entities.gui.adopt("defeat", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {}));
+		def.adopt("text", new gui.Text(this, this.canvas.width/2, this.canvas.height/2 - 40, "You Lose", {base: {font: "52px " + FONT, textAlign: "center", fillStyle: "white"}}));
+		def.adopt("restart", new gui.Button(this, this.canvas.width/2 - 100, this.canvas.height/2 + 20, 200, 60, "Restart", function(){
+			this.engine.state = STATE.START;
+			this.engine.levelnum = 0;
+			this.parent.state = gui.STATE.DISABLED;
+			this.parent.visible = false;
+			this.engine.entities.gui.children.mkchar.state = gui.STATE.NORMAL;
+			this.engine.entities.gui.children.mkchar.visible = true;
+		}));
+		
 		this.levelnum = 0;
     }
+	
+	/* Clear the slate of the game */
+	this.slate = function() {
+		/* Create the player */
+		this.entities.player = this.player = new bill.Bill(this);
+		/* Create world */
+		this.entities.world = new world.World(this);
+		this.entities.map = new world.Map(this);
+		
+		/* Create debate manager */
+		this.entities.debate = new debate.Manager(this);
+	}
 	
 	this.nextLevel = function() {
 		this.entities.world.load(levels[levels.LIST[this.levelnum]]);
@@ -385,12 +402,6 @@ function Fortress(canvas) {
 			/* Debate */
 			case STATE.DEBATE:
 				this.entities.debate.render(this.context);
-				break;
-				
-			case STATE.DEFEAT:
-				this.context.textAlign = "center";
-				this.context.fillStyle = "white";
-				this.context.fillText("YOU LOSE", this.canvas.width/2, this.canvas.height/2);
 				break;
 				
 			case STATE.CHARACTER:

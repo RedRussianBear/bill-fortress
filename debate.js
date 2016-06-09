@@ -99,6 +99,8 @@ debate.Manager = function Manager(engine) {
 		else if(this.engine.player.health <= 0) {
 			this.engine.entities.gui.children.debate.state = gui.STATE.DISABLED;
 			this.engine.entities.gui.children.debate.visible = false;
+			this.engine.entities.gui.children.defeat.state = gui.STATE.NORMAL;
+			this.engine.entities.gui.children.defeat.visible = true;
 			this.engine.state = STATE.DEFEAT;
 		}
 	}
