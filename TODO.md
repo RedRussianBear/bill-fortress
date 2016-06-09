@@ -1,5 +1,4 @@
 # Things to do:
-- Better coliision boxes for loot
 - Add instructions
 - Moar music
 - Better videos

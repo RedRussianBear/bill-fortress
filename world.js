@@ -212,10 +212,10 @@ world.Loot = function Loot(engine, parent, c, r, reward, name, info, image) {
 	sprite.Sprite.call(this, c*world.BOXSIZE + world.BOXSIZE/2 - world.LOOTSIZE/2, r*world.BOXSIZE + world.BOXSIZE/2 - world.LOOTSIZE/2, world.LOOTSIZE, world.LOOTSIZE);
 	
 	this.update = function(delta, i) {
-		if(geometry.inside(this.engine.player.transform.x, this.engine.player.transform.y, this.transform.x, this.transform.y, this.width, this.height)
-		|| geometry.inside(this.engine.player.transform.x + this.engine.player.width, this.engine.player.transform.y, this.transform.x, this.transform.y, this.width, this.height)
-		|| geometry.inside(this.engine.player.transform.x, this.engine.player.transform.y + this.engine.player.height, this.transform.x, this.transform.y, this.width, this.height)
-		|| geometry.inside(this.engine.player.transform.x + this.engine.player.width, this.engine.player.transform.y + this.engine.player.height, this.transform.x, this.transform.y, this.width, this.height)) {
+		if(((this.transform.x + this.width > this.engine.player.transform.x && this.transform.x + this.width < this.engine.player.transform.x + this.engine.player.width) 
+		|| (this.transform.x > this.engine.player.transform.x && this.transform.x < this.engine.player.transform.x + this.engine.player.width))
+		&& ((this.transform.y + this.height > this.engine.player.transform.y && this.transform.y + this.height < this.engine.player.transform.y + this.engine.player.height) 
+		|| (this.transform.y > this.engine.player.transform.y && this.transform.y < this.engine.player.transform.y + this.engine.player.height))) {
 			this.engine.player.amend(this.name, this.info, this.reward);
 			this.parent.loot.splice(i, 1);
 		}

@@ -322,14 +322,13 @@ gui.ToolTip = function ToolTip(engine, text, styles) {
 	this.engine = engine;
 	this.text = text;
 	
-
 	this.styles = {base: {fillStyle: "black", strokeStyle: "grey"}, text: {fillStyle: "white", font: "28px bitfont"}};
 	
     if (styles) merge(styles, this.styles);
 
 	for (var key in this.styles.text) this.engine.context[key] = this.styles.text[key];
 	
-	this.width = this.engine.context.measureText(this.text).width + 4;
+	this.width = Math.min(this.engine.context.measureText(this.text).width + 4, this.engine.canvas.width);
 	this.height = 32;
 
 	
