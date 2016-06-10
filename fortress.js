@@ -206,6 +206,9 @@ function Fortress(canvas) {
 		mkchar.adopt("inst3", new gui.Text(this, 10, 224, "Collect all endorsements to move on to next level", {base: {font: "32px " + FONT, textAlign: "left"}}));
 		mkchar.adopt("begin", new gui.Button(
 				this, this.canvas.width/2 - 150, 500, 300, 40, "Begin", function() {
+					if(this.parent.children.nameinput.text.length == 0) {
+						this.parent.children.nameinput.text = "An Unnamed Bill"
+					}
 					this.parent.state = gui.STATE.DISABLED; 
 					this.parent.visible = false;
 					this.engine.entities.gui.children.hud.state = gui.STATE.NORMAL;
