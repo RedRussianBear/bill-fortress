@@ -1,6 +1,7 @@
 # Things to do:
 - Better coliision boxes for loot
 - Respawn page
+- Add instructions
 - Moar music
 - Better videos
 - Implement president level
