@@ -207,7 +207,7 @@ function Fortress(canvas) {
 		mkchar.adopt("begin", new gui.Button(
 				this, this.canvas.width/2 - 150, 500, 300, 40, "Begin", function() {
 					if(this.parent.children.nameinput.text.length == 0) {
-						this.parent.children.nameinput.text = "An Unnamed Bill"
+						this.parent.children.nameinput.text = "An Unnamed Bill";
 					}
 					this.parent.state = gui.STATE.DISABLED; 
 					this.parent.visible = false;
