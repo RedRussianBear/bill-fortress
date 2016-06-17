@@ -181,7 +181,7 @@ world.Cell = function Cell(engine, c, r, image, type) {
 	this.col = c;
 	this.color = "black";
 	
-	if(this.type == world.CELL.FLOOR || this.type == world.CELL.SECRET) {
+	if(this.type == world.CELL.FLOOR || this.type == world.CELL.SECRET || this.type == world.CELL.EXIT) {
 		this.walkable = true;
 	}
 	
