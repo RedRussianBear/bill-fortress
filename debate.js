@@ -120,7 +120,7 @@ debate.Manager = function Manager(engine) {
 	this.render = function(context) {
 		context.fillStyle = "white";
 		context.fillRect(0, 0, this.engine.canvas.width, this.engine.canvas.height);
-		context.drawImage(this.engine.entities.player.images[bill.DIRECTION.RIGHT][0], 80, 175, 96, 144);
+		context.drawImage(bill.SPRITES[bill.DIRECTION.RIGHT][0], 80, 175, 96, 144);
 		context.drawImage(mobs.SPRITES[this.enemy.party][mobs.DIRECTION.LEFT][0], 624, 175, 96, 144);
 	}
 }

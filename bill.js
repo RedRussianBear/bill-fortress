@@ -13,6 +13,8 @@ bill.ATTACKS_EXTRA = {
 
 bill.DIRECTION = {LEFT: 0, UP: 1, RIGHT: 2, DOWN: 3};
 
+bill.SPRITES = [];
+
 bill.WIDTH = 64;
 bill.HEIGHT = 96;
 
@@ -29,7 +31,6 @@ bill.Bill = function Bill(engine) {
 	/* State and engine*/
 	this.state = bill.DIRECTION.RIGHT;
 	this.engine = engine;
-	this.images = [];
 	this.moving = false;
 	
 	/* Stats */
@@ -48,7 +49,7 @@ bill.Bill = function Bill(engine) {
 	}
 	
 	this.render = function(context, time) {
-		context.drawImage(this.images[this.state][Math.floor(time/100)%(this.moving ? this.images[this.state].length : 1)], this.engine.canvas.width/2 - this.width/2, this.engine.canvas.height/2 - this.height/2, this.width, this.height);
+		context.drawImage(bill.SPRITES[this.state][Math.floor(time/100)%(this.moving ? bill.SPRITES[this.state].length : 1)], this.engine.canvas.width/2 - this.width/2, this.engine.canvas.height/2 - this.height/2, this.width, this.height);
 	}
 	
 	this.update = function(delta) {

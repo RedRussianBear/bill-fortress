@@ -95,22 +95,22 @@ function Fortress(canvas) {
 		this.resources.load(function() {
 			/* Player sprite */
 			that.entities.gui.children.character.children.picture.image = that.resources.$("be0");
-			that.entities.player.images[bill.DIRECTION.LEFT] = new Array();
-			that.entities.player.images[bill.DIRECTION.LEFT].push(that.resources.$("bw0"));
-			that.entities.player.images[bill.DIRECTION.LEFT].push(that.resources.$("bw1"));
-			that.entities.player.images[bill.DIRECTION.UP] = new Array();
-			that.entities.player.images[bill.DIRECTION.UP].push(that.resources.$("bn0"));
-			that.entities.player.images[bill.DIRECTION.UP].push(that.resources.$("bn1"));
-			that.entities.player.images[bill.DIRECTION.UP].push(that.resources.$("bn2"));
-			that.entities.player.images[bill.DIRECTION.UP].push(that.resources.$("bn3"))
-			that.entities.player.images[bill.DIRECTION.RIGHT] = new Array();
-			that.entities.player.images[bill.DIRECTION.RIGHT].push(that.resources.$("be0"));
-			that.entities.player.images[bill.DIRECTION.RIGHT].push(that.resources.$("be1"));
-			that.entities.player.images[bill.DIRECTION.DOWN] = new Array();
-			that.entities.player.images[bill.DIRECTION.DOWN].push(that.resources.$("bs0"));
-			that.entities.player.images[bill.DIRECTION.DOWN].push(that.resources.$("bs1"));
-			that.entities.player.images[bill.DIRECTION.DOWN].push(that.resources.$("bs2"));
-			that.entities.player.images[bill.DIRECTION.DOWN].push(that.resources.$("bs3"));
+			bill.SPRITES[bill.DIRECTION.LEFT] = new Array();
+			bill.SPRITES[bill.DIRECTION.LEFT].push(that.resources.$("bw0"));
+			bill.SPRITES[bill.DIRECTION.LEFT].push(that.resources.$("bw1"));
+			bill.SPRITES[bill.DIRECTION.UP] = new Array();
+			bill.SPRITES[bill.DIRECTION.UP].push(that.resources.$("bn0"));
+			bill.SPRITES[bill.DIRECTION.UP].push(that.resources.$("bn1"));
+			bill.SPRITES[bill.DIRECTION.UP].push(that.resources.$("bn2"));
+			bill.SPRITES[bill.DIRECTION.UP].push(that.resources.$("bn3"))
+			bill.SPRITES[bill.DIRECTION.RIGHT] = new Array();
+			bill.SPRITES[bill.DIRECTION.RIGHT].push(that.resources.$("be0"));
+			bill.SPRITES[bill.DIRECTION.RIGHT].push(that.resources.$("be1"));
+			bill.SPRITES[bill.DIRECTION.DOWN] = new Array();
+			bill.SPRITES[bill.DIRECTION.DOWN].push(that.resources.$("bs0"));
+			bill.SPRITES[bill.DIRECTION.DOWN].push(that.resources.$("bs1"));
+			bill.SPRITES[bill.DIRECTION.DOWN].push(that.resources.$("bs2"));
+			bill.SPRITES[bill.DIRECTION.DOWN].push(that.resources.$("bs3"));
 		
 			/* Democratic congressperson */
 			mobs.SPRITES[mobs.PARTY.DEMOCRAT] = new Array();
@@ -264,6 +264,7 @@ function Fortress(canvas) {
 			this.parent.visible = false;
 			this.engine.entities.gui.children.mkchar.state = gui.STATE.NORMAL;
 			this.engine.entities.gui.children.mkchar.visible = true;
+			this.engine.slate();
 		}));
 		
 		this.levelnum = 0;

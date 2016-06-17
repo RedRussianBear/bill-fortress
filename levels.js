@@ -842,7 +842,7 @@ levels.HOUSE.loot = [
 		},
 		{
 			R: 32, C: 118,
-			REWARD: function(player) {player.attacks.push(bill.ATTACKS_EXTRA["Call a Lobbyist"]);},
+			REWARD: function(player) {var b = bill.ATTACKS_EXTRA["LOBBY"]; player.attacks.push(new debate.Attack(b.NAME, b.EXEC, b.COOLDOWN, b.POWER, b.INFO))},
 			NAME: "Call a Lobbyist",
 			INFO: "You gain the attack \"Call a Lobbyist\" that will help you curry the favor of special interest groups"
 		}
@@ -1236,7 +1236,7 @@ levels.SENATE.atmosphere = [];
 levels.SENATE.loot = [
 		{
 			R: 33, C: 48,
-			REWARD: function(player) {player.attacks.push(bill.ATTACKS_EXTRA["Quote Lincoln"]);},
+			REWARD: function(player) {var b = bill.ATTACKS_EXTRA["QUOTE"]; player.attacks.push(new debate.Attack(b.NAME, b.EXEC, b.COOLDOWN, b.POWER, b.INFO))},
 			NAME: "Quote Lincoln",
 			INFO: "You gain the attack \"Quote Lincoln\", which can bring you back from the brink of death"
 		},
