@@ -2,7 +2,7 @@ var mobs = {};
 
 mobs.DIRECTION = {LEFT: 0, UP: 1, RIGHT: 2, DOWN: 3};
 mobs.PARTY = {DEMOCRAT: 0, REPUBLICAN: 1, SANDERS: 2};
-mobs.RANK = {CONGRESPERSON: 0, SENATOR: 1, SPEAKER: 2, COMCHAIR: 3};
+mobs.RANK = {CONGRESPERSON: 0, SENATOR: 1, SPEAKER: 2, COMCHAIR: 3, PRESIDENT: 4};
 
 mobs.WIDTH = 64;
 mobs.HEIGHT = 96;
@@ -43,12 +43,19 @@ mobs.ATTACKS[mobs.RANK.COMCHAIR] = [
 	{NAME: "Attach Controversial Rider", EXEC: function(enemy, caster){enemy.health -= 50; caster.health += 20;}, COOLDOWN: 20, POWER: 10}
 ];
 
+mobs.ATTACKS[mobs.RANK.PRESIDENT] = [
+	{NAME: "Strawman", EXEC: function(enemy, caster){enemy.health -= 5;}, COOLDOWN: 1, POWER: 1},
+	{NAME: "False Rebuttal", EXEC: function(enemy, caster){enemy.health -= 10; caster.health += 20;}, COOLDOWN: 4, POWER: 5},
+	{NAME: "Ad Hominem", EXEC: function(enemy, caster){enemy.health -= 20;}, COOLDOWN: 5, POWER: 4}
+];
+
 mobs.HEALTH = [];
 
 mobs.HEALTH[mobs.RANK.CONGRESSPERSON] = 100;
 mobs.HEALTH[mobs.RANK.SENATOR] = 300;
 mobs.HEALTH[mobs.RANK.SPEAKER] = 350;
 mobs.HEALTH[mobs.RANK.COMCHAIR] = 200;
+mobs.HEALTH[mobs.RANK.PRESIDENT] = 800;
 
 mobs.Politician = function Politician (engine, x, y, name, party, rank, ondefeat) {
 	

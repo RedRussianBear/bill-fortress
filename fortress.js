@@ -90,6 +90,7 @@ function Fortress(canvas) {
 		this.resources.queue("wall", resource.IMAGE, "tiles/notwalkable.png");
 		this.resources.queue("exit", resource.IMAGE, "tiles/exit.png");
 		this.resources.queue("chest", resource.IMAGE, "assets/chest.png");
+		this.resources.queue("victory", resource.IMAGE, "logo.png");
 
 		var that = this;
 		this.resources.load(function() {
@@ -174,6 +175,9 @@ function Fortress(canvas) {
 			world.SPRITES[world.CELL.EXIT] = that.resources.$("exit");
 			world.SPRITES[world.CELL.SECRET] = that.resources.$("wall");
 			world.SPRITES.CHEST = that.resources.$("chest");
+			
+			that.vsplash = that.resources.$("victory");
+			
 			console.log("Loaded reources");
 		});
 	
@@ -400,6 +404,7 @@ function Fortress(canvas) {
 
 			/* Overworld */
 			case STATE.PAUSE:
+			case STATE.CHARACTER:
 			case STATE.OVERWORLD:
 				this.entities.world.render(this.context, this.offx, this.offy, time);
 				this.entities.player.render(this.context, time);
@@ -410,9 +415,9 @@ function Fortress(canvas) {
 			case STATE.DEBATE:
 				this.entities.debate.render(this.context);
 				break;
-				
-			case STATE.CHARACTER:
-				this.entities.world.render(this.context, this.entities.player.transform.x - this.canvas.width/2 + this.entities.player.width/2, this.entities.player.transform.y - this.canvas.height/2 + this.entities.player.height/2, time);
+			
+			case STATE.VICTORY:
+				this.context.drawImage(this.vsplash, 0, 0, this.canvas.width, this.canvas.height);
 				break;
 		}
 		

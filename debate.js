@@ -90,9 +90,9 @@ debate.Manager = function Manager(engine) {
 		this.ebar.val = this.enemy.health;
 		
 		if(this.enemy.health <= 0) {
+			this.engine.findebate();
 			this.enemy.ondefeat(this.engine.player);
 			this.engine.entities.world.mobs.children.splice(this.engine.entities.world.mobs.children.indexOf(this.enemy), 1);
-			this.engine.findebate();
             this.engine.resources.$("death").volume = 0.2;
             this.engine.resources.$("death").play();
 		}
