@@ -65,6 +65,8 @@ mobs.Politician = function Politician (engine, x, y, name, party, rank, ondefeat
 	this.health = this.maxhealth;
 	this.ondefeat = ondefeat || function(player) {player.endorsements++; player.funds += 10;};
 	
+	this.coff = new sprite.Transform(mobs.WIDTH/2, mobs.HEIGHT/2);
+	
 	var asource = mobs.ATTACKS[this.rank];
 	for(var i = 0; i < asource.length; i++) {
 		this.attacks.push(new debate.Attack(asource[i].NAME, asource[i].EXEC, asource[i].COOLDOWN, asource[i].POWER));
@@ -83,39 +85,47 @@ mobs.Politician = function Politician (engine, x, y, name, party, rank, ondefeat
 		var grid = this.parent.level.grid;
 		this.moving = false;
 		
+		var diffx = Math.abs(this.center.x - player.center.x);
+		var diffy = Math.abs(this.center.y - player.center.y);
+		
 		/* Move towards player, if in range */
 		if(geometry.Vector.distance(this.transform, player.transform) < world.BOXSIZE*3){
-			if(player.transform.y + player.height < this.transform.y) {
+			if(player.center.y < this.center.y) {
 				this.moving = true;
-				this.direction = mobs.DIRECTION.UP;
+				if(diffy > diffx) this.direction = mobs.DIRECTION.UP;
 				if((grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y - dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)].walkable))
 					this.transform.y -= dist;
 			}
-			if(player.transform.y > this.transform.y + this.height) {
+			if(player.center.y > this.center.y) {
 				this.moving = true;
-				this.direction = mobs.DIRECTION.DOWN;
+				if(diffy > diffx) this.direction = mobs.DIRECTION.DOWN;
 				if((grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor(this.transform.x/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y + this.height + dist)/world.BOXSIZE)][Math.floor((this.transform.x + this.width)/world.BOXSIZE)].walkable))
 					this.transform.y += dist;
 			}
-			if(player.transform.x + player.width < this.transform.x) {
-				this.direction = mobs.DIRECTION.LEFT;
+			if(player.center.x < this.center.x) {
 				this.moving = true;
+				if(diffx > diffy) this.direction = mobs.DIRECTION.LEFT;
 				if((grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x - dist)/world.BOXSIZE)].walkable))
 					this.transform.x -= dist;
 			}
-			if(player.transform.x > this.transform.x + this.width) {
+			if(player.center.x > this.center.x) {
 				this.moving = true;
-				this.direction = mobs.DIRECTION.RIGHT;
+				if(diffx > diffy) this.direction = mobs.DIRECTION.RIGHT;
 				if((grid[Math.floor((this.transform.y)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)].walkable && grid[Math.floor((this.transform.y + this.height)/world.BOXSIZE)][Math.floor((this.transform.x + this.width + dist)/world.BOXSIZE)].walkable))
 					this.transform.x += dist;
 			}
 		}
 		
-		if(geometry.Vector.distance(this.transform, player.transform) < world.BOXSIZE) {
+		if(geometry.Vector.distance(this.center, player.center) < world.BOXSIZE) {
 			this.engine.initdebate(this);
 		}
 		
 	}
+}
+
+mobs.Politician.prototype = {
+	/* Get center */
+	get center() { return this.transform.with(this.coff); }
 }
 
 mobs.Manager = function Manager(engine, level) {

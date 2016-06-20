@@ -43,6 +43,8 @@ bill.Bill = function Bill(engine) {
 	this.power = 1;
 	this.sprint = 360;
 	
+	this.coff = new sprite.Transform(bill.WIDTH/2, bill.HEIGHT/2);
+	
 	for(var i = 0; i < bill.ATTACKS_INIT.length; i++){
 		var cur = bill.ATTACKS_INIT[i];
 		this.attacks.push(new debate.Attack(cur.NAME, cur.EXEC, cur.COOLDOWN, cur.POWER, cur.INFO));
@@ -109,4 +111,9 @@ bill.Bill = function Bill(engine) {
 		this.acount++;
 	}
 
+}
+
+bill.Bill.prototype = {
+	/* Get center */
+	get center() { return this.transform.with(this.coff); }
 }
