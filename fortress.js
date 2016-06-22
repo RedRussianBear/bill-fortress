@@ -23,7 +23,7 @@ function Fortress(canvas) {
 		/* Load level files */
 		mklevels();
 		
-		/* Load resources */
+		/* Load Bill Sprites */
 		this.resources.queue("bw0", resource.IMAGE, "sprites/bill/West/frame1.png");
 		this.resources.queue("bw1", resource.IMAGE, "sprites/bill/West/frame2.png");
 		this.resources.queue("be0", resource.IMAGE, "sprites/bill/East/frame1.png");
@@ -37,47 +37,55 @@ function Fortress(canvas) {
 		this.resources.queue("bs2", resource.IMAGE, "sprites/bill/South/frame3.png");
 		this.resources.queue("bs3", resource.IMAGE, "sprites/bill/South/frame4.png");
 		
-		/* Democratic congressperson */
-		this.resources.queue("de0", resource.IMAGE, "sprites/congressdem/East/frame1.png");
-		this.resources.queue("de1", resource.IMAGE, "sprites/congressdem/East/frame2.png");
-		this.resources.queue("dw0", resource.IMAGE, "sprites/congressdem/West/frame1.png");
-		this.resources.queue("dw1", resource.IMAGE, "sprites/congressdem/West/frame2.png");
-		this.resources.queue("dn0", resource.IMAGE, "sprites/congressdem/North/frame1.png");
-		this.resources.queue("dn1", resource.IMAGE, "sprites/congressdem/North/frame2.png");
-		this.resources.queue("dn2", resource.IMAGE, "sprites/congressdem/North/frame3.png");
-		this.resources.queue("dn3", resource.IMAGE, "sprites/congressdem/North/frame4.png");
-		this.resources.queue("ds0", resource.IMAGE, "sprites/congressdem/South/frame1.png");
-		this.resources.queue("ds1", resource.IMAGE, "sprites/congressdem/South/frame2.png");
-		this.resources.queue("ds2", resource.IMAGE, "sprites/congressdem/South/frame3.png");
-		this.resources.queue("ds3", resource.IMAGE, "sprites/congressdem/South/frame4.png");
-
-		/* Republican congressperson */
-		this.resources.queue("re0", resource.IMAGE, "sprites/congressrep/East/frame1.png");
-		this.resources.queue("re1", resource.IMAGE, "sprites/congressrep/East/frame2.png");
-		this.resources.queue("rw0", resource.IMAGE, "sprites/congressrep/West/frame1.png");
-		this.resources.queue("rw1", resource.IMAGE, "sprites/congressrep/West/frame2.png");
-		this.resources.queue("rn0", resource.IMAGE, "sprites/congressrep/North/frame1.png");
-		this.resources.queue("rn1", resource.IMAGE, "sprites/congressrep/North/frame2.png");
-		this.resources.queue("rn2", resource.IMAGE, "sprites/congressrep/North/frame3.png");
-		this.resources.queue("rn3", resource.IMAGE, "sprites/congressrep/North/frame4.png");
-		this.resources.queue("rs0", resource.IMAGE, "sprites/congressrep/South/frame1.png");
-		this.resources.queue("rs1", resource.IMAGE, "sprites/congressrep/South/frame2.png");
-		this.resources.queue("rs2", resource.IMAGE, "sprites/congressrep/South/frame3.png");
-		this.resources.queue("rs3", resource.IMAGE, "sprites/congressrep/South/frame4.png");
-
-		/* Sanders congressperson */
-		this.resources.queue("se0", resource.IMAGE, "sprites/congresssan/East/frame1.png");
-		this.resources.queue("se1", resource.IMAGE, "sprites/congresssan/East/frame2.png");
-		this.resources.queue("sw0", resource.IMAGE, "sprites/congresssan/West/frame1.png");
-		this.resources.queue("sw1", resource.IMAGE, "sprites/congresssan/West/frame2.png");
-		this.resources.queue("sn0", resource.IMAGE, "sprites/congresssan/North/frame1.png");
-		this.resources.queue("sn1", resource.IMAGE, "sprites/congresssan/North/frame2.png");
-		this.resources.queue("sn2", resource.IMAGE, "sprites/congresssan/North/frame3.png");
-		this.resources.queue("sn3", resource.IMAGE, "sprites/congresssan/North/frame4.png");
-		this.resources.queue("ss0", resource.IMAGE, "sprites/congresssan/South/frame1.png");
-		this.resources.queue("ss1", resource.IMAGE, "sprites/congresssan/South/frame2.png");
-		this.resources.queue("ss2", resource.IMAGE, "sprites/congresssan/South/frame3.png");
-		this.resources.queue("ss3", resource.IMAGE, "sprites/congresssan/South/frame4.png");
+		/* Load Mob Sprites */
+		this.resources.queue("dmpe0", resource.IMAGE, "sprites/mobs/dem/male/pres/framee0.png");
+		this.resources.queue("dmpe1", resource.IMAGE, "sprites/mobs/dem/male/pres/framee1.png");
+		this.resources.queue("dmpn0", resource.IMAGE, "sprites/mobs/dem/male/pres/framen0.png");
+		this.resources.queue("dmpn1", resource.IMAGE, "sprites/mobs/dem/male/pres/framen1.png");
+		this.resources.queue("dmpn2", resource.IMAGE, "sprites/mobs/dem/male/pres/framen2.png");
+		this.resources.queue("dmpn3", resource.IMAGE, "sprites/mobs/dem/male/pres/framen3.png");
+		this.resources.queue("dmps0", resource.IMAGE, "sprites/mobs/dem/male/pres/frames0.png");
+		this.resources.queue("dmps1", resource.IMAGE, "sprites/mobs/dem/male/pres/frames1.png");
+		this.resources.queue("dmps2", resource.IMAGE, "sprites/mobs/dem/male/pres/frames2.png");
+		this.resources.queue("dmps3", resource.IMAGE, "sprites/mobs/dem/male/pres/frames3.png");
+		this.resources.queue("dmpw0", resource.IMAGE, "sprites/mobs/dem/male/pres/framew0.png");
+		this.resources.queue("dmpw1", resource.IMAGE, "sprites/mobs/dem/male/pres/framew1.png");
+		this.resources.queue("dmse0", resource.IMAGE, "sprites/mobs/dem/male/sanders/framee0.png");
+		this.resources.queue("dmse1", resource.IMAGE, "sprites/mobs/dem/male/sanders/framee1.png");
+		this.resources.queue("dmsn0", resource.IMAGE, "sprites/mobs/dem/male/sanders/framen0.png");
+		this.resources.queue("dmsn1", resource.IMAGE, "sprites/mobs/dem/male/sanders/framen1.png");
+		this.resources.queue("dmsn2", resource.IMAGE, "sprites/mobs/dem/male/sanders/framen2.png");
+		this.resources.queue("dmsn3", resource.IMAGE, "sprites/mobs/dem/male/sanders/framen3.png");
+		this.resources.queue("dmss0", resource.IMAGE, "sprites/mobs/dem/male/sanders/frames0.png");
+		this.resources.queue("dmss1", resource.IMAGE, "sprites/mobs/dem/male/sanders/frames1.png");
+		this.resources.queue("dmss2", resource.IMAGE, "sprites/mobs/dem/male/sanders/frames2.png");
+		this.resources.queue("dmss3", resource.IMAGE, "sprites/mobs/dem/male/sanders/frames3.png");
+		this.resources.queue("dmsw0", resource.IMAGE, "sprites/mobs/dem/male/sanders/framew0.png");
+		this.resources.queue("dmsw1", resource.IMAGE, "sprites/mobs/dem/male/sanders/framew1.png");
+		this.resources.queue("dmwe0", resource.IMAGE, "sprites/mobs/dem/male/white_congress/framee0.png");
+		this.resources.queue("dmwe1", resource.IMAGE, "sprites/mobs/dem/male/white_congress/framee1.png");
+		this.resources.queue("dmwn0", resource.IMAGE, "sprites/mobs/dem/male/white_congress/framen0.png");
+		this.resources.queue("dmwn1", resource.IMAGE, "sprites/mobs/dem/male/white_congress/framen1.png");
+		this.resources.queue("dmwn2", resource.IMAGE, "sprites/mobs/dem/male/white_congress/framen2.png");
+		this.resources.queue("dmwn3", resource.IMAGE, "sprites/mobs/dem/male/white_congress/framen3.png");
+		this.resources.queue("dmws0", resource.IMAGE, "sprites/mobs/dem/male/white_congress/frames0.png");
+		this.resources.queue("dmws1", resource.IMAGE, "sprites/mobs/dem/male/white_congress/frames1.png");
+		this.resources.queue("dmws2", resource.IMAGE, "sprites/mobs/dem/male/white_congress/frames2.png");
+		this.resources.queue("dmws3", resource.IMAGE, "sprites/mobs/dem/male/white_congress/frames3.png");
+		this.resources.queue("dmww0", resource.IMAGE, "sprites/mobs/dem/male/white_congress/framew0.png");
+		this.resources.queue("dmww1", resource.IMAGE, "sprites/mobs/dem/male/white_congress/framew1.png");
+		this.resources.queue("rmwe0", resource.IMAGE, "sprites/mobs/rep/male/white_congress/framee0.png");
+		this.resources.queue("rmwe1", resource.IMAGE, "sprites/mobs/rep/male/white_congress/framee1.png");
+		this.resources.queue("rmwn0", resource.IMAGE, "sprites/mobs/rep/male/white_congress/framen0.png");
+		this.resources.queue("rmwn1", resource.IMAGE, "sprites/mobs/rep/male/white_congress/framen1.png");
+		this.resources.queue("rmwn2", resource.IMAGE, "sprites/mobs/rep/male/white_congress/framen2.png");
+		this.resources.queue("rmwn3", resource.IMAGE, "sprites/mobs/rep/male/white_congress/framen3.png");
+		this.resources.queue("rmws0", resource.IMAGE, "sprites/mobs/rep/male/white_congress/frames0.png");
+		this.resources.queue("rmws1", resource.IMAGE, "sprites/mobs/rep/male/white_congress/frames1.png");
+		this.resources.queue("rmws2", resource.IMAGE, "sprites/mobs/rep/male/white_congress/frames2.png");
+		this.resources.queue("rmws3", resource.IMAGE, "sprites/mobs/rep/male/white_congress/frames3.png");
+		this.resources.queue("rmww0", resource.IMAGE, "sprites/mobs/rep/male/white_congress/framew0.png");
+		this.resources.queue("rmww1", resource.IMAGE, "sprites/mobs/rep/male/white_congress/framew1.png");
         
         /* Sound effects. */
         this.resources.queue("ambient01", resource.AUDIO, "sounds/america.wav");
@@ -89,7 +97,7 @@ function Fortress(canvas) {
 		this.resources.queue("walkable", resource.IMAGE, "tiles/walkable.png");
 		this.resources.queue("wall", resource.IMAGE, "tiles/notwalkable.png");
 		this.resources.queue("exit", resource.IMAGE, "tiles/exit.png");
-		this.resources.queue("chest", resource.IMAGE, "assets/chest.png");
+		this.resources.queue("chest", resource.IMAGE, "sprites/objects/chest.png");
 		this.resources.queue("victory", resource.IMAGE, "logo.png");
 
 		var that = this;
@@ -112,63 +120,76 @@ function Fortress(canvas) {
 			bill.SPRITES[bill.DIRECTION.DOWN].push(that.resources.$("bs1"));
 			bill.SPRITES[bill.DIRECTION.DOWN].push(that.resources.$("bs2"));
 			bill.SPRITES[bill.DIRECTION.DOWN].push(that.resources.$("bs3"));
-		
-			/* Democratic congressperson */
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT] = new Array();
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT] = new Array();
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT].push(that.resources.$("dw0"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.LEFT].push(that.resources.$("dw1"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT] = new Array();
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT].push(that.resources.$("de0"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.RIGHT].push(that.resources.$("de1"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP] = new Array();
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP].push(that.resources.$("dn0"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP].push(that.resources.$("dn1"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP].push(that.resources.$("dn2"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.UP].push(that.resources.$("dn3"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.DOWN] = new Array();
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.DOWN].push(that.resources.$("ds0"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.DOWN].push(that.resources.$("ds1"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.DOWN].push(that.resources.$("ds2"));
-			mobs.SPRITES[mobs.PARTY.DEMOCRAT][mobs.DIRECTION.DOWN].push(that.resources.$("ds3"));
-						
-			/* Republican congressperson */
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN] = new Array();
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT] = new Array();
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT].push(that.resources.$("rw0"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.LEFT].push(that.resources.$("rw1"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT] = new Array();
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT].push(that.resources.$("re0"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.RIGHT].push(that.resources.$("re1"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP] = new Array();
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP].push(that.resources.$("rn0"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP].push(that.resources.$("rn1"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP].push(that.resources.$("rn2"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.UP].push(that.resources.$("rn3"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN] = new Array();
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs0"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs1"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs2"));
-			mobs.SPRITES[mobs.PARTY.REPUBLICAN][mobs.DIRECTION.DOWN].push(that.resources.$("rs3"));
 			
-			/* Sanders congressperson */
-			mobs.SPRITES[mobs.PARTY.SANDERS] = new Array();
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT] = new Array();
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT].push(that.resources.$("sw0"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.LEFT].push(that.resources.$("sw1"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT] = new Array();
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT].push(that.resources.$("se0"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.RIGHT].push(that.resources.$("se1"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP] = new Array();
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP].push(that.resources.$("sn0"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP].push(that.resources.$("sn1"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP].push(that.resources.$("sn2"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.UP].push(that.resources.$("sn3"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN] = new Array();
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss0"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss1"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss2"));
-			mobs.SPRITES[mobs.PARTY.SANDERS][mobs.DIRECTION.DOWN].push(that.resources.$("ss3"));
+			/* Assign Sprites */
+			mobs.SPRITES["dmp"] = new Array();
+			mobs.SPRITES["dmp"][mobs.DIRECTION.UP] = new Array();
+			mobs.SPRITES["dmp"][mobs.DIRECTION.DOWN] = new Array();
+			mobs.SPRITES["dmp"][mobs.DIRECTION.LEFT] = new Array();
+			mobs.SPRITES["dmp"][mobs.DIRECTION.RIGHT] = new Array();
+			mobs.SPRITES["dmp"][mobs.DIRECTION.RIGHT].push(that.resources.$("dmpe0"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.RIGHT].push(that.resources.$("dmpe1"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.UP].push(that.resources.$("dmpn0"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.UP].push(that.resources.$("dmpn1"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.UP].push(that.resources.$("dmpn2"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.UP].push(that.resources.$("dmpn3"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.DOWN].push(that.resources.$("dmps0"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.DOWN].push(that.resources.$("dmps1"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.DOWN].push(that.resources.$("dmps2"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.DOWN].push(that.resources.$("dmps3"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.LEFT].push(that.resources.$("dmpw0"));
+			mobs.SPRITES["dmp"][mobs.DIRECTION.LEFT].push(that.resources.$("dmpw1"));
+			mobs.SPRITES["dms"] = new Array();
+			mobs.SPRITES["dms"][mobs.DIRECTION.UP] = new Array();
+			mobs.SPRITES["dms"][mobs.DIRECTION.DOWN] = new Array();
+			mobs.SPRITES["dms"][mobs.DIRECTION.LEFT] = new Array();
+			mobs.SPRITES["dms"][mobs.DIRECTION.RIGHT] = new Array();
+			mobs.SPRITES["dms"][mobs.DIRECTION.RIGHT].push(that.resources.$("dmse0"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.RIGHT].push(that.resources.$("dmse1"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.UP].push(that.resources.$("dmsn0"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.UP].push(that.resources.$("dmsn1"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.UP].push(that.resources.$("dmsn2"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.UP].push(that.resources.$("dmsn3"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.DOWN].push(that.resources.$("dmss0"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.DOWN].push(that.resources.$("dmss1"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.DOWN].push(that.resources.$("dmss2"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.DOWN].push(that.resources.$("dmss3"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.LEFT].push(that.resources.$("dmsw0"));
+			mobs.SPRITES["dms"][mobs.DIRECTION.LEFT].push(that.resources.$("dmsw1"));
+			mobs.SPRITES["dmw"] = new Array();
+			mobs.SPRITES["dmw"][mobs.DIRECTION.UP] = new Array();
+			mobs.SPRITES["dmw"][mobs.DIRECTION.DOWN] = new Array();
+			mobs.SPRITES["dmw"][mobs.DIRECTION.LEFT] = new Array();
+			mobs.SPRITES["dmw"][mobs.DIRECTION.RIGHT] = new Array();
+			mobs.SPRITES["dmw"][mobs.DIRECTION.RIGHT].push(that.resources.$("dmwe0"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.RIGHT].push(that.resources.$("dmwe1"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.UP].push(that.resources.$("dmwn0"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.UP].push(that.resources.$("dmwn1"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.UP].push(that.resources.$("dmwn2"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.UP].push(that.resources.$("dmwn3"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.DOWN].push(that.resources.$("dmws0"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.DOWN].push(that.resources.$("dmws1"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.DOWN].push(that.resources.$("dmws2"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.DOWN].push(that.resources.$("dmws3"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.LEFT].push(that.resources.$("dmww0"));
+			mobs.SPRITES["dmw"][mobs.DIRECTION.LEFT].push(that.resources.$("dmww1"));
+			mobs.SPRITES["rmw"] = new Array();
+			mobs.SPRITES["rmw"][mobs.DIRECTION.UP] = new Array();
+			mobs.SPRITES["rmw"][mobs.DIRECTION.DOWN] = new Array();
+			mobs.SPRITES["rmw"][mobs.DIRECTION.LEFT] = new Array();
+			mobs.SPRITES["rmw"][mobs.DIRECTION.RIGHT] = new Array();
+			mobs.SPRITES["rmw"][mobs.DIRECTION.RIGHT].push(that.resources.$("rmwe0"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.RIGHT].push(that.resources.$("rmwe1"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.UP].push(that.resources.$("rmwn0"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.UP].push(that.resources.$("rmwn1"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.UP].push(that.resources.$("rmwn2"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.UP].push(that.resources.$("rmwn3"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.DOWN].push(that.resources.$("rmws0"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.DOWN].push(that.resources.$("rmws1"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.DOWN].push(that.resources.$("rmws2"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.DOWN].push(that.resources.$("rmws3"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.LEFT].push(that.resources.$("rmww0"));
+			mobs.SPRITES["rmw"][mobs.DIRECTION.LEFT].push(that.resources.$("rmww1"));
 		
 			world.SPRITES[world.CELL.WALL] = that.resources.$("wall");
 			world.SPRITES[world.CELL.FLOOR] = that.resources.$("walkable");
@@ -178,7 +199,7 @@ function Fortress(canvas) {
 			
 			that.vsplash = that.resources.$("victory");
 			
-			console.log("Loaded reources");
+			console.log("Loaded resources");
 		});
 	
 	    /* Create the start menu. */
@@ -312,17 +333,19 @@ function Fortress(canvas) {
 	}
 	
 	this.findebate = function() {
-		/* Update HUD */
-		var hud = this.entities.gui.children.hud.children;
-		hud.endorsements.val = this.player.endorsements;
-		hud.funds.text = "Funds: $" + this.player.funds + "k";
-		
 		/* Revert to Overworld */
 		this.state = STATE.OVERWORLD;
 		this.entities.gui.children.hud.visible = true;
 		this.entities.gui.children.hud.state = gui.STATE.NORMAL;
 		this.entities.gui.children.debate.visible = false;
 		this.entities.gui.children.debate.state = gui.STATE.DISABLED;
+	}
+	
+	this.uhud = function() {
+		/* Update HUD */
+		var hud = this.entities.gui.children.hud.children;
+		hud.endorsements.val = this.player.endorsements;
+		hud.funds.text = "Funds: $" + this.player.funds + "k";
 	}
 	
 	/* Update loop. */

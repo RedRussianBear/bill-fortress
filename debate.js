@@ -95,6 +95,7 @@ debate.Manager = function Manager(engine) {
 			this.engine.entities.world.mobs.children.splice(this.engine.entities.world.mobs.children.indexOf(this.enemy), 1);
             this.engine.resources.$("death").volume = 0.2;
             this.engine.resources.$("death").play();
+			this.engine.uhud();
 		}
 		else if(this.engine.player.health <= 0) {
 			this.engine.entities.gui.children.debate.state = gui.STATE.DISABLED;
@@ -121,7 +122,7 @@ debate.Manager = function Manager(engine) {
 		context.fillStyle = "white";
 		context.fillRect(0, 0, this.engine.canvas.width, this.engine.canvas.height);
 		context.drawImage(bill.SPRITES[bill.DIRECTION.RIGHT][0], 80, 175, 96, 144);
-		context.drawImage(mobs.SPRITES[this.enemy.party][mobs.DIRECTION.LEFT][0], 624, 175, 96, 144);
+		context.drawImage(this.enemy.images[mobs.DIRECTION.LEFT][0], 624, 175, 96, 144);
 	}
 }
 

@@ -47,77 +47,77 @@ levels.COMMITTEE.mobs = [
         {
             R: 1, C: 25, 
             NAME: "Sam Johnson", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 10, C: 10, 
             NAME: "Devin Nunes", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 11, C: 25, 
             NAME: "Pat Tiberi", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 11, C: 490, 
             NAME: "Dave Reichert", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 14, C: 27, 
             NAME: "Charles Boustany", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 16, C: 50, 
             NAME: "Peter Roskam", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 18, C: 66, 
             NAME: "Sander Levin", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 20, C: 62, 
             NAME: "Charles Rangel", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 25, C: 15, 
             NAME: "Jim McDermott", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 31, C: 32, 
             NAME: "John Lewis", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 25, C: 65, 
             NAME: "Kevin Brady (Chairman)", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.COMCHAIR, 
             ONDEFEAT: function(player) {player.endorsements+=2; player.funds += 30;} 
         }
@@ -218,609 +218,609 @@ levels.HOUSE.mobs = [
         {
             R: 1, C: 59, 
             NAME: "Scott Tipton", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 4, C: 106, 
             NAME: "Peter Roskam", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 7, C: 12, 
             NAME: "Michael Burgess", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 7, C: 18, 
             NAME: "Dana Rohrabacher", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 7, C: 24, 
             NAME: "David Jolly", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 7, C: 30, 
             NAME: "Barry Loudermilk", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 7, C: 36, 
             NAME: "Mike Rogers", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 7, C: 42, 
             NAME: "Tom McClintock", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 7, C: 59, 
             NAME: "Trent Franks", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 11, C: 26, 
             NAME: "Rick Crawford", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 12, C: 32, 
             NAME: "Steve Womack", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 13, C: 17, 
             NAME: "Bruce Westerman", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 13, C: 28, 
             NAME: "Kevin McCarthy", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 13, C: 34, 
             NAME: "Duncan D. Hunter", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 13, C: 118, 
             NAME: "Daniel Webster", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 14, C: 65, 
             NAME: "Vern Buchanan", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 15, C: 31, 
             NAME: "Lynn Westmoreland", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 15, C: 49, 
             NAME: "Austin Scott", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 17, C: 34, 
             NAME: "Doug Collins", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 18, C: 28, 
             NAME: "Jody Hice", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 18, C: 83, 
             NAME: "Tom Graves", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 19, C: 17, 
             NAME: "Mike Bost", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 20, C: 24, 
             NAME: "Marlin Stutzman", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 20, C: 85, 
             NAME: "Hal Rogers", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 21, C: 29, 
             NAME: "John Fleming", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 22, C: 87, 
             NAME: "Ralph Abraham", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 23, C: 31, 
             NAME: "Gregg Harper", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 24, C: 82, 
             NAME: "Sam Graves", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 25, C: 17, 
             NAME: "Steve Pearce", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 25, C: 39, 
             NAME: "Mark Walker", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 25, C: 52, 
             NAME: "David Rouzer", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 25, C: 71, 
             NAME: "George Holding", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 25, C: 94, 
             NAME: "Jim Bridenstine", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 26, C: 32, 
             NAME: "Frank Lucas", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 26, C: 39, 
             NAME: "Steve Russell", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 26, C: 44, 
             NAME: "Jeff Duncan", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 26, C: 57, 
             NAME: "Trey Gowdy", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 26, C: 80, 
             NAME: "Louie Gohmert", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 26, C: 88, 
             NAME: "Mike Conaway", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 27, C: 92, 
             NAME: "Randy Weber", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 28, C: 29, 
             NAME: "Karen Bass", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 30, C: 23, 
             NAME: "David Scott", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 30, C: 54, 
             NAME: "Danny K. Davis", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 30, C: 86, 
             NAME: "Cedric Richmond", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 31, C: 17, 
             NAME: "Donna Edwards", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 31, C: 29, 
             NAME: "Donald Payne, Jr.", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 31, C: 67, 
             NAME: "Bonnie Watson Coleman", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 32, C: 80, 
             NAME: "Alma Adams", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 33, C: 34, 
             NAME: "Joyce Beatty", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 33, C: 47, 
             NAME: "Marcia Fudge", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 34, C: 28, 
             NAME: "Marc Veasey", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 34, C: 62, 
             NAME: "Gwen Moore", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 34, C: 83, 
             NAME: "John Lewis", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 35, C: 32, 
             NAME: "Elijah Cummings", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 35, C: 54, 
             NAME: "G. K. Butterfield", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 37, C: 17, 
             NAME: "David Price", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 37, C: 22, 
             NAME: "Steny Hoyer", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 37, C: 29, 
             NAME: "Corrine Brown", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 37, C: 67, 
             NAME: "Sanford Bishop", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 38, C: 12, 
             NAME: "John Conyers", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 39, C: 26, 
             NAME: "Chaka Fattah", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 39, C: 31, 
             NAME: "Eddie Johnson", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 40, C: 23, 
             NAME: "Barbara Lee", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 42, C: 111, 
             NAME: "Al Green", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 43, C: 75, 
             NAME: "Hakeem Jeffries", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 44, C: 15, 
             NAME: "Anna Eshoo", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 44, C: 16, 
             NAME: "Janice Hahn", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 44, C: 41, 
             NAME: "Elizabeth Esty", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 45, C: 82, 
             NAME: "Tammy Duckworth", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 45, C: 88, 
             NAME: "John Sarbanes", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 45, C: 94, 
             NAME: "Niki Tsongas", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 45, C: 100, 
             NAME: "Dina Titus", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 46, C: 111, 
             NAME: "Sam Farr", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 48, C: 76, 
             NAME: "Julia Brownley", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 50, C: 29, 
             NAME: "Gwen Graham", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 52, C: 3, 
             NAME: "Frederica Wilson", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 53, C: 53, 
             NAME: "Mark Takai", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 59, C: 69, 
             NAME: "Chris Van Hollen", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 59, C: 88, 
             NAME: "Ann McLane Kuster", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.CONGRESSPERSON, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 10;} 
         },
 		{
             R: 5, C: 120, 
             NAME: "Ways and Means Chair", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.COMCHAIR, 
             ONDEFEAT: function(player) {player.endorsements+=2; player.funds += 30;} 
         },
 		{
             R: 5, C: 18, 
             NAME: "Rules Chair", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.COMCHAIR, 
             ONDEFEAT: function(player) {player.endorsements+=2; player.funds += 30;} 
         },
 		{
             R: 5, C: 24, 
             NAME: "Appropriations Chair", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.COMCHAIR, 
             ONDEFEAT: function(player) {player.endorsements+=2; player.funds += 30;} 
         },
 		{
             R: 5, C: 30, 
             NAME: "Judiciary Chair", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.COMCHAIR, 
             ONDEFEAT: function(player) {player.endorsements+=2; player.funds += 30;} 
         },
 		{
             R: 5, C: 36, 
             NAME: "Intelligence Chair", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.COMCHAIR, 
             ONDEFEAT: function(player) {player.endorsements+=2; player.funds += 30;} 
         },
 		{
             R: 5, C: 42, 
             NAME: "Agriculture Chair", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.COMCHAIR, 
             ONDEFEAT: function(player) {player.endorsements+=2; player.funds += 30;} 
         },
 		{
             R: 46, C: 41, 
             NAME: "Homeland Security Chair", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.COMCHAIR, 
             ONDEFEAT: function(player) {player.endorsements+=2; player.funds += 30;} 
         },
 		{
             R: 26, C: 106, 
             NAME: "Paul Ryan (Speaker)", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements+=5; player.funds += 50;} 
         }
@@ -918,315 +918,315 @@ levels.SENATE.mobs = [
 		{
             R: 2, C: 9, 
             NAME: "Jeff Flake", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 2, C: 27, 
             NAME: "Roger Wicker", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 2, C: 59, 
             NAME: "Deb Fischer", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 8, C: 58, 
             NAME: "Dean Heller", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 9, C: 67, 
             NAME: "Bob Corker", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 9, C: 75, 
             NAME: "Lyin' Ted", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 9, C: 83, 
             NAME: "'Lil Marco", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 9, C: 91, 
             NAME: "Ted Cruz", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 12, C: 74, 
             NAME: "Orrin Hatch", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 13, C: 25, 
             NAME: "John Barrasso", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 14, C: 79, 
             NAME: "Jeff Sessions", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 14, C: 85, 
             NAME: "Dan Sullivan", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 15, C: 5, 
             NAME: "Tom Cotton", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 16, C: 75, 
             NAME: "Cory Gardner", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 19, C: 78, 
             NAME: "David Perdue", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 20, C: 16, 
             NAME: "Jim Risch", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 22, C: 5, 
             NAME: "Joni Ernst", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 22, C: 73, 
             NAME: "Pat Roberts", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 24, C: 45, 
             NAME: "Mitch McConnell", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 24, C: 86, 
             NAME: "Bill Cassidy", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 25, C: 23, 
             NAME: "Susan Collins", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 25, C: 75, 
             NAME: "Thad Cochran", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 27, C: 18, 
             NAME: "Steve Daines", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 27, C: 76, 
             NAME: "Ben Sasse", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 29, C: 24, 
             NAME: "Less the 1% Graham", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 29, C: 77, 
             NAME: "Bernie Sanders", 
-            PARTY: mobs.PARTY.SANDERS, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 30, C: 4, 
             NAME: "Dianne Feinstein", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 30, C: 19, 
             NAME: "Chris Murphy", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 31, C: 28, 
             NAME: "Tom Carper", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 31, C: 73, 
             NAME: "Bill Nelson", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 33, C: 79, 
             NAME: "Mazie Hirono", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 33, C: 85, 
             NAME: "Joe Donnelly", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 38, C: 59, 
             NAME: "Ben Cardin", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 38, C: 67, 
             NAME: "Elizabeth Pocohantas Warren", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 38, C: 75, 
             NAME: "Debbie Stabenow", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 38, C: 83, 
             NAME: "Amy Klobuchar", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 38, C: 91, 
             NAME: "Claire McCaskill", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 43, C: 19, 
             NAME: "Jon Tester", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 44, C: 83, 
             NAME: "Bob Menendez", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 49, C: 14, 
             NAME: "Martin Heinrich", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 51, C: 61, 
             NAME: "Kirsten Gillibrand", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 53, C: 15, 
             NAME: "Heidi Heitkamp", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 53, C: 90, 
             NAME: "Sherrod Brown", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 57, C: 42, 
             NAME: "Bob Casey, Jr.", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 57, C: 79, 
             NAME: "Sheldon Whitehouse", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SENATOR, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         }
@@ -1303,182 +1303,182 @@ levels.CONFERENCE.mobs = [
 		{
             R: 4, C: 15, 
             NAME: "Election Fraud", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 5, C: 23, 
             NAME: "Mitt \"The Choker\" Romney", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 8, C: 21, 
             NAME: "The Donald", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 9, C: 11, 
             NAME: "The Gipper", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 11, C: 17, 
             NAME: "43", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 13, C: 13, 
             NAME: "41", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 13, C: 27, 
             NAME: "The Koch Brothers", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 15, C: 7, 
             NAME: "Sheldon Adelson", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 15, C: 26, 
             NAME: "Gary Johnson", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 17, C: 8, 
             NAME: "Ron Paul", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 18, C: 17, 
             NAME: "Milton Friedman", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 19, C: 24, 
             NAME: "The Evil in the World", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 21, C: 22, 
             NAME: "Jeb! \"Low Energy\" Bush", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 21, C: 28, 
             NAME: "John \"Not a Hero\" McCain", 
-            PARTY: mobs.PARTY.REPUBLICAN, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 24, C: 24, 
             NAME: "The Media", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 25, C: 15, 
             NAME: "Rigged Election Process", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 27, C: 29, 
             NAME: "Bill Clinton", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 28, C: 9, 
             NAME: "Crooked Hillary", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 30, C: 20, 
             NAME: "Al Gore", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 31, C: 18, 
             NAME: "John Kerry", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 32, C: 9, 
             NAME: "Ralph Nader", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 34, C: 18, 
             NAME: "Jill Stein", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 35, C: 14, 
             NAME: "FDR", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 35, C: 22, 
             NAME: "JFK", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 32, C: 22, 
             NAME: "LBJ", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         },
 		{
             R: 22, C: 10, 
             NAME: "Academia", 
-            PARTY: mobs.PARTY.DEMOCRAT, 
+            SPRITECODE: "dmw", 
             RANK: mobs.RANK.SPEAKER, 
             ONDEFEAT: function(player) {player.endorsements++; player.funds += 20;} 
         }
@@ -1528,7 +1528,7 @@ levels.PRESIDENT.mobs = [
 		{
 			R: 13, C: 44,
 			NAME: "Barack Obama",
-			PARTY: mobs.PARTY.DEMOCRAT,
+			SPRITECODE: "dmw",
 			RANK: mobs.RANK.PRESIDENT,
 			ONDEFEAT: function(player) {
 				player.endorsements++;

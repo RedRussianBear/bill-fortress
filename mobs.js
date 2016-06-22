@@ -1,14 +1,13 @@
 var mobs = {};
 
 mobs.DIRECTION = {LEFT: 0, UP: 1, RIGHT: 2, DOWN: 3};
-mobs.PARTY = {DEMOCRAT: 0, REPUBLICAN: 1, SANDERS: 2};
 mobs.RANK = {CONGRESPERSON: 0, SENATOR: 1, SPEAKER: 2, COMCHAIR: 3, PRESIDENT: 4};
 
 mobs.WIDTH = 64;
 mobs.HEIGHT = 96;
 mobs.SPEED = 4;
 
-mobs.SPRITES = [];
+mobs.SPRITES = {};
 
 mobs.ATTACKS = [];
 
@@ -57,12 +56,12 @@ mobs.HEALTH[mobs.RANK.SPEAKER] = 350;
 mobs.HEALTH[mobs.RANK.COMCHAIR] = 200;
 mobs.HEALTH[mobs.RANK.PRESIDENT] = 800;
 
-mobs.Politician = function Politician (engine, x, y, name, party, rank, ondefeat) {
+mobs.Politician = function Politician (engine, x, y, name, rank, ondefeat, images) {
 	
 	sprite.Sprite.call(this, x, y, mobs.WIDTH, mobs.HEIGHT);
 	
+	this.images = images;
 	this.direction = Math.floor(4 * Math.random());
-	this.party = party;
 	this.name = name;
 	this.engine = engine;
 	this.attacks = [];
@@ -83,7 +82,7 @@ mobs.Politician = function Politician (engine, x, y, name, party, rank, ondefeat
 		var offedx = this.transform.x - offx;
 		var offedy = this.transform.y - offy;
 		if(offedx + this.width < 0 || offedy > this.engine.canvas.height || offedx > this.engine.canvas.width || offedy + this.height < 0) return;
-		context.drawImage(mobs.SPRITES[this.party][this.direction][Math.floor(time/100)%(this.moving ? mobs.SPRITES[this.party][this.direction].length : 1)], offedx, offedy, this.width, this.height);
+		context.drawImage(this.images[this.direction][Math.floor(time/100)%(this.moving ? this.images[this.direction].length : 1)], offedx, offedy, this.width, this.height);
 	}
 	
 	this.update = function(delta) {
