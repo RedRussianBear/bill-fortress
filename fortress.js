@@ -278,6 +278,7 @@ function Fortress(canvas) {
 		cha.adopt("name", new gui.Text(this, 10, 10, "[playername]", {base: {font: "50px " + FONT, textAlign: "left", fillStyle: "black", textBaseline: "top"}}, 280));
 		cha.adopt("amend", new gui.Text(this, 310, 10, "Amendments", {base: {font: "50px " + FONT, textAlign: "left", fillStyle: "black", textBaseline: "top"}}, 280));
 		cha.adopt("picture", new gui.Image(this, 20, 70, 256, 384));
+		cha.adopt("amendments", new gui.Scroll(this, 310, 55, 280, 440));
 		
 		/* Defeat Menu */
 		var def = this.entities.gui.adopt("defeat", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {}));

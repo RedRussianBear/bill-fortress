@@ -29,7 +29,8 @@ gui.Component = function Component(engine, x, y, w, h, style) {
     this.visible = false;
     this.state = gui.STATE.DISABLED;
     this.children = {};
-    
+    this.offset = new sprite.Transform(0, 0);
+	
     /** Add a child to the component. */
     this.adopt = function(name, component) { 
         component.parent = this;
@@ -44,17 +45,17 @@ gui.Component = function Component(engine, x, y, w, h, style) {
     
     /** Render the component. */
     this.render = function(context) {
+        var transform = this.relative;
+
         if (!this.visible) return;
 		if(this.style.fillStyle) {
 			context.fillStyle = this.style.fillStyle;
-			context.fillRect(this.transform.x, this.transform.y, this.width, this.height);
+			context.fillRect(transform.x, transform.y, this.width, this.height);
 		}
 		
         for (var name in this.children){ 
 			var child = this.children[name];
 			child.render(context);
-			if(child.tooltip && child.showtip)
-				child.tooltip.render(context, child.mx, child.my);
 		}
 		
 		for (var name in this.children){ 
@@ -84,8 +85,106 @@ gui.Component = function Component(engine, x, y, w, h, style) {
 
 /** Component relative transform. */
 gui.Component.prototype = {
-    get relative() { return this.parent && this.parent.relative && this.transform.with(this.parent.relative) || this.transform; },
+    get relative() { return this.parent && this.parent.relative && this.offset.with(this.transform.with(this.parent.relative)) || this.offset.with(this.transform); },
 }
+
+/** Scroll menu class */
+gui.Scroll = function Scroll(engine, x, y, w, h) {
+	
+	/* Component superclass. */
+	gui.Component.call(this, engine, x, y, w, h);
+	
+	/* States */
+	this.state = gui.STATE.NORMAL;
+	this.visible = true;
+	this.len = 0;
+	this.pad = 8;
+	this.swid = 30;
+	this.sbh = 25;
+	this.stl = this.height - 2 * this.sbh;
+	this.scrolldist = 50;
+	this.scrolltrans = new sprite.Transform(0, 0);
+	
+	var that = this;
+	
+	this.scrollup = function() {
+		if(that.scrolltrans.y + that.scrolldist >= 0) that.scrolltrans.y = 0;
+		else that.scrolltrans.y += that.scrolldist;
+	}
+	
+	this.scrolldown = function() {
+		if(that.len < that.height) return;
+		if(that.scrolltrans.y - that.scrolldist <= that.height - that.len) that.scrolltrans.y = that.height - that.len;
+		else that.scrolltrans.y -= that.scrolldist;
+	}
+	
+	this.up = new gui.Button(engine, this.width - this.swid, 0, this.swid, this.sbh, "/\\", this.scrollup);
+	this.up.parent = this;
+	
+	this.down = new gui.Button(engine, this.width - this.swid, this.height - this.sbh, this.swid, this.sbh, "\\/", this.scrolldown);
+	this.down.parent = this;
+	
+	/* Add a child to the scrolling menu. Ignores any x and y previously assigned to the component. */
+    this.adopt = function(name, component) { 
+        component.parent = this;
+		component.transform.y = this.pad + this.len;
+		component.transform.x = 0;
+		component.offset = this.scrolltrans;
+		this.len = component.transform.y + component.height;
+		
+        return this.children[name] = component; 
+    }
+	
+	this.update = function(delta) {
+		if (this.state == gui.STATE.DISABLED) return;
+		
+        for (var name in this.children){
+			var child = this.children[name];
+			
+			if(child.offset.with(child.transform).y < 0 || child.offset.with(child.transform).y + child.height > this.height) continue;
+			
+			child.update(delta);
+			if(child.tooltip && geometry.Vector.inside(this.engine.input.mouse, child.relative, child.width, child.height)){
+				child.showtip = true;
+				child.mx = this.engine.input.mouse.x;
+				child.my = this.engine.input.mouse.y;
+			}
+			else
+				child.showtip = false;
+		}
+		
+		this.up.update(delta);
+		this.down.update(delta);
+	}
+	
+	this.render = function(context) {
+		var transform = this.relative;
+
+        if (!this.visible) return;
+		/*if(this.style.fillStyle) {
+			context.fillStyle = this.style.fillStyle;
+			context.fillRect(transform.x, transform.y, this.width, this.height);
+		}*/
+		
+        for (var name in this.children){ 
+			var child = this.children[name];
+			if(child.offset.with(child.transform).y < 0 || child.offset.with(child.transform).y + child.height > this.height) continue;
+			child.render(context);
+		}
+		
+		for (var name in this.children){ 
+			var child = this.children[name];
+			if(child.tooltip && child.showtip)
+				child.tooltip.render(context, child.mx, child.my);
+		}
+		
+		this.up.render(context);
+		this.down.render(context);
+	}
+}
+
+/* Inherit the prototype. */
+gui.Scroll.prototype = gui.Component.prototype;
 
 /** Button component class. */
 gui.Button = function Button(engine, x, y, w, h, text, callback, styles) {
@@ -354,7 +453,7 @@ gui.ToolTip = function ToolTip(engine, text, styles) {
 gui.Image = function Image(engine, x, y, w, h, image) {
 	this.image = image;
 	
-	sprite.Sprite.call(this, x, y, w, h);
+	gui.Component.call(this, engine, x, y, w, h);
 	
 	this.update = function(delta) {}
 	
