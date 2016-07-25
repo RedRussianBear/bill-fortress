@@ -95,7 +95,7 @@ mobs.Politician = function Politician (engine, x, y, name, rank, ondefeat, image
 		var diffy = Math.abs(this.center.y - player.center.y);
 		
 		/* Move towards player, if in range */
-		if(geometry.Vector.distance(this.transform, player.transform) < world.BOXSIZE*3){
+		if(geometry.Vector.distance(this.center, player.center) < world.BOXSIZE*3){
 			if(player.center.y < this.center.y) {
 				this.moving = true;
 				if(diffy > diffx) this.direction = mobs.DIRECTION.UP;

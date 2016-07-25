@@ -10,6 +10,8 @@ world.OFFSETY = 0;
 world.SPEED = 20;
 world.BOXSIZE = 128;
 world.LOOTSIZE = 64;
+world.MWIDTH = 64;
+world.MHEIGHT = 96;
 
 /** World tile types. */
 world.CELL = {WALL: 0, FLOOR: 1, PLAYER: 2, EXIT: 3, SECRET: 4};
@@ -25,6 +27,7 @@ world.World = function World(engine) {
 	this.state = World.PASSIVE;
 	this.grid = [];
 	this.loot = [];
+	this.merchants = [];
     
     /* World managers. */
     this.atmosphere = new atmosphere.Manager(this);
@@ -50,7 +53,7 @@ world.World = function World(engine) {
         this.atmosphere.update(delta);
 		
 		for(var i = 0; i < this.loot.length; i++) this.loot[i].update(delta, i);
-        
+        for(var i = 0; i < this.merchants.length; i++) this.merchants[i].update(delta);
     }
 	
     /** Render the world. */
@@ -73,12 +76,14 @@ world.World = function World(engine) {
         this.mobs.render(context, offx, offy, time);
 	
 		for(var i = 0; i < this.loot.length; i++) this.loot[i].render(context, offx, offy);
+		for(var i = 0; i < this.merchants.length; i++) this.merchants[i].render(context, offx, offy);
     }
 	
     /** Load a level. */
 	this.load = function(level) {
 		this.grid = [];
 		this.loot = [];
+		this.merchants = [];
 		this.atmosphere = new atmosphere.Manager(this);
 		this.mobs = new mobs.Manager(this.engine, this);
         
@@ -164,6 +169,12 @@ world.World = function World(engine) {
 			this.loot.push(new world.Loot(this.engine, this, lootlist[i].C, lootlist[i].R, lootlist[i].REWARD, lootlist[i].NAME, lootlist[i].INFO));
 		}
 		
+		/* Create merchants */
+		var mlist = level.merchants;
+		for(var i = 0; i < mlist.length; i++) {
+			this.merchants.push(new world.Merchant(this.engine, this, mlist[i].C, mlist[i].R, mlist[i].NAME, mlist[i].STOCK));
+		}
+		
 		/* Load endorsement requirement */
 		this.endorsereq = level.endorsereq;
 		
@@ -227,6 +238,48 @@ world.Loot = function Loot(engine, parent, c, r, reward, name, info, image) {
 		if(offedx + this.width < 0 || offedy > this.engine.canvas.height || offedx > this.engine.canvas.width || offedy + this.height < 0) return;
 		context.drawImage(this.image, offedx, offedy, this.width, this.height);
 	}
+}
+
+world.Merchant = function(engine, parent, c, r, name, stock, image) {
+	this.engine = engine;
+	this.name = name;
+	this.parent = parent;
+	this.stock = stock;
+	this.image = image || world.SPRITES.MERCHANT;
+	this.coff = new sprite.Transform(world.MWIDTH/2, world.MHEIGHT/2);
+
+	
+	/* Sprite Super Constructor */
+	sprite.Sprite.call(this, c*world.BOXSIZE + world.BOXSIZE/2 - world.MWIDTH/2, r*world.BOXSIZE + world.BOXSIZE/2 - world.MHEIGHT/2, world.MWIDTH, world.MHEIGHT);
+	
+	this.update = function(delta) {
+		if(geometry.Vector.distance(this.center, this.engine.player.center) < world.BOXSIZE * 2) this.inrange = true;
+		else this.inrange = false;
+		
+		if(this.inrange && this.engine.input.keyboard[input.KEY["I"]] == input.STATE.DOWN) this.engine.dialog(this);
+		
+	}
+	
+	this.render = function(context, offx, offy) {
+		if(this.inrange) {
+			context.fillStyle = "black";
+			context.font = "32px bitfont";
+			context.textAlign = "center";
+			context.textBaseline = "middle";
+			context.fillText("Press [I] to interact with merchant", this.engine.canvas.width/2, 400);
+		}
+		
+		var offedx = this.transform.x - offx;
+		var offedy = this.transform.y - offy;
+		
+		if(offedx + this.width < 0 || offedy > this.engine.canvas.height || offedx > this.engine.canvas.width || offedy + this.height < 0) return;
+		context.drawImage(this.image, offedx, offedy, this.width, this.height);
+	}
+}
+
+world.Merchant.prototype = {
+	/* Get center */
+	get center() { return this.transform.with(this.coff); }
 }
 
 world.map = {};

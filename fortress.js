@@ -1,5 +1,5 @@
 /** States. */
-var STATE = {NULL: 0, START: 1, PAUSE: 2, OVERWORLD: 3, DEBATE: 4, CHARACTER: 5, VICTORY: 6, DEFEAT: 7};
+var STATE = {NULL: 0, START: 1, PAUSE: 2, OVERWORLD: 3, DEBATE: 4, CHARACTER: 5, VICTORY: 6, DEFEAT: 7, DIALOG: 8};
 
 /* Global font. */
 var FONT = "bitfont";
@@ -98,6 +98,7 @@ function Fortress(canvas) {
 		this.resources.queue("wall", resource.IMAGE, "tiles/notwalkable.png");
 		this.resources.queue("exit", resource.IMAGE, "tiles/exit.png");
 		this.resources.queue("chest", resource.IMAGE, "sprites/objects/chest.png");
+		this.resources.queue("lobbyist", resource.IMAGE, "sprites/objects/chest.png");
 		this.resources.queue("victory", resource.IMAGE, "logo.png");
 
 		var that = this;
@@ -196,6 +197,7 @@ function Fortress(canvas) {
 			world.SPRITES[world.CELL.EXIT] = that.resources.$("exit");
 			world.SPRITES[world.CELL.SECRET] = that.resources.$("wall");
 			world.SPRITES.CHEST = that.resources.$("chest");
+			world.SPRITES.MERCHANT = that.resources.$("lobbyist");
 			
 			that.vsplash = that.resources.$("victory");
 			
@@ -293,6 +295,13 @@ function Fortress(canvas) {
 			this.engine.slate();
 		}));
 		
+		/* Dialog Menu */
+		var dia = this.entities.gui.adopt("dialog", new gui.Component(this, 0, 0, this.canvas.width, this.canvas.height, {fillStyle: "black"}));
+		dia.adopt("mname", new gui.Text(this, 10, 10, "[merchant_name]", {base: {font: "50px " + FONT, textAlign: "left", fillStyle: "white", textBaseline: "top"}}, 380));
+		dia.adopt("iname", new gui.Text(this, 10, 70, "[item_name]", {base: {font: "42px " + FONT, textAlign: "left", fillStyle: "white", textBaseline: "top"}}, 380));
+		dia.adopt("desc", new gui.Text(this, 10, 120, "[item_desc]", {base: {font: "32px " + FONT, textAlign: "left", fillStyle: "white", textBaseline: "top"}}, 380));
+		dia.adopt("items", new gui.Scroll(this, 410, 10, 390, 550));
+		
 		this.levelnum = 0;
     }
 	
@@ -342,6 +351,46 @@ function Fortress(canvas) {
 		this.entities.gui.children.debate.state = gui.STATE.DISABLED;
 	}
 	
+	this.dialog = function(merchant) {
+		var dia = this.entities.gui.children.dialog;
+		dia.children.mname.text = merchant.name;
+
+		dia.children.items.init();
+		var items = dia.children.items;
+		for(var i = 0; i < merchant.stock.length; i++) {
+			(function(i){
+				var curi = merchant.stock[i];
+				var v = items.adopt(curi.name, new gui.Button(this.engine, 0, 0, 360, 60, curi.name, function(){
+					var player = this.engine.player;
+					if(player.funds >= curi.cost) {
+						this.state = gui.STATE.DISABLED;
+						player.amend(curi.name, curi.info, curi.reward);
+						player.funds -= curi.cost;
+						merchant.stock.splice(i, 1);
+					}
+				}));
+				
+				v.tooltip = new gui.ToolTip(this.engine, curi.info);
+			})(i);
+		}
+		
+		this.state = STATE.DIALOG;
+		this.entities.gui.children.hud.visible = false;
+		this.entities.gui.children.hud.state = gui.STATE.DISABLED;
+		this.entities.gui.children.dialog.state = gui.STATE.NORMAL;
+		this.entities.gui.children.dialog.visible = true;
+		
+	}
+	
+	this.findialog = function() {
+		/* Revert to Overworld */
+		this.state = STATE.OVERWORLD;
+		this.entities.gui.children.hud.visible = true;
+		this.entities.gui.children.hud.state = gui.STATE.NORMAL;
+		this.entities.gui.children.dialog.visible = false;
+		this.entities.gui.children.dialog.state = gui.STATE.DISABLED;
+	}
+	
 	this.uhud = function() {
 		/* Update HUD */
 		var hud = this.entities.gui.children.hud.children;
@@ -366,6 +415,10 @@ function Fortress(canvas) {
 				this.state = STATE.CHARACTER;
 				this.entities.gui.children.character.state = gui.STATE.NORMAL;
 				this.entities.gui.children.character.visible = true;
+			}
+			else if(this.state == STATE.DIALOG) {
+				this.findialog();
+				this.uhud();
 			}
 		}
 		

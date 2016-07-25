@@ -94,16 +94,21 @@ gui.Scroll = function Scroll(engine, x, y, w, h) {
 	/* Component superclass. */
 	gui.Component.call(this, engine, x, y, w, h);
 	
-	/* States */
-	this.state = gui.STATE.NORMAL;
-	this.visible = true;
-	this.len = 0;
-	this.pad = 8;
-	this.swid = 30;
-	this.sbh = 25;
-	this.stl = this.height - 2 * this.sbh;
-	this.scrolldist = 50;
-	this.scrolltrans = new sprite.Transform(0, 0);
+	/* Clear States */
+	this.init = function() {
+		this.state = gui.STATE.NORMAL;
+		this.visible = true;
+		this.len = 0;
+		this.pad = 8;
+		this.swid = 30;
+		this.sbh = 25;
+		this.stl = this.height - 2 * this.sbh;
+		this.scrolldist = 50;
+		this.scrolltrans = new sprite.Transform(0, 0);
+		this.children = {};
+	}
+	
+	this.init();
 	
 	var that = this;
 	
@@ -253,7 +258,6 @@ gui.Button = function Button(engine, x, y, w, h, text, callback, styles) {
 			if (this.engine.input.mouse.left == input.STATE.PRESSED) this.callback();
 		} else {
 		    this.hover = false;
-		    this.state = gui.STATE.NORMAL;
 		}
 	
 	}
@@ -421,7 +425,7 @@ gui.ToolTip = function ToolTip(engine, text, styles) {
 	this.engine = engine;
 	this.text = text;
 	
-	this.styles = {base: {fillStyle: "black", strokeStyle: "grey"}, text: {fillStyle: "white", font: "28px bitfont"}};
+	this.styles = {base: {fillStyle: "black", strokeStyle: "grey"}, text: {fillStyle: "white", font: "28px bitfont", textAlign: "left", textBaseline: "top"}};
 	
     if (styles) merge(styles, this.styles);
 

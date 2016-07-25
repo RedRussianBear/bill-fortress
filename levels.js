@@ -144,6 +144,26 @@ levels.COMMITTEE.loot = [
 			INFO: "Your power doubles from approval from the Ways and Means Committee"
 		}
 	];
+levels.COMMITTEE.merchants = [
+	{
+		R: 7, C: 35, 
+		NAME: "The Gun Lobby",
+		STOCK: [
+			{
+				name: "NRA Support",
+				cost: 20,
+				info: "Gun nuts are on board with you",
+				reward: function(player) {player.power *= 1.5}
+			},
+			{
+				name: "Stupidity",
+				cost: 10,
+				info: "Gun nuts are on board with you",
+				reward: function(player) {player.power *= 1.5}
+			}
+		]
+	}
+];
 
 /* Level Two: HOUSE */
 
@@ -847,6 +867,8 @@ levels.HOUSE.loot = [
 			INFO: "You gain the attack \"Call a Lobbyist\" that will help you curry the favor of special interest groups"
 		}
 	];
+levels.HOUSE.merchants = [
+];
 
 /* Level Three: SENATE */
 levels.SENATE = {};
@@ -1253,7 +1275,8 @@ levels.SENATE.loot = [
 			INFO: "You gain 60 HP because Patriotic PAC has spent money to support you"
 		}
 	];
-
+levels.SENATE.merchants = [
+];
 
 /* Level Four: Conference Committee */
 levels.CONFERENCE = {};
@@ -1493,6 +1516,8 @@ levels.CONFERENCE.loot = [
 			INFO: "You gain 50% power and health from the conference committee resolving difference between the house and senate"
 		},
 	];
+levels.CONFERENCE.merchants = [
+];
 	
 levels.PRESIDENT = {};
 
@@ -1541,4 +1566,6 @@ levels.PRESIDENT.mobs = [
 levels.PRESIDENT.endorsereq = 1;
 levels.PRESIDENT.atmosphere = [];
 levels.PRESIDENT.loot = [];
+levels.PRESIDENT.merchants = [
+];
 }
